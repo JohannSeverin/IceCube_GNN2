@@ -1,0 +1,34 @@
+{
+    "Experiment": "Test_exp0",
+    "Exp_group":  "Test_series", 
+
+    "ModelName":  "GraphSage_network",
+ 
+    "hyper_params": {
+        "batch_size":      512,
+        "learning_rate":   1e-4,
+        "n_out":           4,
+        "encode_layers":   3,
+        "decode_layers":   3,
+        "hidden_states":   128,
+        "dropout":         0.25,
+        "batch_norm":      true
+    },
+
+    "Data":       "MuonGun",
+    "GraphType":  "PCA_gen",
+    "GraphParam": 6,
+    "Data_split": [0.8, 0.1, 0.1],
+
+    "raw_path":   null,
+
+    "Features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10"],
+    "Targets":    ["direction_x", "direction_y", "direction_z"],
+    "event_lims": "pid = 13 or pid = -13",
+    "node_lims":  "SRTInIcePulses = 1", 
+
+    "LossFunc":   "VonMises3D",
+    "Log_wandb": true,
+    "metrics":   ["loss", "angle_w"]
+}
+   
