@@ -7,6 +7,13 @@ file_path = osp.dirname(osp.realpath(__file__))
 
 
 
+def list_experiments():
+    experiment_folder = osp.join(file_path, "..", "experiments") 
+    experiment_files  = os.listdir(experiment_folder)
+    experiment_files.remove("done")
+    return experiment_folder, experiment_files
+
+
 def get_A_func(name):
     from importlib import __import__   # Get import library 
     file  = __import__(name)           # Import the given file

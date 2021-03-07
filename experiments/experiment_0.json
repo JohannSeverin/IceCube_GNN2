@@ -3,10 +3,17 @@
     "Exp_group":  "Test_series", 
 
     "ModelName":  "GraphSage_network",
- 
+
+    "epcohs":     100,
+    "batch_size": 512,
+    "early_stop": true,
+    "patience":   5,
+    "learning_rate":   1e-4,
+    "lr_schedule": "classic_schedule",
+    "val_every":   100000,
+    "verbose":     true,
+
     "hyper_params": {
-        "batch_size":      512,
-        "learning_rate":   1e-4,
         "n_out":           4,
         "encode_layers":   3,
         "decode_layers":   3,
