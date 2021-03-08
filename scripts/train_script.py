@@ -43,7 +43,7 @@ def train_model(construct_dict):
     #   Setup, Loss_func and Train_loop            #
     ################################################
 
-    # get model metrics
+    # Get model, metrics, lr_schedule and loss function
     model, model_path     = setup_model(construct_dict)
     loss_func             = get_loss_func(construct_dict['LossFunc'])
     metrics               = get_metrics(construct_dict['metrics'])
@@ -172,11 +172,8 @@ def train_model(construct_dict):
                 if construct_dict['verbose']:
                     print(f"Training stopped, no improvement made in {patience} steps.")
     
+    run.finish()
     
-                
-
-
-
 
 
 
@@ -191,8 +188,6 @@ def get_lr_schedule(construct_dict):
     lr_schedule  = lr_generator(lr) 
 
     return lr_schedule
-
-
 
 
 
@@ -212,7 +207,6 @@ def get_loss_func(name):
     module = __import__(osp.join(file_path, "loss_funcs", name))
     loss_func = getattr(module, "loss_func")
     return loss_func
-
 
 
 

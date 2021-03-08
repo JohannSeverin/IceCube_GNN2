@@ -11,7 +11,7 @@ import os.path as osp
 ##########################################################
 
 # Generate list over experiments to run
-from scripts.utils import list_experiments
+from scripts.utils import list_experiments, instructions_to_dataset_name
 from scripts.train_script import train_model
 exp_folder, exp_list = list_experiments()
 
@@ -33,6 +33,13 @@ for i, experiment in enumerate(exp_list):
     # except:
     #     shutil.move(osp.join(exp_folder, "failed", experiment))
     #     print(f"Experiment {experiment[:-5]} failed \t {experiment}: {i} / {len(exp_list)}")
+
+
+    # Create a script to go through and test the performance
+    test_model(model = construct_dict['Experiment'], data = instructions_to_dataset_name(construct_dict))
+    
+
+
 
 
 # We can setup a shutdown maybe
