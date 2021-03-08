@@ -3,23 +3,22 @@ from scipy.sparse.csr import csr_matrix
 from sklearn.decomposition import PCA
 
 
-def A_func(x, k = 6):
+def PCA_gen(pos, k = 6, self_loop = False):
     """
     Generate adjacancy matrix by considering the principle component axis of the triggers in the events.
     Symmetric around the event, so there will be k // 2 neighbors before and after along the principle component.
     """
 
-    pos = x[:3, :]
-
     # Use PCA to find principle component projection
-    p_components = PCA(n_components = 1).fit_transform(pos)
+    p_components = np.array(PCA(n_components = 1).fit_transform(pos)).flatten()
 
     a_idxs       = neighbors(p_components, self_loop, k)
-    ones         = np.ones(size = a_idxs.shape[0])
+    ones         = np.ones(shape = a_idxs.shape[0])
 
-    a            = csr_matrix(ones, (a_idxs[:,0], a_idxs[:, 1]))
+    a            = csr_matrix((ones, (a_idxs[:,0], a_idxs[:, 1])))
 
     return a
+
 
 
 def neighbors(values, self_loop = False, k = 6):
@@ -39,9 +38,8 @@ def neighbors(values, self_loop = False, k = 6):
             continue
         else:
             idxs = np.arange(max(0, i), min(N_nodes, N_nodes - i))
-            sparse_idx.append(np.vstack([sorted_idxs[idxs], np.roll(sorted_idxs, i)[idxs]]).T)
+            sparse_idx.append(np.vstack([sorted_idxs[idxs], np.roll(sorted_idxs, i)[idxs]]))
 
-    sparse_idx = np.vstack(sparse_idx)
-
-    return sparse_idx
+    sparse_idx = np.column_stack(sparse_idx).T
+    return sparse_idx.astype(int)
 

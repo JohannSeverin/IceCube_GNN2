@@ -7,9 +7,10 @@ import numpy as np
 from pandas import read_sql
 
 from spektral.data import Dataset, Graph
+from scipy.sparse import csr_matrix
 
 verbose = True
-from utils import instructions_to_dataset_name, check_dataset, split_events, get_A_func
+from scripts.utils import instructions_to_dataset_name, check_dataset, split_events, get_A_func, remove_dataset
 
 
 file_path = osp.dirname(osp.realpath(__file__))
@@ -27,7 +28,6 @@ class graph_dataset(Dataset):
         self.type        = type
 
         self.name        = instructions_to_dataset_name(construct_dict)
-        self.per_file    = 10000
 
         self.Data        = construct_dict['Data']
         self.GraphType   = construct_dict['GraphType']
@@ -38,16 +38,23 @@ class graph_dataset(Dataset):
         self.event_lims  = construct_dict['event_lims']
         self.node_lims   = construct_dict['node_lims']
 
+        self.graph_batch = construct_dict['graph_batch']
         self.data_split  = construct_dict['data_split'] 
         self.seed        = 25
         
         self.features    = construct_dict["features"]
         self.targets     = construct_dict["targets"]
 
+        self.verbose     = construct_dict["verbose"]
 
+        if construct_dict["clear_dataset"]:
+            remove_dataset(self.Data, self.GraphType, self.GraphParam)
 
         super().__init__()
 
+
+    def __len__(self):
+        return 20000
 
     @property
     def path(self):
@@ -55,23 +62,28 @@ class graph_dataset(Dataset):
 
 
     def download(self):
+        if self.verbose:
+            print("Preparing dataset")
+
         # Check if the data exists, if not create directories
         xs_exists, as_exists = check_dataset(self.Data, self.GraphType, self.GraphParam)
 
         if not self.raw_path:
-            raw_path = osp.join(file_path, "..", "data", "raw", self.Data + ".db")
+            self.raw_path = osp.join(file_path, "..", "data", "raw", self.Data + ".db")
         
         x_path = osp.join(file_path, "..", "data", "features", self.Data)
         a_path = self.path
 
         A_func = get_A_func(self.GraphType)
 
-        with sqlite3.connect(raw_path) as conn:    # Connect to raw database    
+        with sqlite3.connect(self.raw_path) as conn:    # Connect to raw database    
+            if self.verbose:
+                print(f"Connected to {self.raw_path}")
             # Gather ids from sql file
-            event_query = "select event__no from truth"
+            event_query = "select event_no from truth"
             if self.event_lims:
                 event_query += " where " + self.event_lims
-            event_ids = read_sql(event_query)
+            event_ids = np.array(read_sql(event_query, conn)).flatten()
             
             # Split event_numbers in train/test
             train_events, val_events, test_events = split_events(event_ids, self.data_split, self.seed)
@@ -88,18 +100,18 @@ class graph_dataset(Dataset):
                         print(f"Extracting features for {type}")
 
                     # generate x features loop
-                    for i in tqdm(range(0, len(events), self.graph_batch)):
+                    for i in tqdm.tqdm(range(0, len(events), self.graph_batch)):
                         get_ids = train_events[i: i + self.graph_batch]
 
                         feature_query = f"select event_no, {', '.join(self.features)} from features where event_no in {tuple(get_ids)}"
                         if self.node_lims:
                             feature_query += " and " + self.node_lims # Add further restrictions
 
-                        features      = read_sql(conn, feature_query)
+                        features      = read_sql(feature_query, conn)
 
                         target_query = f"select {', '.join(self.targets)} from truth where event_no in {tuple(get_ids)}"
 
-                        targets      = read_sql(conn, target_query)
+                        targets      = read_sql(target_query, conn)
 
                         # Convert to np arrays and split xs in list
                         f_event      = np.array(features['event_no'])
@@ -113,7 +125,7 @@ class graph_dataset(Dataset):
                         
                         # Save in folder
                         with open(osp.join(x_path, type + str(i) + ".dat"), "wb") as xy_file:
-                            pickle.dump(xy_file, [xs, ys])
+                            pickle.dump([xs, ys], xy_file)
 
             if not as_exists:
                 # Load data from the xs and generate appropiate adjacency matrices in the a - folder
@@ -121,19 +133,17 @@ class graph_dataset(Dataset):
                 if verbose:
                     print("Making adjacency matrices")
 
-                for xy_file in tqdm(os.listdir(x_path)):
-
-                    xs, ys = pickle.load(open(xy_file, "rb"))
-
-                    as = []
+                for xy_file in tqdm.tqdm(os.listdir(x_path)):
+                    with open(osp.join(x_path, type + str(i) + ".dat"), "rb") as file:
+                        xs, ys = pickle.load(file)
+                    As = []
 
                     for x in xs:
                         a = A_func(x, self.GraphParam)
-                        as.append(a)
+                        As.append(a)
                     
-                    head, tail = osp.split(xy_file)
-                    with open(osp.join(a_path, head), "wb") as a_file:
-                        pickle.dump(a_file, as)
+                    with open(osp.join(a_path, xy_file), "wb") as a_file:
+                        pickle.dump(As, a_file)
 
                         
     def read(self):
@@ -154,13 +164,13 @@ class graph_dataset(Dataset):
                 xy_file = pickle.load(open(xy_path, "rb"))
                 xs, ys = xy_file
                 
-                as  = pickle.load(open(a_path,  "rb"))
+                As  = pickle.load(open(a_path,  "rb"))
 
                 # Loop over data
-                for x, y, a in zip(xs, ys, as):
+                for x, y, a in zip(xs, ys, As):
                     yield Graph(x = x, a = a, y = y)
 
-        return graph_generator
+        return graph_generator()
 
 
 

@@ -1,6 +1,8 @@
-import os, sys, json
+import os, sys, json, shutil
 import os.path as osp
 import numpy as np
+
+from importlib import import_module
 
 
 file_path = osp.dirname(osp.realpath(__file__))
@@ -11,19 +13,19 @@ def list_experiments():
     experiment_folder = osp.join(file_path, "..", "experiments") 
     experiment_files  = os.listdir(experiment_folder)
     experiment_files.remove("done")
+    experiment_files.remove("failed")
     return experiment_folder, experiment_files
 
 
 def get_A_func(name):
-    from importlib import __import__   # Get import library 
-    file  = __import__(name)           # Import the given file
-    A_func = getattr(file, "A_func")   # Import A_func from the file
+    import scripts.A_func_list as A_func_list
+    A_func = getattr(A_func_list, name)   # Import A_func from the file
     return A_func
 
 
 def split_events(ids, data_splits = [0.8, 0.1, 0.1], seed = 25):
     # Setup seed
-    np.seed(seed)
+    np.random.seed(seed)
     
     # permutate the indices of event numers
     N = len(ids)
@@ -37,7 +39,7 @@ def split_events(ids, data_splits = [0.8, 0.1, 0.1], seed = 25):
     # Split events
     train_events = ids[idx_tr]
     val_events   = ids[idx_val]
-    test_events  = idx[idx_test]
+    test_events  = ids[idx_test]
 
     return train_events, val_events, test_events
 
@@ -52,13 +54,29 @@ def instructions_to_dataset_name(construction_dict):
     return name 
 
 
+def remove_dataset(Data, GraphType, GraphParam = None):
+    # function to remove data_folder and adjacency completely to restart
+
+    # Remove data
+    Data_folder = osp.join(file_path, "..", "data", "features")
+    if Data in os.listdir(Data_folder):
+        shutil.rmtree(osp.join(Data_folder, Data))
+
+    # Remove adjacancy folder
+    Graph_Name = Data + "_" + GraphType + str(GraphParam)
+    Adjancancy_folder = osp.join(file_path, "..", "data", "adjacency")
+
+    if Graph_Name  in os.listdir(Adjancancy_folder):
+        shutil.rmtree(osp.join(Adjancancy_folder, Graph_Name))
+
+
 def check_dataset(Data, GraphType, GraphParam = None):
     """
     Check if a given dataset is generated, else initiate the process
     Return data_exists, as_exists
     Boolean determing if x data file and as data file are constructed
     """
-    Data_folder = osp.join(file_path, "..", "data", " features")
+    Data_folder = osp.join(file_path, "..", "data", "features")
     if Data not in os.listdir(Data_folder):
         os.mkdir(osp.join(Data_folder, Data))
         data_exists = False
@@ -67,7 +85,7 @@ def check_dataset(Data, GraphType, GraphParam = None):
     
     Graph_Name = Data + "_" + GraphType + str(GraphParam)
 
-    Adjancancy_folder = osp.join(file_path, "..", "data", " adjacency")
+    Adjancancy_folder = osp.join(file_path, "..", "data", "adjacency")
 
     if Graph_Name not in os.listdir(Adjancancy_folder):
         os.mkdir(osp.join(Adjancancy_folder, Graph_Name))

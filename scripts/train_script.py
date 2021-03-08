@@ -19,7 +19,7 @@ def train_model(construct_dict):
     # Setup Log 
     if construct_dict["log_wandb"]:
         import wandb
-        run = wandb.init(project = construct_dict["Exp_group"], entitiy = "johannbs", reinit = True, name = "Experiment")
+        run = wandb.init(project = construct_dict["Exp_group"], entity = "johannbs", reinit = True, name = "Experiment")
         run.config(construct_dict)
 
     ################################################
@@ -28,13 +28,16 @@ def train_model(construct_dict):
     
     epochs      = construct_dict['epochs']
     batch_size  = construct_dict['batch_size']
-    early_stop  = construct_dict['early']
+    early_stop  = construct_dict['early_stop']
     patience    = construct_dict['patience']
     
     from scripts.datasets import graph_dataset
 
     train_data    = graph_dataset(construct_dict, "train")
     train_loader  = DisjointLoader(train_data, epochs = epochs, batch_size = batch_size)
+
+    if construct_dict['clear_dataset']:
+        construct_dict['clear_dataset'] = False
 
     val_data      = graph_dataset(construct_dict, "val")
 
@@ -185,7 +188,7 @@ def get_lr_schedule(construct_dict):
 
     lr_generator = getattr(lr_module, schedule)
 
-    lr_schedule  = lr_generator(lr) 
+    lr_schedule  = lr_generator(lr)()
 
     return lr_schedule
 
@@ -204,8 +207,8 @@ def get_metrics(metric_names):
 
 def get_loss_func(name):
     # Return loss func from the loss functions folder given a name
-    module = __import__(osp.join(file_path, "loss_funcs", name))
-    loss_func = getattr(module, "loss_func")
+    import scripts.loss_funcs as loss_func_module
+    loss_func = getattr(loss_func_module, name)
     return loss_func
 
 
@@ -216,13 +219,14 @@ def setup_model(construct_dict):
     hyper_params  = construct_dict['hyper_params']
 
     # Load model from model folder
-    model_module  = __import__(osp.join(file_path, "models", model_name))
-    model         = getattr(model_module, "model") 
+    import scripts.models as model_module
+    model         = getattr(model_module, model_name) 
     model         = model(**hyper_params)
 
     # Make folder for saved states
-    model_path    = osp.join(file_path, "models", model_name)
-    os.mkdir(model_path)
+    model_path    = osp.join(file_path, "..", "models", model_name)
+    if not osp.isdir(model_path):
+        os.mkdir(model_path)
 
     return model, model_path
 

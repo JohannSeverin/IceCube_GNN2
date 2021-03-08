@@ -4,7 +4,7 @@
 
     "ModelName":  "GraphSage_network",
 
-    "epcohs":     100,
+    "epochs":     100,
     "batch_size": 512,
     "early_stop": true,
     "patience":   5,
@@ -22,20 +22,22 @@
         "batch_norm":      true
     },
 
-    "Data":       "MuonGun",
-    "GraphType":  "PCA_gen",
-    "GraphParam": 6,
-    "Data_split": [0.8, 0.1, 0.1],
+    "Data":            "MuonGun",
+    "GraphType":       "PCA_gen",
+    "GraphParam":       6,
+    "data_split":      [0.8, 0.1, 0.1],
+    "clear_dataset":   false,
+    "graph_batch":     10000,
 
-    "raw_path":   null,
+    "raw_path":   "/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db",
 
-    "Features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10"],
-    "Targets":    ["direction_x", "direction_y", "direction_z"],
-    "event_lims": "pid = 13 or pid = -13",
+    "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10"],
+    "targets":    ["direction_x", "direction_y", "direction_z"],
+    "event_lims": "pid = 13 limit 20000",
     "node_lims":  "SRTInIcePulses = 1", 
 
     "LossFunc":   "VonMises3D",
-    "log_wandb": true,
-    "metrics":   ["loss", "angle_w"]
+    "log_wandb": false,
+    "metrics":   ["angle_u"]
 }
    
