@@ -1,0 +1,21 @@
+WARNING:tensorflow:Gradients do not exist for variables ['graph_sage_network/dense_7/kernel:0', 'graph_sage_network/dense_7/bias:0', 'graph_sage_network/dense_10/kernel:0', 'graph_sage_network/dense_10/bias:0'] when minimizing the loss.
+WARNING:tensorflow:Gradients do not exist for variables ['graph_sage_network/dense_7/kernel:0', 'graph_sage_network/dense_7/bias:0', 'graph_sage_network/dense_10/kernel:0', 'graph_sage_network/dense_10/bias:0'] when minimizing the loss.
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m~/Desktop/IceCube_GNN2/run_trainings.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     28[0m     [0;31m# Try to train the model given the construction dict[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     29[0m     [0;31m# try:[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 30[0;31m     [0mtrain_model[0m[0;34m([0m[0mconstruct_dict[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     31[0m     [0mshutil[0m[0;34m.[0m[0mmove[0m[0;34m([0m[0mosp[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mexp_folder[0m[0;34m,[0m [0;34m"done"[0m[0;34m,[0m [0mexperiment[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     32[0m     [0mprint[0m[0;34m([0m[0;34mf"Experiment {experiment[:-5]} done \t {experiment}: {i} / {len(exp_list)}"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Desktop/IceCube_GNN2/scripts/train_script.py[0m in [0;36mtrain_model[0;34m(construct_dict)[0m
+[1;32m    147[0m             [0;31m# Print if verbose[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    148[0m             [0;32mif[0m [0mconstruct_dict[0m[0;34m[[0m[0;34m'verbose'[0m[0;34m][0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 149[0;31m                 [0mprint[0m[0;34m([0m[0;34mf"Seen data: {seen_data:07d} \t Avg loss since last validation: {loss / current_batch:.6f} \t Data per second: {1 / np.mean(batch_time)::.2f}          "[0m[0;34m,[0m [0mend[0m [0;34m=[0m [0;34m"\r"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    150[0m [0;34m[0m[0m
+[1;32m    151[0m [0;34m[0m[0m
+
+[0;31mValueError[0m: Invalid format specifier
+
+[23;0t

@@ -1,0 +1,49 @@
+2021-03-09 21:00:52,912 INFO    MainThread:35244 [wandb_setup.py:_flush():70] setting env: {}
+2021-03-09 21:00:52,913 INFO    MainThread:35244 [wandb_setup.py:_flush():70] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2021-03-09 21:00:52,913 INFO    MainThread:35244 [wandb_setup.py:_flush():70] setting login settings: {}
+2021-03-09 21:00:52,913 INFO    MainThread:35244 [wandb_setup.py:_flush():70] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7f8eea4a9490>
+2021-03-09 21:00:52,913 INFO    MainThread:35244 [wandb_init.py:_log_setup():319] Logging user logs to /home/johannbs/Desktop/IceCube_GNN2/wandb/run-20210309_210052-1k4krbfc/logs/debug.log
+2021-03-09 21:00:52,914 INFO    MainThread:35244 [wandb_init.py:_log_setup():320] Logging internal logs to /home/johannbs/Desktop/IceCube_GNN2/wandb/run-20210309_210052-1k4krbfc/logs/debug-internal.log
+2021-03-09 21:00:52,914 INFO    MainThread:35244 [wandb_init.py:init():351] calling init triggers
+2021-03-09 21:00:52,914 INFO    MainThread:35244 [wandb_init.py:init():356] wandb.init called with sweep_config: {}
+config: {'Experiment': 'Test_exp_scaling_1mio', 'Exp_group': 'Test_series', 'ModelName': 'GraphSage_network', 'epochs': 100, 'train_data': 10000000, 'batch_size': 512, 'early_stop': True, 'patience': 5, 'learning_rate': 0.0001, 'lr_schedule': 'classic_schedule', 'val_every': 100000, 'buffer_size': 50000, 'verbose': True, 'hyper_params': {'n_out': 4, 'encode_layers': 3, 'decode_layers': 3, 'hidden_states': 32, 'dropout': 0.25, 'batch_norm': True}, 'Data': 'MuonGun', 'GraphType': 'PCA_gen', 'GraphParam': 10, 'data_split': [0.9, 0.05, 0.95], 'clear_dataset': False, 'graph_batch': 10000, 'transforms': '/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl', 'raw_path': '/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db', 'features': ['dom_x', 'dom_y', 'dom_z', 'time', 'charge_log10'], 'targets': ['direction_x', 'direction_y', 'direction_z'], 'event_lims': 'pid = 13 limit 500000', 'node_lims': 'SRTInIcePulses = 1', 'LossFunc': 'VonMises3D', 'log_wandb': True, 'metrics': ['angle_u']}
+2021-03-09 21:00:52,914 INFO    MainThread:35244 [wandb_init.py:init():404] starting backend
+2021-03-09 21:00:52,927 INFO    MainThread:35244 [backend.py:ensure_launched():81] starting backend process...
+2021-03-09 21:00:52,936 INFO    MainThread:35244 [backend.py:ensure_launched():85] started backend process with pid: 35260
+2021-03-09 21:00:52,938 INFO    MainThread:35244 [wandb_init.py:init():413] backend started and connected
+2021-03-09 21:00:52,940 INFO    MainThread:35244 [wandb_init.py:init():436] updated telemetry
+2021-03-09 21:00:52,941 INFO    MainThread:35244 [wandb_init.py:init():459] communicating current version
+2021-03-09 21:00:53,790 INFO    MainThread:35244 [wandb_init.py:init():464] got version response upgrade_message: "wandb version 0.10.21 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2021-03-09 21:00:53,790 INFO    MainThread:35244 [wandb_init.py:init():472] communicating run to backend with 30 second timeout
+2021-03-09 21:00:54,014 INFO    MainThread:35244 [wandb_init.py:init():495] starting run threads in backend
+2021-03-09 21:00:55,583 INFO    MainThread:35244 [wandb_run.py:_console_start():1411] atexit reg
+2021-03-09 21:00:55,583 INFO    MainThread:35244 [wandb_run.py:_redirect():1274] redirect: SettingsConsole.WRAP
+2021-03-09 21:00:55,584 INFO    MainThread:35244 [wandb_run.py:_redirect():1309] Wrapping output streams.
+2021-03-09 21:00:55,584 INFO    MainThread:35244 [wandb_run.py:_redirect():1325] Redirects installed.
+2021-03-09 21:00:55,584 INFO    MainThread:35244 [wandb_init.py:init():518] run started, returning control to user process
+2021-03-09 21:01:06,284 INFO    MainThread:35244 [wandb_init.py:_pause_backend():240] pausing backend
+2021-03-09 21:01:37,065 INFO    MainThread:35244 [wandb_init.py:_resume_backend():245] resuming backend
+2021-03-09 21:01:37,065 INFO    MainThread:35244 [wandb_init.py:_pause_backend():240] pausing backend
+2021-03-09 21:01:37,067 INFO    MainThread:35244 [wandb_run.py:_atexit_cleanup():1381] got exitcode: 0
+2021-03-09 21:01:37,067 INFO    MainThread:35244 [wandb_run.py:_restore():1353] restore
+2021-03-09 21:01:37,306 INFO    MainThread:35244 [wandb_run.py:_wait_for_finish():1504] got exit ret: file_counts {
+  wandb_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 801
+  total_bytes: 801
+}
+
+2021-03-09 21:01:39,312 INFO    MainThread:35244 [wandb_run.py:_wait_for_finish():1504] got exit ret: done: true
+exit_result {
+}
+file_counts {
+  wandb_count: 5
+}
+pusher_stats {
+  uploaded_bytes: 10003
+  total_bytes: 10003
+}
+
+2021-03-09 21:01:40,616 INFO    MainThread:35244 [wandb_run.py:_show_files():1726] logging synced files

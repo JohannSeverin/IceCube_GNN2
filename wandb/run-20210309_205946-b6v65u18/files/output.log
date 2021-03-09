@@ -1,0 +1,23 @@
+WARNING:tensorflow:Gradients do not exist for variables ['graph_sage_network/dense_7/kernel:0', 'graph_sage_network/dense_7/bias:0', 'graph_sage_network/dense_10/kernel:0', 'graph_sage_network/dense_10/bias:0'] when minimizing the loss.
+WARNING:tensorflow:Gradients do not exist for variables ['graph_sage_network/dense_7/kernel:0', 'graph_sage_network/dense_7/bias:0', 'graph_sage_network/dense_10/kernel:0', 'graph_sage_network/dense_10/bias:0'] when minimizing the loss.
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m~/Desktop/IceCube_GNN2/run_trainings.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     28[0m     [0;31m# Try to train the model given the construction dict[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     29[0m     [0;31m# try:[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 30[0;31m     [0mtrain_model[0m[0;34m([0m[0mconstruct_dict[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     31[0m     [0mshutil[0m[0;34m.[0m[0mmove[0m[0;34m([0m[0mosp[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mexp_folder[0m[0;34m,[0m [0;34m"done"[0m[0;34m,[0m [0mexperiment[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     32[0m     [0mprint[0m[0;34m([0m[0;34mf"Experiment {experiment[:-5]} done \t {experiment}: {i} / {len(exp_list)}"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Desktop/IceCube_GNN2/scripts/train_script.py[0m in [0;36mtrain_model[0;34m(construct_dict)[0m
+[1;32m    141[0m             [0mseen_data[0m      [0;34m+=[0m [0mlen[0m[0;34m([0m[0mtargets[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    142[0m             [0mcurrent_batch[0m  [0;34m+=[0m [0;36m1[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 143[0;31m             [0mbatch_time[0m      [0;34m=[0m [0mnp[0m[0;34m.[0m[0mroll[0m[0;34m([0m[0mbatch_time[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    144[0m             [0mbatch_time[0m[0;34m[[0m[0;36m0[0m[0;34m][0m   [0;34m=[0m [0mtime[0m[0;34m.[0m[0mtime[0m[0;34m([0m[0;34m)[0m [0;34m-[0m [0mclock[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    145[0m             [0mclock[0m           [0;34m=[0m [0mtime[0m[0;34m.[0m[0mtime[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m<__array_function__ internals>[0m in [0;36mroll[0;34m(*args, **kwargs)[0m
+
+[0;31mTypeError[0m: _roll_dispatcher() missing 1 required positional argument: 'shift'
+
+[23;0t

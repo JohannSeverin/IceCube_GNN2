@@ -1,0 +1,19 @@
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m~/Desktop/IceCube_GNN2/run_trainings.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     28[0m     [0;31m# Try to train the model given the construction dict[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     29[0m     [0;31m# try:[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 30[0;31m     [0mtrain_model[0m[0;34m([0m[0mconstruct_dict[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     31[0m     [0mshutil[0m[0;34m.[0m[0mmove[0m[0;34m([0m[0mosp[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mexp_folder[0m[0;34m,[0m [0;34m"done"[0m[0;34m,[0m [0mexperiment[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     32[0m     [0mprint[0m[0;34m([0m[0;34mf"Experiment {experiment[:-5]} done \t {experiment}: {i} / {len(exp_list)}"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Desktop/IceCube_GNN2/scripts/train_script.py[0m in [0;36mtrain_model[0;34m(construct_dict)[0m
+[1;32m     21[0m         [0;32mimport[0m [0mwandb[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     22[0m         [0mrun[0m [0;34m=[0m [0mwandb[0m[0;34m.[0m[0minit[0m[0;34m([0m[0mproject[0m [0;34m=[0m [0mconstruct_dict[0m[0;34m[[0m[0;34m"Exp_group"[0m[0;34m][0m[0;34m,[0m [0mentity[0m [0;34m=[0m [0;34m"johannbs"[0m[0;34m,[0m [0mreinit[0m [0;34m=[0m [0;32mTrue[0m[0;34m,[0m [0mname[0m [0;34m=[0m [0;34m"Experiment"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 23[0;31m         [0mwandb[0m[0;34m.[0m[0mconfig[0m[0;34m([0m[0mconstruct_dict[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     24[0m [0;34m[0m[0m
+[1;32m     25[0m     [0;31m################################################[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mTypeError[0m: 'Config' object is not callable
+
+[23;0t

@@ -1,4 +1,4 @@
-import tqdm, os, sys
+import tqdm, os, sys, time
 
 import tensorflow as tf
 import numpy as np
@@ -19,8 +19,7 @@ def train_model(construct_dict):
     # Setup Log 
     if construct_dict["log_wandb"]:
         import wandb
-        run = wandb.init(project = construct_dict["Exp_group"], entity = "johannbs", reinit = True, name = "Experiment")
-        run.config(construct_dict)
+        run = wandb.init(project = construct_dict["Exp_group"], entity = "johannbs", reinit = True, name = "Experiment", config = construct_dict)
 
     ################################################
     #   Load dataset for training and validation   #
@@ -33,13 +32,16 @@ def train_model(construct_dict):
     
     from scripts.datasets import graph_dataset
 
-    train_data    = graph_dataset(construct_dict, "train")
+    train_data    = graph_dataset(construct_dict, "train", initialize = True)
     train_loader  = DisjointLoader(train_data, epochs = epochs, batch_size = batch_size)
 
     if construct_dict['clear_dataset']:
         construct_dict['clear_dataset'] = False
 
+
     val_data      = graph_dataset(construct_dict, "val")
+
+
 
 
     ################################################
@@ -72,17 +74,23 @@ def train_model(construct_dict):
     
     # Define validation function
     @tf.function(input_signature = train_loader.tf_signature(), experimental_relax_shapes = True)
+    def test_step(inputs, targets):
+        predictions     = model(inputs, training = False)
+        targets         = tf.cast(targets, tf.float32) 
+        return targets, predictions
+
+
     def validation(loader, metrics):
         all_predictions = []
         all_targets     = []
 
         batches = 0
+        loss    = 0
 
         # Loop over the batch and calculate predictions
         for batch in loader:
             inputs, targets = batch
-            predictions     = model(inputs, training = False)
-            targets         = tf.cast(targets, tf.float32) 
+            targets, predictions = test_step(inputs, targets)
             loss           += loss_func(targets, predictions)
             batches        += 1
             all_predictions.append(predictions)
@@ -90,8 +98,8 @@ def train_model(construct_dict):
         
         # Calculate validations
         val_loss    = loss / batches
-        predictions = tf.concat(all_predictions, axis = 1)
-        targets     = tf.concat(all_targets,     axos = 1)
+        predictions = tf.concat(all_predictions, axis = 0)
+        targets     = tf.concat(all_targets,     axis = 0)
 
         # Loop over metics and calculate
         if len(metrics) > 0:
@@ -112,69 +120,83 @@ def train_model(construct_dict):
     current_batch         = 0
     loss                  = 0
     validation_track_loss = []
-    seen_data             = 0     
-
+    seen_data             = 0
+    early_stop            = False
+    batch_time            = np.ones(10) * 100
+    clock                 = time.time()
 
     # Start loop
-    for batch in train_loader:
-
-        # Train model
-        inputs, targets = batch
-        out             = train_step(inputs, targets)
-        loss           += out
-
-        # Update counters
-        seen_data      += len(targets)
-        current_batch  += 1
+    while seen_data < construct_dict['train_data']:
         
-        # Print if verbose
-        if construct_dict['verbose']: 
-            print(f"Seen data: {seen_data} \t Avg loss since last validation: {loss / current_batch:.6f}          ", end = "\r")
-
+        train_data    = graph_dataset(construct_dict, "train")
+        train_loader  = DisjointLoader(train_data, epochs = epochs, batch_size = batch_size)
         
-        # Validate and update learning rate
-        if seen_data % construct_dict['val_every'] < batch_size and seen_data > 0:
+        for batch in train_loader:
+            # Train model
+            inputs, targets = batch
+            out             = train_step(inputs, targets)
+            loss           += out
 
-            # Validate data
-            val_loader = DisjointLoader(val_data, epoch = 1, batch_size = batch_size)
-            val_loss, metric_dict = validation(val_loader)
-
-            # Print if verbose
-            if construct_dict['verbose']:
-                print(f"Validation loss: {val_loss :.6f}")
-                print(f"Validation metrics: " + "\t".join([f"{i}: {metric_dict[i]:.6f}" for i in metric_dict.keys()]))
-
-            # Log to wandb
-            if construct_dict["log_wandb"]:
-                to_log              = {}
-                if len(metric_dict) > 0:
-                    for m in metric_dict.keys():
-                        to_log[m] = metric_dict[m]
-
-                to_log["train_loss"]    = loss / current_batch 
-                to_log["val_loss"]      = val_loss
-                to_log["learning_rate"] = lr
-
-                run.log(data = to_log, step = seen_data)
-
-            # Update learning rate according to schedule
-            lr  = next(lr_schedule)
-            opt.learning_rate.assign(lr)
+            # Update counters
+            seen_data      += len(targets)
+            current_batch  += 1
+            batch_time      = np.roll(batch_time, 1)
+            batch_time[0]   = time.time() - clock
+            clock           = time.time()
             
-            # Reset states
-            current_batch    = 0
-            loss             = 0
+            # Print if verbose
+            if construct_dict['verbose']: 
+                print(f"Seen data: {seen_data:07d} \t Avg loss since last validation: {loss / current_batch:.6f} \t Data per second: {construct_dict['batch_size'] / np.mean(batch_time):.2f}          ", end = "\r")
 
-            # Save model
-            model.save(model_path)
+            
+            # Validate and update learning rate
+            if seen_data % construct_dict['val_every'] < batch_size and seen_data > 0:
 
-            # Check for early_stopping
-            validation_track_loss.append(val_loss)
+                # Validate data
+                val_loader = DisjointLoader(val_data, epochs = 1, batch_size = batch_size)
+                val_loss, metric_dict = validation(val_loader, metrics)
 
-            if np.argmin(validation_track_loss) > len(validation_track_loss) - patience and early_stop == True:
+                # Print if verbose
                 if construct_dict['verbose']:
-                    print(f"Training stopped, no improvement made in {patience} steps.")
-    
+                    print("\n")
+                    print(f"Validation loss: {val_loss :.6f} \t learning_rate {lr:.3e}")
+                    print(f"Validation metrics: " + "\t".join([f"{i}: {metric_dict[i]:.6f}" for i in metric_dict.keys()]))
+
+                # Log to wandb
+                if construct_dict["log_wandb"]:
+                    to_log              = {}
+                    if len(metric_dict) > 0:
+                        for m in metric_dict.keys():
+                            to_log[m] = metric_dict[m]
+
+                    to_log["train_loss"]    = loss / current_batch 
+                    to_log["val_loss"]      = val_loss
+                    to_log["learning_rate"] = lr
+
+                    wandb.log(data = to_log, step = seen_data)
+
+                # Update learning rate according to schedule
+                lr  = next(lr_schedule)
+                opt.learning_rate.assign(lr)
+                
+                # Reset states
+                current_batch    = 0
+                loss             = 0
+
+                # Save model
+                model.save(model_path)
+
+                # Check for early_stopping
+                validation_track_loss.append(val_loss)
+
+                if np.argmin(validation_track_loss) < len(validation_track_loss) - patience and early_stop == True:
+                    if construct_dict['verbose']:
+                        print(f"Training stopped, no improvement made in {patience} steps.")
+                        early_stop = True
+                        break
+        if early_stop == True:
+            break
+
     run.finish()
     
 

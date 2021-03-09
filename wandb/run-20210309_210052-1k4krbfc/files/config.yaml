@@ -1,0 +1,126 @@
+wandb_version: 1
+
+Data:
+  desc: null
+  value: MuonGun
+Exp_group:
+  desc: null
+  value: Test_series
+Experiment:
+  desc: null
+  value: Test_exp_scaling_1mio
+GraphParam:
+  desc: null
+  value: 10
+GraphType:
+  desc: null
+  value: PCA_gen
+LossFunc:
+  desc: null
+  value: VonMises3D
+ModelName:
+  desc: null
+  value: GraphSage_network
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.10.19
+    framework: tensorflow
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.8.5
+    t:
+      1:
+      - 3
+      - 5
+      2:
+      - 3
+      - 5
+      4: 3.8.5
+      5: 0.10.19
+      8:
+      - 1
+batch_size:
+  desc: null
+  value: 512
+buffer_size:
+  desc: null
+  value: 50000
+clear_dataset:
+  desc: null
+  value: false
+data_split:
+  desc: null
+  value:
+  - 0.9
+  - 0.05
+  - 0.95
+early_stop:
+  desc: null
+  value: true
+epochs:
+  desc: null
+  value: 100
+event_lims:
+  desc: null
+  value: pid = 13 limit 500000
+features:
+  desc: null
+  value:
+  - dom_x
+  - dom_y
+  - dom_z
+  - time
+  - charge_log10
+graph_batch:
+  desc: null
+  value: 10000
+hyper_params:
+  desc: null
+  value:
+    batch_norm: true
+    decode_layers: 3
+    dropout: 0.25
+    encode_layers: 3
+    hidden_states: 32
+    n_out: 4
+learning_rate:
+  desc: null
+  value: 0.0001
+log_wandb:
+  desc: null
+  value: true
+lr_schedule:
+  desc: null
+  value: classic_schedule
+metrics:
+  desc: null
+  value:
+  - angle_u
+node_lims:
+  desc: null
+  value: SRTInIcePulses = 1
+patience:
+  desc: null
+  value: 5
+raw_path:
+  desc: null
+  value: /home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db
+targets:
+  desc: null
+  value:
+  - direction_x
+  - direction_y
+  - direction_z
+train_data:
+  desc: null
+  value: 10000000
+transforms:
+  desc: null
+  value: /home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl
+val_every:
+  desc: null
+  value: 100000
+verbose:
+  desc: null
+  value: true

@@ -21,6 +21,16 @@ eps = 1e-5
 
 # Probably needs regularization, but first step is just to fit, then we will regularize.
 
+
+# Normalize params
+normalize = {"translate": tf.constant([0, 0, -200, 10000, 0], dtype = tf.float32),
+             "scale":     tf.constant([100, 100, 100, 2500, 0.25], dtype = tf.float32),
+             "x_dom":  (0, 100),
+             "y_dom":  (0, 100),
+             "z_dom":  (-200, 100),
+             "time":   (10000, 2500),
+             "charge": (0, 0.25)}
+
 class GraphSage_network(Model):
     def __init__(self, n_out = 6, hidden_states = 64, forward = False, dropout = 0, **kwargs):
         super().__init__()
@@ -51,6 +61,7 @@ class GraphSage_network(Model):
 
     def call(self, inputs, training = False):
         x, a, i = inputs
+        x       = self.normalize(x)
         a, e    = self.generate_edge_features(x, a)
         e       = self.batch_edge(e)
         x = self.MP([x, a, e])
@@ -78,6 +89,10 @@ class GraphSage_network(Model):
 
         return tf.concat([x_units, x_sigs], axis = 1)
 
+    def normalize(self, input):
+      input -= normalize['translate']
+      input /= normalize['scale']
+      return input
 
     def generate_edge_features(self, x, a):
       send    = a.indices[:, 0]

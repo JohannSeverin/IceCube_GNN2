@@ -1,0 +1,54 @@
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m~/Desktop/IceCube_GNN2/run_trainings.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     28[0m     [0;31m# Try to train the model given the construction dict[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     29[0m     [0;31m# try:[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 30[0;31m     [0mtrain_model[0m[0;34m([0m[0mconstruct_dict[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     31[0m     [0mshutil[0m[0;34m.[0m[0mmove[0m[0;34m([0m[0mosp[0m[0;34m.[0m[0mjoin[0m[0;34m([0m[0mexp_folder[0m[0;34m,[0m [0;34m"done"[0m[0;34m,[0m [0mexperiment[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     32[0m     [0mprint[0m[0;34m([0m[0;34mf"Experiment {experiment[:-5]} done \t {experiment}: {i} / {len(exp_list)}"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Desktop/IceCube_GNN2/scripts/train_script.py[0m in [0;36mtrain_model[0;34m(construct_dict)[0m
+[1;32m     33[0m     [0;32mfrom[0m [0mscripts[0m[0;34m.[0m[0mdatasets[0m [0;32mimport[0m [0mgraph_dataset[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     34[0m [0;34m[0m[0m
+[0;32m---> 35[0;31m     [0mtrain_data[0m    [0;34m=[0m [0mgraph_dataset[0m[0;34m([0m[0mconstruct_dict[0m[0;34m,[0m [0;34m"train"[0m[0;34m,[0m [0minitialize[0m [0;34m=[0m [0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     36[0m     [0mtrain_loader[0m  [0;34m=[0m [0mDisjointLoader[0m[0;34m([0m[0mtrain_data[0m[0;34m,[0m [0mepochs[0m [0;34m=[0m [0mepochs[0m[0;34m,[0m [0mbatch_size[0m [0;34m=[0m [0mbatch_size[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     37[0m [0;34m[0m[0m
+
+[0;32m~/Desktop/IceCube_GNN2/scripts/datasets.py[0m in [0;36m__init__[0;34m(self, construct_dict, type, initialize)[0m
+[1;32m     55[0m             [0mremove_dataset[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mData[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0mGraphType[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0mGraphParam[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     56[0m [0;34m[0m[0m
+[0;32m---> 57[0;31m         [0msuper[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0m__init__[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     58[0m [0;34m[0m[0m
+[1;32m     59[0m [0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.8/site-packages/spektral/data/dataset.py[0m in [0;36m__init__[0;34m(self, transforms, **kwargs)[0m
+[1;32m    116[0m [0;34m[0m[0m
+[1;32m    117[0m         [0;31m# Read graphs[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 118[0;31m         [0mself[0m[0;34m.[0m[0mgraphs[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mread[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    119[0m         [0;32mif[0m [0mself[0m[0;34m.[0m[0ma[0m [0;32mis[0m [0;32mNone[0m [0;32mand[0m [0mself[0m[0;34m.[0m[0m__len__[0m[0;34m([0m[0;34m)[0m [0;34m>[0m [0;36m0[0m [0;32mand[0m [0;34m"a"[0m [0;32mnot[0m [0;32min[0m [0mself[0m[0;34m.[0m[0mgraphs[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    120[0m             warnings.warn(
+
+[0;32m~/Desktop/IceCube_GNN2/scripts/datasets.py[0m in [0;36mread[0;34m(self)[0m
+[1;32m    199[0m     [0;32mdef[0m [0mread[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    200[0m         [0mgraph_generator[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mgenerator[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 201[0;31m         [0;32mreturn[0m [0;34m[[0m[0mi[0m [0;32mfor[0m [0mi[0m [0;32min[0m [0mgraph_generator[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    202[0m [0;34m[0m[0m
+[1;32m    203[0m [0;34m[0m[0m
+
+[0;32m~/Desktop/IceCube_GNN2/scripts/datasets.py[0m in [0;36m<listcomp>[0;34m(.0)[0m
+[1;32m    199[0m     [0;32mdef[0m [0mread[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    200[0m         [0mgraph_generator[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mgenerator[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 201[0;31m         [0;32mreturn[0m [0;34m[[0m[0mi[0m [0;32mfor[0m [0mi[0m [0;32min[0m [0mgraph_generator[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    202[0m [0;34m[0m[0m
+[1;32m    203[0m [0;34m[0m[0m
+
+[0;32m~/Desktop/IceCube_GNN2/scripts/datasets.py[0m in [0;36mgraph_generator[0;34m()[0m
+[1;32m    185[0m [0;34m[0m[0m
+[1;32m    186[0m                 [0mxy_file[0m [0;34m=[0m [0mpickle[0m[0;34m.[0m[0mload[0m[0;34m([0m[0mopen[0m[0;34m([0m[0mxy_path[0m[0;34m,[0m [0;34m"rb"[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 187[0;31m                 [0mxs[0m[0;34m,[0m [0mys[0m [0;34m=[0m [0mxy_file[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    188[0m [0;34m[0m[0m
+[1;32m    189[0m                 [0mAs[0m  [0;34m=[0m [0mpickle[0m[0;34m.[0m[0mload[0m[0;34m([0m[0mopen[0m[0;34m([0m[0ma_path[0m[0;34m,[0m  [0;34m"rb"[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mValueError[0m: too many values to unpack (expected 2)
+
+[23;0t

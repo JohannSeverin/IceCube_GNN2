@@ -1,10 +1,15 @@
 import os, sys, tqdm, json, shutil
-import tensorflow as tf
 
-from spektral.data import DisjointLoader
 import os.path as osp
 
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
+import tensorflow as tf
+
+gpu_devices = tf.config.list_physical_devices('GPU') 
+if len(gpu_devices) > 0:
+    print("GPU detected")
+    tf.config.experimental.set_memory_growth(gpu_devices[0], True)
 
 ##########################################################
 #      Loop over JSON files and train models             # 
