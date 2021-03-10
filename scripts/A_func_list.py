@@ -2,6 +2,12 @@ import numpy as np
 from scipy.sparse.csr import csr_matrix
 from sklearn.decomposition import PCA
 
+from sklearn.neighbors import kneighbors_graph as knn
+
+
+def NearestNeighbors(pos, k = 6):
+    return knn(pos, k)
+    
 
 def PCA_gen(pos, k = 6, self_loop = False):
     """
@@ -42,4 +48,6 @@ def neighbors(values, self_loop = False, k = 6):
 
     sparse_idx = np.column_stack(sparse_idx).T
     return sparse_idx.astype(int)
+
+
 

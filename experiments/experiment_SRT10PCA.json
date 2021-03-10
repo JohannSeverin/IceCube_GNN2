@@ -1,6 +1,6 @@
 {
-    "Experiment": "Graph_Sage64",
-    "Exp_group":  "GraphSage_test", 
+    "Experiment": "PCA10_SRT",
+    "Exp_group":  "GraphTypeTest", 
 
     "ModelName":  "GraphSage_network",
 
@@ -8,8 +8,8 @@
     "train_data": 5000000,
     "batch_size": 512,
     "early_stop": true,
-    "patience":   5,
-    "learning_rate":   5e-4,
+    "patience":   3,
+    "learning_rate":   2e-3,
     "lr_schedule": "classic_schedule",
     "val_every":   100000,
     "buffer_size": 50000,
@@ -17,6 +17,7 @@
 
     "hyper_params": {
         "n_out":           4,
+        "n_in":            6,
         "encode_layers":   3,
         "decode_layers":   3,
         "hidden_states":   64,
@@ -24,23 +25,23 @@
         "batch_norm":      true
     },
 
-    "Data":            "MuonGun",
+    "Data":            "MuonGunSRT",
     "GraphType":       "PCA_gen",
     "GraphParam":       10,
-    "data_split":      [0.9, 0.05, 0.95],
+    "data_split":      [0.9, 0.05, 0.05],
     "clear_dataset":   false,
     "graph_batch":     10000,
     "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
 
     "raw_path":   "/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db",
 
-    "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10"],
+    "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "SRTInIcePulses"],
     "targets":    ["direction_x", "direction_y", "direction_z"],
     "event_lims": "pid = 13 limit 500000",
-    "node_lims":  "SRTInIcePulses = 1", 
+    "node_lims":  null, 
 
     "LossFunc":   "VonMises3D",
     "log_wandb": true,
-    "metrics":   ["angle_u"]
+    "metrics":   ["angle_u", "pull_z", "sigma_median", "zenith_u", "azimuthal_u"]
 }
    

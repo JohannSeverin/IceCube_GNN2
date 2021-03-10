@@ -19,7 +19,7 @@ def train_model(construct_dict):
     # Setup Log 
     if construct_dict["log_wandb"]:
         import wandb
-        run = wandb.init(project = construct_dict["Exp_group"], entity = "johannbs", reinit = True, name = "Experiment", config = construct_dict)
+        run = wandb.init(project = construct_dict["Exp_group"], entity = "johannbs", reinit = True, name = construct_dict["Experiment"], config = construct_dict)
 
     ################################################
     #   Load dataset for training and validation   #
@@ -103,7 +103,7 @@ def train_model(construct_dict):
 
         # Loop over metics and calculate
         if len(metrics) > 0:
-            metric_values = [m(targets, predictions) for m in metrics]
+            metric_values = [float(m(targets, predictions)) for m in metrics]
             metric_dict   = {i:j for i, j in zip(construct_dict['metrics'], metric_values)}
         else:
             metric_dict   = None
@@ -129,7 +129,7 @@ def train_model(construct_dict):
     while seen_data < construct_dict['train_data']:
         
         train_data    = graph_dataset(construct_dict, "train")
-        train_loader  = DisjointLoader(train_data, epochs = epochs, batch_size = batch_size)
+        train_loader  = DisjointLoader(train_data, epochs = 1, batch_size = batch_size)
         
         for batch in train_loader:
             # Train model
@@ -160,7 +160,9 @@ def train_model(construct_dict):
                 if construct_dict['verbose']:
                     print("\n")
                     print(f"Validation loss: {val_loss :.6f} \t learning_rate {lr:.3e}")
-                    print(f"Validation metrics: " + "\t".join([f"{i}: {metric_dict[i]:.6f}" for i in metric_dict.keys()]))
+                    print(f"Validation metrics: " + "\t".join([f"{i}: {metric_dict[i]:.3f}" for i in metric_dict.keys()]))
+                    print("")
+
 
                 # Log to wandb
                 if construct_dict["log_wandb"]:
@@ -239,6 +241,7 @@ def setup_model(construct_dict):
     # Retrieve name and params for construction
     model_name    = construct_dict['ModelName']
     hyper_params  = construct_dict['hyper_params']
+    experiment    = construct_dict['Experiment']
 
     # Load model from model folder
     import scripts.models as model_module
@@ -246,7 +249,7 @@ def setup_model(construct_dict):
     model         = model(**hyper_params)
 
     # Make folder for saved states
-    model_path    = osp.join(file_path, "..", "models", model_name)
+    model_path    = osp.join(file_path, "..", "models", experiment)
     if not osp.isdir(model_path):
         os.mkdir(model_path)
 

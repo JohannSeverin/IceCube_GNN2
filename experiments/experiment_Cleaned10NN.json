@@ -1,6 +1,6 @@
 {
-    "Experiment": "Graph_Sage128",
-    "Exp_group":  "GraphSage_test", 
+    "Experiment": "NN10_cleaned",
+    "Exp_group":  "GraphTypeTest", 
 
     "ModelName":  "GraphSage_network",
 
@@ -8,8 +8,8 @@
     "train_data": 5000000,
     "batch_size": 512,
     "early_stop": true,
-    "patience":   5,
-    "learning_rate":   5e-4,
+    "patience":   3,
+    "learning_rate":   2e-3,
     "lr_schedule": "classic_schedule",
     "val_every":   100000,
     "buffer_size": 50000,
@@ -17,17 +17,18 @@
 
     "hyper_params": {
         "n_out":           4,
+        "n_in":            5,
         "encode_layers":   3,
         "decode_layers":   3,
-        "hidden_states":   128,
+        "hidden_states":   64,
         "dropout":         0.25,
         "batch_norm":      true
     },
 
-    "Data":            "MuonGun",
-    "GraphType":       "PCA_gen",
+    "Data":            "MuonGunCleaned",
+    "GraphType":       "NearestNeighbors",
     "GraphParam":       10,
-    "data_split":      [0.9, 0.05, 0.95],
+    "data_split":      [0.9, 0.05, 0.05],
     "clear_dataset":   false,
     "graph_batch":     10000,
     "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
@@ -41,6 +42,6 @@
 
     "LossFunc":   "VonMises3D",
     "log_wandb": true,
-    "metrics":   ["angle_u"]
+    "metrics":   ["angle_u", "pull_z", "sigma_median", "zenith_u", "azimuthal_u"]
 }
    

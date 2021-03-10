@@ -23,7 +23,7 @@ eps = 1e-5
 
 
 # Normalize params
-normalize = {"translate": tf.constant([0, 0, -200, 10000, 0], dtype = tf.float32),
+normalize5 ={"translate": tf.constant([0, 0, -200, 10000, 0], dtype = tf.float32),
              "scale":     tf.constant([100, 100, 100, 2500, 0.25], dtype = tf.float32),
              "x_dom":  (0, 100),
              "y_dom":  (0, 100),
@@ -31,11 +31,21 @@ normalize = {"translate": tf.constant([0, 0, -200, 10000, 0], dtype = tf.float32
              "time":   (10000, 2500),
              "charge": (0, 0.25)}
 
+normalize6 ={"translate": tf.constant([0, 0, -200, 10000, 0, 0], dtype = tf.float32),
+             "scale":     tf.constant([100, 100, 100, 2500, 0.25, 1], dtype = tf.float32),
+             "x_dom":  (0, 100),
+             "y_dom":  (0, 100),
+             "z_dom":  (-200, 100),
+             "time":   (10000, 2500),
+             "charge": (0, 0.25)}
+
+
 class GraphSage_network(Model):
-    def __init__(self, n_out = 6, hidden_states = 64, forward = False, dropout = 0, **kwargs):
+    def __init__(self, n_out = 6, n_in = 5, hidden_states = 64, forward = False, dropout = 0, **kwargs):
         super().__init__()
         self.forward = forward
-
+        self.norm_trans   = normalize6['translate'][:n_in +1]
+        self.norm_scale   = normalize6['scale'][:n_in + 1]
 
         self.batch_edge  = BatchNormalization()
 
@@ -79,19 +89,19 @@ class GraphSage_network(Model):
           x = norm_layer(x, training = training)
 
         x_units = self.units[0](x)
-        x_units = self.units[1](x)
+        x_units = self.units[1](x_units)
         x_units = self.units_out(x_units)
         x_units = tf.math.divide_no_nan(x_units, tf.expand_dims(tf.math.reduce_euclidean_norm(x_units, axis = 1), axis = -1))
 
         x_sigs  = self.sigs[0](x)
-        x_sigs  = self.sigs[1](x)
+        x_sigs  = self.sigs[1](x_sigs)
         x_sigs  = tf.abs(self.sigs_out(x_sigs)) + eps
 
         return tf.concat([x_units, x_sigs], axis = 1)
 
     def normalize(self, input):
-      input -= normalize['translate']
-      input /= normalize['scale']
+      input -= self.norm_trans
+      input /= self.norm_scale
       return input
 
     def generate_edge_features(self, x, a):

@@ -22,3 +22,30 @@ config: {'Experiment': 'Graph_Sage32', 'Exp_group': 'GraphSage_test', 'ModelName
 2021-03-09 22:32:45,242 INFO    MainThread:41655 [wandb_run.py:_redirect():1309] Wrapping output streams.
 2021-03-09 22:32:45,242 INFO    MainThread:41655 [wandb_run.py:_redirect():1325] Redirects installed.
 2021-03-09 22:32:45,243 INFO    MainThread:41655 [wandb_init.py:init():518] run started, returning control to user process
+2021-03-09 22:36:31,319 INFO    MainThread:41655 [wandb_init.py:_pause_backend():240] pausing backend
+2021-03-09 22:36:32,289 INFO    MainThread:41655 [wandb_init.py:_resume_backend():245] resuming backend
+2021-03-09 22:36:32,289 INFO    MainThread:41655 [wandb_init.py:_pause_backend():240] pausing backend
+2021-03-09 22:36:32,291 INFO    MainThread:41655 [wandb_run.py:_atexit_cleanup():1381] got exitcode: 0
+2021-03-09 22:36:32,292 INFO    MainThread:41655 [wandb_run.py:_restore():1353] restore
+2021-03-09 22:36:32,522 INFO    MainThread:41655 [wandb_run.py:_wait_for_finish():1504] got exit ret: file_counts {
+  wandb_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 801
+  total_bytes: 801
+}
+
+2021-03-09 22:36:34,528 INFO    MainThread:41655 [wandb_run.py:_wait_for_finish():1504] got exit ret: done: true
+exit_result {
+}
+file_counts {
+  wandb_count: 5
+}
+pusher_stats {
+  uploaded_bytes: 81087
+  total_bytes: 81087
+}
+
+2021-03-09 22:36:35,821 INFO    MainThread:41655 [wandb_run.py:_show_summary():1659] rendering summary
+2021-03-09 22:36:35,821 INFO    MainThread:41655 [wandb_run.py:_show_history():1697] rendering history
+2021-03-09 22:36:35,822 INFO    MainThread:41655 [wandb_run.py:_show_files():1726] logging synced files
