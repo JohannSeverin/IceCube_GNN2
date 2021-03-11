@@ -17,6 +17,7 @@
 
     "hyper_params": {
         "n_out":           4,
+        "n_in":            5,
         "encode_layers":   3,
         "decode_layers":   3,
         "hidden_states":   64,

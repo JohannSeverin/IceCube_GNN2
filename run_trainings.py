@@ -14,7 +14,7 @@ if len(gpu_devices) > 0:
     tf.config.experimental.set_memory_growth(gpu_devices[0], True)
 
 
-SHUTDOWN = True
+SHUTDOWN = False
 ##########################################################
 #      Loop over JSON files and train models             # 
 ##########################################################
@@ -36,11 +36,12 @@ for i, experiment in enumerate(exp_list):
 
     # Try to train the model given the construction dict
     try: 
+        print(f"Starting expriment from {experiment[:-5]}")
         train_model(construct_dict)
         shutil.move(osp.join(exp_folder, experiment), osp.join(exp_folder, "done", experiment))
         print(f"Experiment {experiment[:-5]} done \t {experiment}: {i + 1} / {len(exp_list)}")
     except:
-        shutil.move(osp.join(exp_folder, "failed", experiment))
+        shutil.move(osp.join(exp_folder, experiment), osp.join(exp_folder, "failed", experiment))
         print(f"Experiment {experiment[:-5]} failed \t {experiment}: {i} / {len(exp_list)}")
 
 

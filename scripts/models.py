@@ -32,7 +32,7 @@ normalize5 ={"translate": tf.constant([0, 0, -200, 10000, 0], dtype = tf.float32
              "charge": (0, 0.25)}
 
 normalize6 ={"translate": tf.constant([0, 0, -200, 10000, 0, 0], dtype = tf.float32),
-             "scale":     tf.constant([100, 100, 100, 2500, 0.25, 1], dtype = tf.float32),
+             "scale":     tf.constant([100, 100, 100, 2500, 0.25, 1.], dtype = tf.float32),
              "x_dom":  (0, 100),
              "y_dom":  (0, 100),
              "z_dom":  (-200, 100),
@@ -44,8 +44,8 @@ class GraphSage_network(Model):
     def __init__(self, n_out = 6, n_in = 5, hidden_states = 64, forward = False, dropout = 0, **kwargs):
         super().__init__()
         self.forward = forward
-        self.norm_trans   = normalize6['translate'][:n_in +1]
-        self.norm_scale   = normalize6['scale'][:n_in + 1]
+        self.norm_trans   = normalize6['translate'][:n_in]
+        self.norm_scale   = normalize6['scale'][:n_in]
 
         self.batch_edge  = BatchNormalization()
 

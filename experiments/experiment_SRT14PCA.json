@@ -29,7 +29,7 @@
     "GraphType":       "PCA_gen",
     "GraphParam":       14,
     "data_split":      [0.9, 0.05, 0.05],
-    "clear_dataset":   false,
+    "clear_dataset":   true,
     "graph_batch":     10000,
     "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
 

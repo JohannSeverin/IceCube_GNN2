@@ -128,10 +128,10 @@ class graph_dataset(Dataset):
                         # Add inverse transforms (FIX LATER???)
                         if self.transform:
                             for col, trans in enumerate(self.features):
-                                if col in transformers['features'].keys():
+                                if trans in list(transformers['features'].keys()):
                                     x_long[:, col] = transformers["features"][trans].inverse_transform(x_long[:, col].reshape(-1, 1)).flatten()
                             for col, trans in enumerate(self.targets):
-                                if col in transformers['truth'].keys():
+                                if trans in list(transformers['truth'].keys()):
                                     ys[:, col]     = transformers["truth"][trans].inverse_transform(ys[:, col].reshape(-1, 1)).flatten()
                                 
 
@@ -157,7 +157,7 @@ class graph_dataset(Dataset):
 
                     for x in xs:
                         try:
-                            a = A_func(x[:3, :], self.GraphParam)
+                            a = A_func(x[:, :3], self.GraphParam)
                         except:
                              a = csr_matrix(np.ones(shape = (x.shape[0], x.shape[0])) - np.eye(x.shape[0]))
                         As.append(a)
