@@ -5,8 +5,8 @@
     "ModelName":  "GraphSage_network",
 
     "epochs":     100,
-    "train_data": 5000000,
-    "batch_size": 256,
+    "train_data": 1000000,
+    "batch_size": 32,
     "early_stop": true,
     "patience":   3,
     "learning_rate":   5e-4,
@@ -30,13 +30,13 @@
     "data_split":      [0.9, 0.05, 0.05],
     "clear_dataset":   false,
     "graph_batch":     10000,
-    "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
+    "transforms":      "/home/johannseverin/data/MuonGun/transformers.pkl",
 
-    "raw_path":   "/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db",
+    "raw_path":   "/home/johannseverin/data/MuonGun/rasmus_classification_muon_3neutrino_3mio.db",
 
     "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "SRTInIcePulses"],
     "targets":    ["direction_x", "direction_y", "direction_z"],
-    "event_lims": "pid = 13 limit 500000",
+    "event_lims": "pid = 13 limit 100000",
     "node_lims":  null, 
 
     "LossFunc":   "VonMisesPolarZenith",
