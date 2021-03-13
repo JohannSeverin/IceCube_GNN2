@@ -41,11 +41,12 @@ normalize6 ={"translate": tf.constant([0, 0, -200, 10000, 0, 0], dtype = tf.floa
 
 
 class GraphSage_network(Model):
-    def __init__(self, n_out = 6, n_in = 5, hidden_states = 64, forward = False, dropout = 0, **kwargs):
+    def __init__(self, n_out = 3, n_kappa = 1, n_in = 5, hidden_states = 64, forward = False, dropout = 0, gamma = 0, **kwargs):
         super().__init__()
         self.forward = forward
         self.norm_trans   = normalize6['translate'][:n_in]
         self.norm_scale   = normalize6['scale'][:n_in]
+        self.gamma        = gamma
 
         self.batch_edge  = BatchNormalization()
 
@@ -63,10 +64,10 @@ class GraphSage_network(Model):
         self.norm_layers  = [BatchNormalization() for i in range(len(self.decode))]
 
         self.units     = [Dense(hidden_states) for i in range(2)]
-        self.units_out = Dense(3)
+        self.units_out = Dense(n_out)
         self.sigs      = [Dense(hidden_states) for i in range(2)]
 
-        self.sigs_out  = Dense(1)
+        self.sigs_out  = Dense(n_kappa)
 
 
     def call(self, inputs, training = False):
@@ -91,7 +92,12 @@ class GraphSage_network(Model):
         x_units = self.units[0](x)
         x_units = self.units[1](x_units)
         x_units = self.units_out(x_units)
-        x_units = tf.math.divide_no_nan(x_units, tf.expand_dims(tf.math.reduce_euclidean_norm(x_units, axis = 1), axis = -1))
+
+        x_norm   = tf.math.reduce_euclidean_norm(x_units, axis = 1)
+
+        self.add_loss(tf.reduce_mean(self.gamma * abs(x_norm - 1)))
+
+        x_units = tf.math.divide_no_nan(x_units, tf.expand_dims(x_norm, axis = -1))
 
         x_sigs  = self.sigs[0](x)
         x_sigs  = self.sigs[1](x_sigs)

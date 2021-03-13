@@ -1,5 +1,5 @@
 {
-    "Experiment": "NN14_SRT",
+    "Experiment": "PCA10_SRT",
     "Exp_group":  "GraphTypeTest", 
 
     "ModelName":  "GraphSage_network",
@@ -26,10 +26,10 @@
     },
 
     "Data":            "MuonGunSRT",
-    "GraphType":       "NearestNeighbors",
-    "GraphParam":       14,
+    "GraphType":       "PCA_gen",
+    "GraphParam":       10,
     "data_split":      [0.9, 0.05, 0.05],
-    "clear_dataset":   true,
+    "clear_dataset":   false,
     "graph_batch":     10000,
     "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
 

@@ -198,7 +198,8 @@ def train_model(construct_dict):
                         break
         if early_stop == True:
             break
-
+    
+    model.summary()
     run.finish()
     
 
