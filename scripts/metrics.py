@@ -3,6 +3,42 @@ import tensorflow as tf
 import tensorflow_probability as tfp
 
 
+def azimuthal_u_from_angles(y_true, y_reco):
+    diffs = tf.minimum(abs(y_true[:, 0] - y_reco[:, 0]), 2 * np.pi - abs(y_true[:, 0] - y_reco[:, 0]))
+
+    u_azi = 180 / np.pi * tfp.stats.percentile(diffs, [68])
+
+    return u_azi.numpy()
+
+
+
+def zenith_u_from_angles(y_true, y_reco):
+    diffs = tf.minimum(abs(y_true[:, 1] - y_reco[:, 1]), 2 * np.pi - abs(y_true[:, 1] - y_reco[:, 1]))
+
+    u_zen = 180 / np.pi * tfp.stats.percentile(diffs, [68])
+
+    return u_zen.numpy()
+
+
+
+def azimuthal_u_from_cossine(y_true, y_reco):
+
+    aziguess = tf.atan2(y_reco[:,1],y_reco[:,0])
+    azi = tf.minimum( tf.abs(y_true[:,0] - aziguess) , tf.abs(tf.abs(y_true[:,0] - aziguess) - 2*np.pi))
+    
+    u_azi = 180 / np.pi * tfp.stats.percentile(azi, [68])
+
+    return u_azi.numpy()
+
+
+def zenith_u_from_cossine(y_true, y_reco):
+    zeniguess = tf.atan2(y_reco[:,3],y_reco[:,2])
+    zeni = tf.minimum( tf.abs(y_true[:,1] - zeniguess) , tf.abs(tf.abs(y_true[:,1] - zeniguess) - 2*np.pi))
+
+    u_zenth = 180 / np.pi *  tfp.stats.percentile(zeni, [68])
+    
+    return u_zenth.numpy()
+
 
 def angle(pred, true):
     return tf.math.acos(

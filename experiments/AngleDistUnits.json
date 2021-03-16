@@ -1,15 +1,15 @@
 {
-    "Experiment": "3DGauss",
+    "Experiment": "AngleDistUnits",
     "Exp_group":  "LossFuncTests", 
 
     "ModelName":  "GraphSage_network",
 
     "epochs":     100,
-    "train_data": 1000000,
-    "batch_size": 32,
+    "train_data": 10000000,
+    "batch_size": 256,
     "early_stop": true,
     "patience":   3,
-    "learning_rate":   5e-4,
+    "learning_rate":   2e-3,
     "lr_schedule": "classic_schedule",
     "val_every":   100000,
     "buffer_size": 50000,
@@ -17,7 +17,9 @@
 
     "hyper_params": {
         "n_out":           3,
-        "n_kappa":         3,
+        "n_kappa":         0,
+        "n_corr":          0,
+        "gamma":           0,
         "n_in":            6,
         "hidden_states":   64,
         "dropout":         0.25,
@@ -36,11 +38,11 @@
 
     "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "SRTInIcePulses"],
     "targets":    ["direction_x", "direction_y", "direction_z"],
-    "event_lims": "pid = 13 limit 100000",
+    "event_lims": "pid = 13",
     "node_lims":  null, 
 
-    "LossFunc":   "VonMisesPolarZenith",
+    "LossFunc":   "AngleDist",
     "log_wandb": true,
-    "metrics":   ["angle_u", "zenith_u", "azimuthal_u", "mean_zenith_std", "mean_azimuth_std"]
+    "metrics":   ["angle_u", "zenith_u", "azimuthal_u"]
 }
    

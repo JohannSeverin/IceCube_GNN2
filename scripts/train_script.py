@@ -1,6 +1,12 @@
 import tqdm, os, sys, time
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
+
 import tensorflow as tf
+
+
+
+
 import numpy as np
 
 import os.path as osp
@@ -199,7 +205,7 @@ def train_model(construct_dict):
         if early_stop == True:
             break
     
-    model.summary()
+    print(model.summary())
     run.finish()
     
 
