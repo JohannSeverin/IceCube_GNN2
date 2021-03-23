@@ -1,8 +1,6 @@
 import os
 from spektral.layers.convolutional.gcn_conv import GCNConv
 
-
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = '2'
 import tensorflow as tf
 
 from spektral.layers import CrystalConv, GraphSageConv, MessagePassing

@@ -1,12 +1,8 @@
-import tqdm, os, sys, time
+import tqdm, os, sys, time, pickle
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 
 import tensorflow as tf
-
-
-
-
 import numpy as np
 
 import os.path as osp
@@ -118,6 +114,52 @@ def train_model(construct_dict):
 
 
 
+    def test_model(loader, metrics):
+        # Empty arrays
+        all_predictions = []
+        all_targets     = []
+        all_Ns          = []
+
+
+        batches = 0
+        loss    = 0
+
+        # Loop over the batch and calculate predictions
+        for batch in loader:
+            inputs, targets = batch
+            _, __, N        = tf.unique_with_counts(inputs[2])
+            targets, predictions = test_step(inputs, targets)
+            loss           += loss_func(targets, predictions)
+            batches        += 1
+            all_predictions.append(predictions)
+            all_targets.append(targets)
+            all_Ns.append(N)
+        
+        # Calculate validations
+        test_loss   = loss / batches
+        predictions = tf.concat(all_predictions, axis = 0)
+        targets     = tf.concat(all_targets,     axis = 0)
+        Ns          = tf.concat(all_Ns,          axis = 0)
+
+        # Test metrics
+        if len(metrics) > 0:
+            metric_values = [float(m(targets, predictions)) for m in metrics]
+            metric_dict   = {i:j for i, j in zip(construct_dict['metrics'], metric_values)}
+        else:
+            metric_dict   = {}
+        
+        metric_dict.update({"TestLoss": test_loss.numpy()})
+
+        # Test dictionairy
+        test_dict = {
+            "reco":     predictions.numpy(),
+            "targets":  targets.numpy(),
+            "Ns":       Ns.numpy(),
+            "metrics":  metric_dict
+        }
+
+        return test_dict
+
     ################################################
     #  Train Model                                 #      
     ################################################
@@ -133,7 +175,10 @@ def train_model(construct_dict):
 
     # Start loop
     while seen_data < construct_dict['train_data']:
-        
+        # Break if early_stopping is going
+        if early_stop == True:
+            break
+
         train_data    = graph_dataset(construct_dict, "train")
         train_loader  = DisjointLoader(train_data, epochs = 1, batch_size = batch_size)
         
@@ -197,14 +242,21 @@ def train_model(construct_dict):
                 # Check for early_stopping
                 validation_track_loss.append(val_loss)
 
-                if np.argmin(validation_track_loss) < len(validation_track_loss) - patience and early_stop == True:
+                if (np.argmin(validation_track_loss) < len(validation_track_loss) - patience) and early_stop == True:
                     if construct_dict['verbose']:
                         print(f"Training stopped, no improvement made in {patience} steps.")
                         early_stop = True
                         break
-        if early_stop == True:
-            break
-    
+
+    test_data             = graph_dataset(construct_dict, "test")
+    test_loader           = DisjointLoader(test_data, epochs = 1, batch_size = batch_size, shuffle = False)
+    test_dict             = test_model(test_loader, metrics)
+
+    wandb.log(test_dict['metrics'])
+
+    with open(osp.join(file_path, "..", "test_folder", construct_dict['Experiment'] + ".dat"), "wb") as file:
+        pickle.dump(test_dict, file)
+
     print(model.summary())
     run.finish()
     

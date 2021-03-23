@@ -180,3 +180,15 @@ def CosSinePairs(y_true, y_reco):
 
     return loss
 
+
+
+#######################################################
+#  Classification                                     #
+#######################################################
+
+from tensorflow.keras.losses import BinaryCrossentropy
+
+BCE = BinaryCrossentropy(from_logits = True)
+
+def BinaryCE_from_logits(y_true, y_reco):
+    return BCE(y_true, y_reco)

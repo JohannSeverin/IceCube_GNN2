@@ -1,12 +1,12 @@
 {
     "Experiment": "2DMisesFromAngles",
-    "Exp_group":  "LossFucnTest", 
+    "Exp_group":  "LossFuncTest2", 
 
     "ModelName":  "GraphSage_network_angles",
 
     "epochs":     100,
-    "train_data": 10000000,
-    "batch_size": 256,
+    "train_data": 2500000,
+    "batch_size": 64,
     "early_stop": true,
     "patience":   3,
     "learning_rate":   3e-3,
@@ -29,7 +29,7 @@
     "Data":            "MuonGunSRTAngles",
     "GraphType":       "NearestNeighbors",
     "GraphParam":       14,
-    "data_split":      [0.9, 0.05, 0.05],
+    "data_split":      [0.95, 0.025, 0.025],
     "clear_dataset":   false,
     "graph_batch":     10000,
     "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
@@ -41,7 +41,7 @@
     "event_lims": "pid = 13",
     "node_lims":  null, 
 
-    "LossFunc":   "CosSinePairs",
+    "LossFunc":   "VonMisesPolarZenith_from_angles",
     "log_wandb": true,
     "metrics":   ["azimuthal_u_from_angles", "zenith_u_from_angles"]
 }

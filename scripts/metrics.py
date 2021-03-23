@@ -123,3 +123,16 @@ def mean_azimuth_std(y_true, y_reco):
 
     return tf.reduce_mean(std) / np.pi * 180
 
+
+from tensorflow.keras.metrics import BinaryAccuracy
+from sklearn.metrics import roc_auc_score
+
+def AUC(y_true, y_reco):
+    auc = roc_auc_score(y_true.numpy(), y_roc.numpy())
+    return auc
+
+BA = BinaryAccuracy()
+def binary_accuracy(y_true, y_reco):
+    BA.reset_states()
+    BA.update(y_true, y_reco)
+    return BA.result()

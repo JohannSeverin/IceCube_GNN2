@@ -1,12 +1,12 @@
 {
-    "Experiment": "VonMises3D low",
-    "Exp_group":  "LossFuncTests", 
+    "Experiment": "3DMisesFromUnits",
+    "Exp_group":  "LossFuncTest2", 
 
     "ModelName":  "GraphSage_network",
 
     "epochs":     100,
-    "train_data": 5000000,
-    "batch_size": 256,
+    "train_data": 2500000,
+    "batch_size": 64,
     "early_stop": true,
     "patience":   3,
     "learning_rate":   2e-3,
@@ -19,7 +19,7 @@
         "n_out":           3,
         "n_kappa":         1,
         "n_corr":          0,
-        "gamma":           0.05,
+        "gamma":           0,
         "n_in":            6,
         "hidden_states":   64,
         "dropout":         0.25,
@@ -29,16 +29,16 @@
     "Data":            "MuonGunSRT",
     "GraphType":       "NearestNeighbors",
     "GraphParam":       14,
-    "data_split":      [0.9, 0.05, 0.05],
+    "data_split":      [0.95, 0.025, 0.025],
     "clear_dataset":   false,
     "graph_batch":     10000,
-    "transforms":      "/home/johannseverin/data/MuonGun/transformers.pkl",
+    "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
 
-    "raw_path":   "/home/johannseverin/data/MuonGun/rasmus_classification_muon_3neutrino_3mio.db",
+    "raw_path":   "/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db",
 
     "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "SRTInIcePulses"],
     "targets":    ["direction_x", "direction_y", "direction_z"],
-    "event_lims": "pid = 13 limit 500000",
+    "event_lims": "pid = 13",
     "node_lims":  null, 
 
     "LossFunc":   "VonMises3D",

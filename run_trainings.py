@@ -5,15 +5,8 @@ import os.path as osp
 from tensorflow.keras.backend import clear_session
 
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
-import tensorflow as tf
 
-gpu_devices = tf.config.list_physical_devices('GPU') 
-if len(gpu_devices) > 0:
-    tf.config.experimental.set_memory_growth(gpu_devices[0], True)
-
-
-SHUTDOWN = True
+SHUTDOWN = False
 ##########################################################
 #      Loop over JSON files and train models             # 
 ##########################################################
