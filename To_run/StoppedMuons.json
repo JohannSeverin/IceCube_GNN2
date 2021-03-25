@@ -1,23 +1,23 @@
 {
-    "Experiment": "2DMisesFromUnits",
-    "Exp_group":  "LossFuncTest2", 
+    "Experiment": "StoppedMuons",
+    "Exp_group":  "StoppedMuons", 
 
     "ModelName":  "GraphSage_network",
 
     "epochs":     100,
-    "train_data": 2500000,
-    "batch_size": 64,
+    "train_data": 10000000,
+    "batch_size": 256,
     "early_stop": true,
-    "patience":   3,
+    "patience":   2,
     "learning_rate":   2e-3,
     "lr_schedule": "classic_schedule",
     "val_every":   100000,
-    "buffer_size": 50000,
+    "buffer_size": 100000,
     "verbose":     true,
 
     "hyper_params": {
-        "n_out":           3,
-        "n_kappa":         2,
+        "n_out":           1,
+        "n_kappa":         0,
         "n_corr":          0,
         "gamma":           0,
         "n_in":            6,
@@ -26,23 +26,23 @@
         "batch_norm":      true
     },
 
-    "Data":            "MuonGunSRT",
+    "Data":            "MuonGunStopped",
     "GraphType":       "NearestNeighbors",
     "GraphParam":       14,
     "data_split":      [0.8, 0.1, 0.1],
     "clear_dataset":   false,
-    "graph_batch":     10000,
+    "graph_batch":     25000,
     "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
 
     "raw_path":   "/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db",
 
     "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "SRTInIcePulses"],
-    "targets":    ["direction_x", "direction_y", "direction_z"],
+    "targets":    ["stopped_muon"],
     "event_lims": "pid = 13",
     "node_lims":  null, 
 
-    "LossFunc":   "VonMises3D",
+    "LossFunc":   "BinaryCE_from_logits",
     "log_wandb": true,
-    "metrics":   ["angle_u", "zenith_u", "azimuthal_u", "mean_zenith_std", "mean_azimuth_std"]
+    "metrics":   ["binary_accuracy", "AUC"]
 }
    

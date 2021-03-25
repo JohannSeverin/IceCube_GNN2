@@ -1,15 +1,15 @@
 {
-    "Experiment": "OscNextInitial",
+    "Experiment": "OscNext_units",
     "Exp_group":  "OscNextAngle", 
 
     "ModelName":  "GraphSage_network",
 
     "epochs":     100,
-    "train_data": 100000,
+    "train_data": 2500000,
     "batch_size": 256,
     "early_stop": true,
-    "patience":   3,
-    "learning_rate":   2e-3,
+    "patience":   1,
+    "learning_rate":   1e-3,
     "lr_schedule": "classic_schedule",
     "val_every":   100000,
     "buffer_size": 50000,
@@ -20,29 +20,29 @@
         "n_kappa":         2,
         "n_corr":          0,
         "gamma":           0,
-        "n_in":            5,
+        "n_in":            6,
         "hidden_states":   64,
         "dropout":         0.25,
         "batch_norm":      true
     },
 
-    "Data":            "OscNext_angle",
+    "Data":            "OscNext_units",
     "GraphType":       "NearestNeighbors",
     "GraphParam":       14,
     "data_split":      [0.8, 0.1, 0.1],
-    "clear_dataset":   false,
+    "clear_dataset":   true,
     "graph_batch":     10000,
-    "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
+    "transforms":      null,
 
-    "raw_path":   "/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db",
+    "raw_path":   "/home/johannbs/Desktop/IceCube_GNN2/data/raw/dev_level7_mu_e_tau_oscweight_newfeats_unscaled.db",
 
-    "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10"],
+    "features":   ["dom_x", "dom_y", "dom_z", "dom_time", "charge_log10", "width"],
     "targets":    ["direction_x", "direction_y", "direction_z"],
-    "event_lims": "event_no in (select event_no from truth limit 100000)",
+    "event_lims": "event_no in (select event_no from truth order by random() limit 500000)",
     "node_lims":  null, 
 
     "LossFunc":   "VonMisesPolarZenith",
-    "log_wandb": true,
-    "metrics":   ["angle_u", "zenith_u", "azimuthal_u", "mean_zenith_std", "mean_azimuth_std"]
+    "log_wandb": false,
+    "metrics":   ["angle_u", "zenith_u", "azimuthal_u", "mean_sigma_zenith", "mean_azimuth_std"]
 }
    

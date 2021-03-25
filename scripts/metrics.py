@@ -67,6 +67,10 @@ def pull_z(y_true, y_reco):
     return tfp.stats.percentile(pull, [68])
 
 
+def mean_sigma_zenith(y_true, y_reco):
+    polar_k   = y_reco[:, 4]
+
+    return tf.reduce_mean(1 / tf.sqrt(polar_k)) * 180 / np.pi
 
 def sigma_median(y_true, y_reco):
     # Return the median uncertainity from the predictions
@@ -128,11 +132,9 @@ from tensorflow.keras.metrics import BinaryAccuracy
 from sklearn.metrics import roc_auc_score
 
 def AUC(y_true, y_reco):
-    auc = roc_auc_score(y_true.numpy(), y_roc.numpy())
+    auc = roc_auc_score(y_true.numpy(), tf.y_reco.numpy())
     return auc
 
 BA = BinaryAccuracy()
 def binary_accuracy(y_true, y_reco):
-    BA.reset_states()
-    BA.update(y_true, y_reco)
-    return BA.result()
+    return BA(y_true, y_reco)

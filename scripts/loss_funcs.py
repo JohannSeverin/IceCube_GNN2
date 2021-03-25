@@ -14,6 +14,30 @@ eps = 1e-5
 #######################################################
 
 
+def VonMisesNormal(y_true, y_reco):
+    # Two polar von mises in azimuth and zenith
+    vects       = y_reco[:, :3]
+    polar_k     = y_reco[:, 3]
+    zenth_k     = y_reco[:, 4]
+
+    rxy_reco    = tf.math.reduce_euclidean_norm(vects[:, :2],  axis = 1)
+    rxy_true    = tf.math.reduce_euclidean_norm(y_true[:, :2], axis = 1)
+
+    cos_azi     = tf.math.divide_no_nan(tf.squeeze(tf.expand_dims(vects[:, :2], axis = 1) @ tf.expand_dims(y_true[:, :2], axis = -1)),
+                                        (rxy_reco * rxy_true ))
+
+    cos_zenth   = vects[:, 2] * y_true[:, 2] + rxy_reco * rxy_true
+
+
+    lnI0_azi     = polar_k + tf.math.log(1 + tf.math.exp(-2*polar_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(polar_k)) + tf.math.log(1 + 0.24273*tf.square(polar_k)) - tf.math.log(1+0.43023*tf.square(polar_k))
+    # sig_zenth    = zenth_k + tf.math.log(1 + tf.math.exp(-2*zenth_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(zenth_k)) + tf.math.log(1 + 0.24273*tf.square(zenth_k)) - tf.math.log(1+0.43023*tf.square(zenth_k))
+
+    llh_azi     = polar_k * cos_azi   - lnI0_azi
+    llh_zenth   = - zenth_k * (1 - cos_zenth) / 2 + tf.math.log(zenth_k) / 2
+
+
+    return tf.reduce_mean(- llh_zenth - llh_azi)
+
 
 def VonMisesPolarZenith(y_true, y_reco):
     # Two polar von mises in azimuth and zenith

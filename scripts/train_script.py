@@ -60,12 +60,18 @@ def train_model(construct_dict):
     lr            = next(lr_schedule)
     opt           = Adam(lr)
 
+    if construct_dict['angles_to_units']:
+        from scripts.helper_functions import angles_to_units
+
+
     # Define training function
     @tf.function(input_signature = train_loader.tf_signature(), experimental_relax_shapes = True)
     def train_step(inputs, targets):
         with tf.GradientTape() as tape:
             predictions = model(inputs, training = True)
             targets     = tf.cast(targets, tf.float32)
+            if construct_dict['angles_to_units']:
+                targets = angles_to_units(targets)
             loss        = loss_func(targets, predictions)
             loss       += sum(model.losses)
         
@@ -79,6 +85,8 @@ def train_model(construct_dict):
     def test_step(inputs, targets):
         predictions     = model(inputs, training = False)
         targets         = tf.cast(targets, tf.float32) 
+        if construct_dict['angles_to_units']:
+            targets = angles_to_units(targets)
         return targets, predictions
 
 
@@ -252,7 +260,8 @@ def train_model(construct_dict):
     test_loader           = DisjointLoader(test_data, epochs = 1, batch_size = batch_size, shuffle = False)
     test_dict             = test_model(test_loader, metrics)
 
-    wandb.log(test_dict['metrics'])
+    if construct_dict["log_wandb"]:
+        wandb.log(test_dict['metrics'])
 
     with open(osp.join(file_path, "..", "test_folder", construct_dict['Experiment'] + ".dat"), "wb") as file:
         pickle.dump(test_dict, file)
