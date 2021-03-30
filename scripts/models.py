@@ -158,8 +158,6 @@ class GraphSage_network_angles(Model):
       return a, e
 
 
-
-
 class GraphSage_network(Model):
     def __init__(self, n_out = 3, n_kappa = 1, n_corr = 0, n_in = 5, hidden_states = 64, forward = False, dropout = 0, gamma = 0, **kwargs):
         super().__init__()
@@ -278,6 +276,118 @@ class GraphSage_network(Model):
       return a, e
 
 
+
+class MessegaPassModel(Model):
+
+    def __init__(self, n_out = 3, n_kappa = 1, n_in = 5, hidden_states = 64, dropout = 0, batch_norm = True, MP_layers = 3,\
+                 message_size = 2, message_layers = 2, update_size = 4, update_layers = 2, decode_layers = [6, 6, 3], split_structure = [1, 1], **kwargs):
+        
+        # Setups 
+        super().__init__()
+        self.norm_trans   = normalize6['translate'][:n_in]
+        self.norm_scale   = normalize6['scale'][:n_in]
+        self.n_out        = n_out
+        self.n_kappa      = n_kappa
+
+        self.batch_edge  = BatchNormalization()
+        
+        self.apply_layers = []
+        self.bn_layers    = []
+        for i in range(MP_layers):
+          self.apply_layers.append(MP2(hidden_states = hidden_states,  message_size = message_size,   message_layers = message_layers, \
+                                        update_size   = update_size,    update_layers = update_layers, dropout = dropout))
+          if batch_norm:
+            self.bn_layers.append(BatchNormalization())
+        
+        self.Pool1   = GlobalMaxPool()
+        self.Pool2   = GlobalAvgPool()
+        self.Pool3   = GlobalSumPool()
+
+        self.decode_layers = []
+        for i in decode_layers:
+          self.decode_layers.append(Dense(i * hidden_states))
+          self.decode_layers.append(Dropout(dropout))
+          if batch_norm:
+            self.decode_layers.append(BatchNormalization())
+        
+        self.split_layers = []
+        for i in range(n_out + n_kappa):
+          self.split_layers.append([Dense(hidden_states * j) for j in split_structure] + [Dense(1)])
+
+
+
+    def call(self, inputs, training = False):
+        x, a, i = inputs
+        x       = self.normalize(x)
+        a, e    = self.generate_edge_features(x, a)
+        e       = self.batch_edge(e)
+
+        for MessagePassLayer, BatchNormLayer in zip(self.apply_layers, self.bn_layers):
+          x = MessagePassLayer([x, a, e])
+          x = BatchNormLayer(x)
+        
+        x1 = self.Pool1([x, i])
+        x2 = self.Pool2([x, i])
+        x3 = self.Pool3([x, i])
+        x = tf.concat([x1, x2, x3], axis = 1)
+        
+        for DecodeLayer in self.decode_layers:
+          x = DecodeLayer(x)
+
+        output = []
+        for i, split in enumerate(self.split_layers):
+          x_out = split[0](x)
+
+          for layer in split[1:]:
+            x_out = layer(x_out)
+          
+          output.append(x_out)
+        
+        x = tf.concat(output, axis = 1)
+
+        if self.n_out == 3:
+          x_norm   = tf.math.reduce_euclidean_norm(x[:, :3], axis = 1)
+          x_out = tf.math.divide_no_nan(x[:, :3], tf.expand_dims(x_norm, axis = -1))
+        else:
+          x_out = x[:, :self.n_out]
+        
+        x_kappa = tf.abs(x[:, - self.n_kappa:]) + eps 
+        
+        return tf.concat([x_out, x_kappa], axis = 1)
+
+
+
+
+    def normalize(self, input):
+      input -= self.norm_trans
+      input /= self.norm_scale
+      return input
+
+    def generate_edge_features(self, x, a):
+      send    = a.indices[:, 0]
+      receive = a.indices[:, 1]
+      
+      diff_x  = tf.subtract(tf.gather(x, receive), tf.gather(x, send))
+
+      dists   = tf.sqrt(
+        tf.reduce_sum(
+          tf.square(
+            diff_x[:, :3]
+          ), axis = 1
+        ))
+
+      vects = tf.math.divide_no_nan(diff_x[:, :3], tf.expand_dims(dists, axis = -1))
+
+      e = tf.concat([diff_x[:, 3:], tf.expand_dims(dists, -1), vects], axis = 1)
+
+      return a, e
+
+
+     
+
+
+
+
 class MP(MessagePassing):
 
     def __init__(self, n_out, hidden_states, dropout = 0):
@@ -289,8 +399,8 @@ class MP(MessagePassing):
 
     def propagate(self, x, a, e=None, training = False, **kwargs):
         self.n_nodes = tf.shape(x)[0]
-        self.index_i = a.indices[:, 1]
-        self.index_j = a.indices[:, 0]
+        self.index_i = a.indices[:, 0]
+        self.index_j = a.indices[:, 1]
 
         # Message
         # print(x, a, e)
@@ -299,13 +409,23 @@ class MP(MessagePassing):
 
         # Aggregate
         # agg_kwargs = self.get_kwargs(x, a, e, self.agg_signature, kwargs)
-        embeddings = self.aggregate(messages, training = training)
+        embeddings = self.describe(messages, self.index_i)
 
         # Update
         # upd_kwargs = self.get_kwargs(x, a, e, self.upd_signature, kwargs)
         output = self.update(embeddings, training = training)
 
         return output
+    
+
+    def describe(self, input, index):
+        minimum = tf.math.segment_min(input, index)
+        maximum = tf.math.segment_max(input, index)
+        mean    = tf.math.segment_mean(input, index)
+        var     = tf.math.segment_mean(input ** 2, index) - tf.math.segment_mean(input, index) ** 2
+
+        return tf.concat([minimum, maximum, mean, var], axis = 1)
+
 
     def message(self, x, a, e, training = False):
         # print([self.get_i(x), self.get_j(x), e])
@@ -316,6 +436,55 @@ class MP(MessagePassing):
     def update(self, embeddings, training = False):
         out = self.update_mlp(embeddings, training = training)
         return out
+
+
+class MP2(MessagePassing):
+
+    def __init__(self,            hidden_states,     message_size = 2,   message_layers = 2, \
+                                  update_size  = 4,  update_layers = 2,  dropout        = 0):
+        super().__init__()
+        self.hidden_states = hidden_states
+        self.message_mlp = MLP(message_size, message_size, layers = message_layers, dropout = dropout)
+        self.update_mlp  = MLP(update_size,  update_size , layers = update_layers,  dropout = dropout)
+
+
+    def propagate(self, x, a, e=None, training = False, **kwargs):
+        self.n_nodes = tf.shape(x)[0]
+        self.index_i = a.indices[:, 0]
+        self.index_j = a.indices[:, 1]
+
+        # Message
+        messages = self.message(x, a, e, training = training)
+
+        # Aggregate
+        embeddings = self.describe(messages, self.index_i)
+
+        # Update
+        output = self.update(embeddings, training = training)
+
+        return output
+    
+
+    def describe(self, input, index):
+        minimum = tf.math.segment_min(input, index)
+        maximum = tf.math.segment_max(input, index)
+        mean    = tf.math.segment_mean(input, index)
+        var     = tf.math.segment_mean(input ** 2, index) - tf.math.segment_mean(input, index) ** 2
+
+        return tf.concat([minimum, maximum, mean, var], axis = 1)
+
+
+    def message(self, x, a, e, training = False):
+        # print([self.get_i(x), self.get_j(x), e])
+        out = tf.concat([self.get_i(x), self.get_j(x), e], axis = 1)
+        out = self.message_mlp(out, training = training)
+        return out
+    
+    def update(self, embeddings, training = False):
+        out = self.update_mlp(embeddings, training = training)
+        return out
+
+
 
 class MLP(Model):
     def __init__(self, output, hidden=256, layers=2, batch_norm=True,

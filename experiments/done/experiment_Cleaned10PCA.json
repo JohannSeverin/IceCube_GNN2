@@ -4,6 +4,7 @@
 
     "ModelName":  "GraphSage_network",
 
+
     "epochs":     100,
     "train_data": 5000000,
     "batch_size": 512,

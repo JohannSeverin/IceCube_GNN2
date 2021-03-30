@@ -69,7 +69,7 @@ def train_model(construct_dict):
     def train_step(inputs, targets):
         with tf.GradientTape() as tape:
             predictions = model(inputs, training = True)
-            targets     = tf.cast(targets, tf.float32)
+            targets     = tf.cast(targets[:, 1:], tf.float32)
             if construct_dict['angles_to_units']:
                 targets = angles_to_units(targets)
             loss        = loss_func(targets, predictions)
@@ -82,12 +82,13 @@ def train_model(construct_dict):
     
     # Define validation function
     @tf.function(input_signature = train_loader.tf_signature(), experimental_relax_shapes = True)
-    def test_step(inputs, targets):
+    def test_step(inputs, labels):
+        ids, targets    = labels[:,0], labels[:, 1:]
         predictions     = model(inputs, training = False)
         targets         = tf.cast(targets, tf.float32) 
         if construct_dict['angles_to_units']:
             targets = angles_to_units(targets)
-        return targets, predictions
+        return ids, targets, predictions
 
 
     def validation(loader, metrics):
@@ -99,8 +100,8 @@ def train_model(construct_dict):
 
         # Loop over the batch and calculate predictions
         for batch in loader:
-            inputs, targets = batch
-            targets, predictions = test_step(inputs, targets)
+            inputs, labels  = batch
+            _, targets, predictions = test_step(inputs, labels)
             loss           += loss_func(targets, predictions)
             batches        += 1
             all_predictions.append(predictions)
@@ -127,6 +128,7 @@ def train_model(construct_dict):
         all_predictions = []
         all_targets     = []
         all_Ns          = []
+        all_ids         = []
 
 
         batches = 0
@@ -134,20 +136,22 @@ def train_model(construct_dict):
 
         # Loop over the batch and calculate predictions
         for batch in loader:
-            inputs, targets = batch
+            inputs, labels  = batch
             _, __, N        = tf.unique_with_counts(inputs[2])
-            targets, predictions = test_step(inputs, targets)
+            ids, targets, predictions = test_step(inputs, labels)
             loss           += loss_func(targets, predictions)
             batches        += 1
             all_predictions.append(predictions)
             all_targets.append(targets)
             all_Ns.append(N)
+            all_ids.append(ids)
         
         # Calculate validations
         test_loss   = loss / batches
         predictions = tf.concat(all_predictions, axis = 0)
         targets     = tf.concat(all_targets,     axis = 0)
         Ns          = tf.concat(all_Ns,          axis = 0)
+        ids         = tf.concat(all_ids,         axis = 0)
 
         # Test metrics
         if len(metrics) > 0:
@@ -160,6 +164,7 @@ def train_model(construct_dict):
 
         # Test dictionairy
         test_dict = {
+            "id":       ids.numpy(),
             "reco":     predictions.numpy(),
             "targets":  targets.numpy(),
             "Ns":       Ns.numpy(),
@@ -192,12 +197,12 @@ def train_model(construct_dict):
         
         for batch in train_loader:
             # Train model
-            inputs, targets = batch
-            out             = train_step(inputs, targets)
+            inputs, labels  = batch
+            out             = train_step(inputs, labels)
             loss           += out
 
             # Update counters
-            seen_data      += len(targets)
+            seen_data      += len(labels)
             current_batch  += 1
             batch_time      = np.roll(batch_time, 1)
             batch_time[0]   = time.time() - clock
@@ -250,7 +255,7 @@ def train_model(construct_dict):
                 # Check for early_stopping
                 validation_track_loss.append(val_loss)
 
-                if (np.argmin(validation_track_loss) < len(validation_track_loss) - patience) and early_stop == True:
+                if (np.argmin(validation_track_loss) < len(validation_track_loss) - patience) and construct_dict['early_stop'] == True:
                     if construct_dict['verbose']:
                         print(f"Training stopped, no improvement made in {patience} steps.")
                         early_stop = True
@@ -262,12 +267,13 @@ def train_model(construct_dict):
 
     if construct_dict["log_wandb"]:
         wandb.log(test_dict['metrics'])
+        run.finish()
 
     with open(osp.join(file_path, "..", "test_folder", construct_dict['Experiment'] + ".dat"), "wb") as file:
         pickle.dump(test_dict, file)
 
     print(model.summary())
-    run.finish()
+
     
 
 
@@ -312,11 +318,14 @@ def setup_model(construct_dict):
     experiment    = construct_dict['Experiment']
 
     # Load model from model folder
-    import scripts.models as model_module
-    model         = getattr(model_module, model_name) 
-    model         = model(**hyper_params)
+    if construct_dict["Load_model"]:
+        model = tf.keras.models.load_model(osp.join(file_path, "..", "models", construct_dict["Load_name"]))
+    else:
+        import scripts.models as model_module
+        model         = getattr(model_module, model_name) 
+        model         = model(**hyper_params)
 
-    # Make folder for saved states
+        # Make folder for saved states
     model_path    = osp.join(file_path, "..", "models", experiment)
     if not osp.isdir(model_path):
         os.mkdir(model_path)

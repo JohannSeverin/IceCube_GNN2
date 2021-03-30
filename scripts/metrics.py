@@ -113,8 +113,8 @@ def azimuthal_u(y_true, y_reco):
 def mean_zenith_std(y_true, y_reco):
     zenith_k   = y_reco[:, 4]
 
-    std       = tf.math.sqrt(1 - tf.math.divide_no_nan(tf.math.special.bessel_i1(zenith_k),
-                                                       tf.math.special.bessel_i0(zenith_k)))
+    std       = tf.math.sqrt(- 2 * tf.math.log(tf.math.divide_no_nan(tf.math.special.bessel_i1(zenith_k),
+                                                       tf.math.special.bessel_i0(zenith_k))))
 
     return tf.reduce_mean(std) / np.pi * 180
 
@@ -122,8 +122,8 @@ def mean_zenith_std(y_true, y_reco):
 def mean_azimuth_std(y_true, y_reco):
     polar_k   = y_reco[:, 3]
 
-    std       = tf.math.sqrt(1 - tf.math.divide_no_nan(tf.math.special.bessel_i1(polar_k),
-                                                       tf.math.special.bessel_i0(polar_k)))
+    std       = tf.math.sqrt(- 2 * tf.math.log(tf.math.divide_no_nan(tf.math.special.bessel_i1(polar_k),
+                                                       tf.math.special.bessel_i0(polar_k))))
 
     return tf.reduce_mean(std) / np.pi * 180
 

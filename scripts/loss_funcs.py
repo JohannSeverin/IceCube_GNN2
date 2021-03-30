@@ -197,10 +197,10 @@ def CosSinePairs(y_true, y_reco):
 
     loss = 0
 
-    loss += tf.reduce_mean(tf.square(azi[0]))
-    loss += tf.reduce_mean(tf.square(azi[1]))
-    loss += tf.reduce_mean(tf.square(zeni[0]))
-    loss += tf.reduce_mean(tf.square(zeni[1]))
+    loss += tf.reduce_mean(tf.abs(azi[0]))
+    loss += tf.reduce_mean(tf.abs(azi[1]))
+    loss += tf.reduce_mean(tf.abs(zeni[0]))
+    loss += tf.reduce_mean(tf.abs(zeni[1]))
 
     return loss
 

@@ -116,7 +116,7 @@ class graph_dataset(Dataset):
 
                         features      = read_sql(feature_query, conn)
 
-                        target_query = f"select {', '.join(self.targets)} from truth where event_no in {tuple(get_ids)}"
+                        target_query = f"select {'event_no, ' + ', '.join(self.targets)} from truth where event_no in {tuple(get_ids)}"
 
                         targets      = read_sql(target_query, conn)
 
