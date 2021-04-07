@@ -35,7 +35,7 @@
     "GraphType":       "NearestNeighbors",
     "GraphParam":       6,
     "data_split":      [0.8, 0.1, 0.1],
-    "clear_dataset":   true,
+    "clear_dataset":   false,
     "graph_batch":     25000,
     "transforms":      null,
 
@@ -43,11 +43,11 @@
 
     "features":   ["dom_x", "dom_y", "dom_z", "dom_time", "charge_log10", "width"],
     "targets":    ["azimuth", "zenith"],
-    "angles_to_units": false,
+    "angles_to_units": true,
     "event_lims": "event_no in (select event_no from truth where pid in (-12, -14, -16, 12, 14, 16) order by random() limit 100000)",
     "node_lims":  "", 
 
-    "LossFunc":   "CosSinePairs",
+    "LossFunc":   "VonMiess",
     "log_wandb": true,
     "metrics":   ["azimuthal_u_from_cossine", "zenith_u_from_cossine"]
 }

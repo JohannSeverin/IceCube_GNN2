@@ -159,7 +159,7 @@ class GraphSage_network_angles(Model):
 
 
 class GraphSage_network(Model):
-    def __init__(self, n_out = 3, n_kappa = 1, n_corr = 0, n_in = 5, hidden_states = 64, forward = False, dropout = 0, gamma = 0, **kwargs):
+    def __init__(self, n_out = 3, n_kappa = 1, n_corr = 0, n_in = 5, hidden_states = 64, forward = False, dropout = 0, gamma = 0, sigmoid = False, **kwargs):
         super().__init__()
         self.forward = forward
         self.norm_trans   = normalize6['translate'][:n_in]
@@ -167,6 +167,7 @@ class GraphSage_network(Model):
         self.gamma        = gamma
         self.n_corr       = n_corr
         self.n_kappa      = n_kappa
+        self.sigmoid      = sigmoid
 
         self.batch_edge  = BatchNormalization()
 
@@ -280,7 +281,7 @@ class GraphSage_network(Model):
 class MessegaPassModel(Model):
 
     def __init__(self, n_out = 3, n_kappa = 1, n_in = 5, hidden_states = 64, dropout = 0, batch_norm = True, MP_layers = 3,\
-                 message_size = 2, message_layers = 2, update_size = 4, update_layers = 2, decode_layers = [6, 6, 3], split_structure = [1, 1], **kwargs):
+                 message_size = 2, message_layers = 2, update_size = 4, update_layers = 2, decode_layers = [6, 6, 3], split_structure = [1, 1], sigmoid = False, **kwargs):
         
         # Setups 
         super().__init__()
@@ -288,6 +289,7 @@ class MessegaPassModel(Model):
         self.norm_scale   = normalize6['scale'][:n_in]
         self.n_out        = n_out
         self.n_kappa      = n_kappa
+        self.sigmoid      = sigmoid
 
         self.batch_edge  = BatchNormalization()
         
@@ -338,8 +340,9 @@ class MessegaPassModel(Model):
         for i, split in enumerate(self.split_layers):
           x_out = split[0](x)
 
-          for layer in split[1:]:
-            x_out = layer(x_out)
+          if len(split) > 1:
+            for layer in split[1:]:
+              x_out = layer(x_out)
           
           output.append(x_out)
         
@@ -351,9 +354,14 @@ class MessegaPassModel(Model):
         else:
           x_out = x[:, :self.n_out]
         
-        x_kappa = tf.abs(x[:, - self.n_kappa:]) + eps 
-        
-        return tf.concat([x_out, x_kappa], axis = 1)
+        if self.n_out == 1 and self.sigmoid:
+          x_out = tf.math.sigmoid(x)
+
+        if self.n_kappa == 0:
+          return x_out
+        else:
+          x_kappa = tf.abs(x[:, - self.n_kappa:]) + eps 
+          return tf.concat([x_out, x_kappa], axis = 1)
 
 
 

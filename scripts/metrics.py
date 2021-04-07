@@ -132,7 +132,7 @@ from tensorflow.keras.metrics import BinaryAccuracy
 from sklearn.metrics import roc_auc_score
 
 def AUC(y_true, y_reco):
-    auc = roc_auc_score(y_true.numpy(), tf.y_reco.numpy())
+    auc = roc_auc_score(y_true.numpy(), y_reco.numpy())
     return auc
 
 BA = BinaryAccuracy()

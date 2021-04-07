@@ -212,7 +212,7 @@ def CosSinePairs(y_true, y_reco):
 
 from tensorflow.keras.losses import BinaryCrossentropy
 
-BCE = BinaryCrossentropy(from_logits = True)
+BCE = BinaryCrossentropy()
 
 def BinaryCE_from_logits(y_true, y_reco):
     return BCE(y_true, y_reco)

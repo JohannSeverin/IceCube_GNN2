@@ -1,8 +1,8 @@
 {
-    "Experiment": "AnglesMuons_long",
-    "Exp_group":  "LossFuncTest2", 
+    "Experiment": "StoppedMuons",
+    "Exp_group":  "StoppedMuons", 
 
-    "ModelName":  "GraphSage_network_angles",
+    "ModelName":  "MessegaPassModel",
 
 
     "Load_model": false,
@@ -10,30 +10,33 @@
 
     "epochs":     100,
     "train_data": 10000000,
-    "batch_size": 64,
+    "batch_size": 256,
     "early_stop": true,
-    "patience":   3,
-    "learning_rate":   5e-3,
+    "patience":   5,
+    "learning_rate":   2e-3,
     "lr_schedule": "classic_schedule",
-    "val_every":   200000,
+    "val_every":   100000,
     "buffer_size": 100000,
     "verbose":     true,
 
     "hyper_params": {
-        "n_out":           2,
-        "n_kappa":         2,
+        "n_out":           1,
+        "sigmoid":         true,
+        "n_kappa":         0,
         "n_corr":          0,
-        "cossin":          false,
+        "gamma":           0,
         "n_in":            6,
+        "message_layers":  3,
+        "message_size":    6,
         "hidden_states":   64,
-        "dropout":         0.15,
+        "dropout":         0.25,
         "batch_norm":      true
     },
 
-    "Data":            "MuonGunSRTAngles",
+    "Data":            "MuonGunStopped_Clean",
     "GraphType":       "NearestNeighbors",
-    "GraphParam":       14,
-    "data_split":      [0.95, 0.025, 0.025],
+    "GraphParam":       6,
+    "data_split":      [0.8, 0.1, 0.1],
     "clear_dataset":   false,
     "graph_batch":     25000,
     "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
@@ -41,13 +44,13 @@
     "raw_path":   "/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db",
 
     "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "SRTInIcePulses"],
-    "targets":    ["azimuth", "zenith"],
-    "angles_to_units":  false,
-    "event_lims": "pid = 13",
-    "node_lims":  null, 
+    "targets":    ["stopped_muon"],
+    "angles_to_units": false,
+    "event_lims": "pid = 13 limit 500000",
+    "node_lims":  "SRTInIcePulses = 1", 
 
-    "LossFunc":   "VonMisesPolarZenith_from_angles",
+    "LossFunc":   "BinaryCE_from_logits",
     "log_wandb": true,
-    "metrics":   ["azimuthal_u_from_angles", "zenith_u_from_angles"]
+    "metrics":   ["binary_accuracy", "AUC"]
 }
    
