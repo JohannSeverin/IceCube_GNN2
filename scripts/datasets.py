@@ -125,12 +125,12 @@ class graph_dataset(Dataset):
                         x_long       = np.array(features[self.features])
                         ys           = np.array(targets)
 
-                        # Add inverse transforms (FIX LATER???)
+
                         if self.transform:
                             for col, trans in enumerate(self.features):
                                 if trans in list(transformers['features'].keys()):
                                     x_long[:, col] = transformers["features"][trans].inverse_transform(x_long[:, col].reshape(-1, 1)).flatten()
-                            for col, trans in enumerate(self.targets):
+                            for col, trans in enumerate(["event_no"] + self.targets):
                                 if trans in list(transformers['truth'].keys()):
                                     ys[:, col]     = transformers["truth"][trans].inverse_transform(ys[:, col].reshape(-1, 1)).flatten()
                                 

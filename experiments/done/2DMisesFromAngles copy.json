@@ -30,11 +30,11 @@
         "batch_norm":      true
     },
 
-    "Data":            "MuonGunSRTAngles",
+    "Data":            "MuonGunSRTAngles_test",
     "GraphType":       "NearestNeighbors",
     "GraphParam":       14,
     "data_split":      [0.95, 0.025, 0.025],
-    "clear_dataset":   false,
+    "clear_dataset":   true,
     "graph_batch":     25000,
     "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
 
@@ -43,11 +43,11 @@
     "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "SRTInIcePulses"],
     "targets":    ["azimuth", "zenith"],
     "angles_to_units":  false,
-    "event_lims": "pid = 13",
+    "event_lims": "pid = 13 limit 100000",
     "node_lims":  null, 
 
     "LossFunc":   "VonMisesPolarZenith_from_angles",
-    "log_wandb": true,
+    "log_wandb": false,
     "metrics":   ["azimuthal_u_from_angles", "zenith_u_from_angles"]
 }
    
