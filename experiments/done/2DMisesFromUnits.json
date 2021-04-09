@@ -11,7 +11,7 @@
     "train_data": 10000000,
     "batch_size": 64,
     "early_stop": true,
-    "patience":   3,
+    "patience":   5,
     "learning_rate":   5e-3,
     "lr_schedule": "classic_schedule",
     "val_every":   200000,
