@@ -1,0 +1,52 @@
+{
+    "Experiment": "Neutrino SRT",
+    "Exp_group":  "Neutrino", 
+
+    "ModelName":  "GraphSage_network",
+
+    "Load_model": false,
+    "Load_name":  "PCA6_cleaned",
+
+    "epochs":     100,
+    "train_data": 10000000,
+    "batch_size": 64,
+    "early_stop": true,
+    "patience":   5,
+    "learning_rate":   5e-3,
+    "lr_schedule": "classic_schedule",
+    "val_every":   200000,
+    "buffer_size": 100000,
+    "verbose":     true,
+
+    "hyper_params": {
+        "n_out":           3,
+        "n_kappa":         2,
+        "n_corr":          0,
+        "gamma":           0,
+        "n_in":            6,
+        "hidden_states":   64,
+        "dropout":         0.25,
+        "batch_norm":      true
+    },
+
+    "Data":            "NeutrinoSRT",
+    "GraphType":       "NearestNeighbors",
+    "GraphParam":       12,
+    "data_split":      [0.95, 0.025, 0.025],
+    "clear_dataset":   false,
+    "graph_batch":     25000,
+    "transforms":      "/home/johannbs/Desktop/IceCube_GNN/data/db_files/transformers.pkl",
+
+    "raw_path":   "/home/johannbs/Desktop/IceCube_GNN/data/db_files/rasmus_classification_muon_3neutrino_3mio.db",
+
+    "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "SRTInIcePulses"],
+    "targets":    ["azimuth", "zenith"],
+    "angles_to_units":  true,
+    "event_lims": "pid in (12, 14, 16, -12, -14, -16)",
+    "node_lims":  null, 
+
+    "LossFunc":   "VonMisesPolarZenith",
+    "log_wandb": true,
+    "metrics":   ["angle_u", "zenith_u", "azimuthal_u", "mean_zenith_std", "mean_azimuth_std"]
+}
+   
