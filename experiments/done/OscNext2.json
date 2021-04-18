@@ -1,5 +1,5 @@
 {
-    "Experiment": "OscNext_RUN",
+    "Experiment": "OscNext_units_2d",
     "Exp_group":  "Neutrino", 
 
     "ModelName":  "GraphSage_network",
@@ -12,7 +12,7 @@
     "batch_size": 64,
     "early_stop": true,
     "patience":   5,
-    "learning_rate":   5e-3,
+    "learning_rate":   1e-3,
     "lr_schedule": "classic_schedule",
     "val_every":   200000,
     "buffer_size": 100000,
@@ -25,7 +25,7 @@
         "gamma":           0,
         "n_in":            6,
         "hidden_states":   64,
-        "dropout":         0.25,
+        "dropout":         0.05,
         "batch_norm":      true
     },
 
