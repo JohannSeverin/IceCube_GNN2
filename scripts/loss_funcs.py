@@ -169,6 +169,20 @@ def NegativeCosine(y_true, y_reco):
     return tf.reduce_mean(tf.math.log(tf.math.cosh(1 - cos_angle)))
     
 
+def TwoNegativeCosine(y_true, y_reco):
+    vects       = y_reco[:, :3]
+    polar_k     = y_reco[:, 3]
+    zenth_k     = y_reco[:, 4]
+
+    rxy_reco    = tf.math.reduce_euclidean_norm(vects[:, :2],  axis = 1)
+    rxy_true    = tf.math.reduce_euclidean_norm(y_true[:, :2], axis = 1)
+
+    cos_azi     = tf.math.divide_no_nan(tf.squeeze(tf.expand_dims(vects[:, :2], axis = 1) @ tf.expand_dims(y_true[:, :2], axis = -1)),
+                                        (rxy_reco * rxy_true ))
+
+    cos_zenth   = vects[:, 2] * y_true[:, 2] + tf.math.sign(vects[:, 0]) * tf.math.sign(y_true[:, 0]) * rxy_reco * rxy_true
+
+    return tf.reduce_mean(2 - cos_azi - cos_zenth)
 
 # Helper function
 def cos_from_vects(true, pred):

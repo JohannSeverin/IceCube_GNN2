@@ -1,5 +1,5 @@
 {
-    "Experiment": "Neutrino Cleaned",
+    "Experiment": "OscNextMillion",
     "Exp_group":  "Neutrino", 
 
     "ModelName":  "GraphSage_network",

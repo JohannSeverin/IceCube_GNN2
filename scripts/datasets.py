@@ -1,10 +1,11 @@
 import sqlite3, os, sys, pickle, tqdm
+from sqlite3.dbapi2 import enable_shared_cache
 
 import os.path as osp
 import tensorflow as tf
 import numpy as np
 
-from pandas import read_sql
+from pandas import read_sql, read_pickle
 
 from spektral.data import Dataset, Graph
 from scipy.sparse import csr_matrix
@@ -41,6 +42,11 @@ class graph_dataset(Dataset):
         self.graph_batch = construct_dict['graph_batch']
         self.buffer_size = construct_dict['buffer_size']
         self.data_split  = construct_dict['data_split'] 
+        if "max_split" in construct_dict.keys():
+            self.max_split = construct_dict["max_split"]
+        else:
+            self.max_split = None
+
         self.seed        = 25
         
         self.features    = construct_dict["features"]
@@ -91,18 +97,27 @@ class graph_dataset(Dataset):
             # print(event_ids)
             
             # Split event_numbers in train/test
-            train_events, val_events, test_events = split_events(event_ids, self.data_split, self.seed)
+            if type(self.data_split) == str:
+                sets = read_pickle(self.data_split)
+                train_events, val_events     = list(sets['train'].event_no), list(sets['test'].event_no)
+                test_events                  = list(sets['test'].event_no)
+            else:
+                train_events, val_events, test_events = split_events(event_ids, self.data_split, self.seed)
 
             del event_ids # Remove unecessary ram usage
+            if self.max_split:
+                train_events = train_events[:self.max_split[0]]
+                val_events   = val_events[:self.max_split[1]]
+                test_events  = test_events[:self.max_split[2]]
 
             # Generate x features if they do not exist
             if not xs_exists:
                 
                 # Loop over train, validation and test
-                for type, events in zip(["train", "val", "test"], [train_events, val_events, test_events]):
+                for data_type, events in zip(["train", "val", "test"], [train_events, val_events, test_events]):
                     
                     if verbose:
-                        print(f"Extracting features for {type}")
+                        print(f"Extracting features for {data_type}")
 
                     # generate x features loop
                     for i in tqdm.tqdm(range(0, len(events), self.graph_batch)):
@@ -141,7 +156,7 @@ class graph_dataset(Dataset):
 
                         
                         # Save in folder
-                        with open(osp.join(x_path, type + str(i) + ".dat"), "wb") as xy_file:
+                        with open(osp.join(x_path, data_type + str(i) + ".dat"), "wb") as xy_file:
                             pickle.dump([xs, ys], xy_file)
 
             if not as_exists:
