@@ -26,6 +26,10 @@ for i, experiment in enumerate(exp_list):
     with open(osp.join(exp_folder, experiment)) as file:
         construct_dict = json.load(file)
     
+    if "threads" in construct_dict.keys():
+        if "threads":
+            os.environ['TF_NUM_INTRAOP_THREADS'] = str(construct_dict["threads"])
+
 
     # Try to train the model given the construction dict
     if SKIP_ERRS:

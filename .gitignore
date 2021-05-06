@@ -2,3 +2,4 @@ data/
 predictions/
 wandb/
 models/
+nohup.out

@@ -171,9 +171,7 @@ def NegativeCosine(y_true, y_reco):
 
 def TwoNegativeCosine(y_true, y_reco):
     vects       = y_reco[:, :3]
-    polar_k     = y_reco[:, 3]
-    zenth_k     = y_reco[:, 4]
-
+    
     rxy_reco    = tf.math.reduce_euclidean_norm(vects[:, :2],  axis = 1)
     rxy_true    = tf.math.reduce_euclidean_norm(y_true[:, :2], axis = 1)
 

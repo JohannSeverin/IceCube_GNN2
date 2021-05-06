@@ -29,8 +29,8 @@ normalize5 ={"translate": tf.constant([0, 0, -200, 10000, 0], dtype = tf.float32
              "time":   (10000, 2500),
              "charge": (0, 0.25)}
 
-normalize6 ={"translate": tf.constant([0, 0, -200, 10000, 0, 0], dtype = tf.float32),
-             "scale":     tf.constant([100, 100, 100, 2500, 0.25, 1.], dtype = tf.float32),
+normalize6 ={"translate": tf.constant([0, 0, -200, 10000, 0, 1.], dtype = tf.float32),
+             "scale":     tf.constant([100, 100, 100, 2500, 0.25, 7.], dtype = tf.float32),
              "x_dom":  (0, 100),
              "y_dom":  (0, 100),
              "z_dom":  (-200, 100),
@@ -278,7 +278,7 @@ class GraphSage_network(Model):
 
 
 
-class MessegaPassModel(Model):
+class MessagePassModel(Model):
 
     def __init__(self, n_out = 3, n_kappa = 1, n_in = 5, hidden_states = 64, dropout = 0, batch_norm = True, MP_layers = 3,\
                  message_size = 2, message_layers = 2, update_size = 4, update_layers = 2, decode_layers = [6, 6, 3], split_structure = [1, 1], sigmoid = False, **kwargs):

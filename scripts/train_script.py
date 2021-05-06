@@ -3,6 +3,13 @@ import tqdm, os, sys, time, pickle
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 
 import tensorflow as tf
+
+gpu_devices = tf.config.list_physical_devices('GPU') 
+if len(gpu_devices) > 0:
+    print("GPU detected")
+    for gpu in gpu_devices:
+        tf.config.experimental.set_memory_growth(gpu, True)
+
 import numpy as np
 
 import os.path as osp

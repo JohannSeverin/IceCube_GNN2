@@ -1,0 +1,53 @@
+{
+    "Experiment": "OscNext_units_angle_dist",
+    "Exp_group":  "Neutrino", 
+
+    "ModelName":  "GraphSage_network",
+
+    "Load_model": false,
+    "Load_name":  "PCA6_cleaned",
+
+    "epochs":     100,
+    "train_data": 10000000,
+    "batch_size": 512,
+    "early_stop": true,
+    "patience":   5,
+    "learning_rate":   2.5e-4,
+    "lr_schedule": "classic_schedule",
+    "val_every":   200000,
+    "buffer_size": 100000,
+    "verbose":     true,
+
+    "hyper_params": {
+        "n_out":           3,
+        "n_kappa":         0,
+        "n_corr":          0,
+        "gamma":           0,
+        "n_in":            6,
+        "hidden_states":   64,
+        "dropout":         0.05,
+        "batch_norm":      true
+    },
+
+    "Data":            "OscNextCommonSplit",
+    "GraphType":       "NearestNeighbors",
+    "GraphParam":       6,
+    "data_split":      "/groups/hep/pcs557/databases/dev_lvl7_mu_nu_e_classification_v003/meta/sets.pkl",
+    "max_split":       [1000000, 200000, 200000],
+    "clear_dataset":   false,
+    "graph_batch":     25000,
+    "transforms":      null,
+
+    "raw_path":   "/groups/hep/pcs557/databases/dev_lvl7_mu_nu_e_classification_v003/data/dev_lvl7_mu_nu_e_classification_v003_unscaled.db",
+
+    "features":   ["dom_x", "dom_y", "dom_z", "dom_time", "charge_log10", "width"],
+    "targets":    ["azimuth", "zenith"],
+    "angles_to_units":  true,
+    "event_lims": "pid in (12, 14, 16, -12, -14, -16)",
+    "node_lims":  null, 
+
+    "LossFunc":   "TwoNegativeCosine",
+    "log_wandb": true,
+    "metrics":   ["angle_u", "zenith_u", "azimuthal_u"]
+}
+   

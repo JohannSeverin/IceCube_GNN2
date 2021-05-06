@@ -1,0 +1,63 @@
+{
+    "Experiment": "OscNext_MP",
+    "Exp_group":  "Full_OscNext", 
+
+    "ModelName":  "MessagePassModel",
+
+    "Load_model": false,
+    "Load_name":  "PCA6_cleaned",
+
+    "threads":           16, 
+
+    "epochs":     100,
+    "train_data": 25000000,
+    "batch_size": 128,
+    "early_stop": false,
+    "patience":   5,
+    "learning_rate":   1e-3,
+    "lr_schedule": "classic_schedule",
+    "val_every":   500000,
+    "buffer_size": 250000,
+    "verbose":     true,
+
+    "hyper_params": {
+        "n_out":           3,
+        "n_kappa":         2,
+        "n_corr":          0,
+        "gamma":           0,
+        "n_in":            5,
+        "hidden_states":   128,
+        "MP_layers":       3,
+        "message_size":    2,
+        "message_layers":  2,
+        "update_size":     4,
+        "update_layers":   2, 
+        "decode_layers":   [6, 6, 3],
+        "split_structure": [2, 2],
+        "dropout":         0.10,
+        "batch_norm":      true
+    },
+
+    "Data":            "MuonNeutrino",
+    "GraphType":       "NearestNeighbors",
+    "GraphParam":       6,
+    "data_split":      [0.8, 0.1, 0.1],
+    "max_split":       null,
+    "clear_dataset":   false,
+    "graph_batch":     50000,
+    "transforms":      null,
+
+
+    "raw_path":   "/groups/hep/pcs557/databases/experimental_databases/dev_level7_mu_tau_e_muongun_classification/data/dev_level7_mu_tau_e_muongun_classification_unscaled.db",
+
+    "features":   ["dom_x", "dom_y", "dom_z", "dom_time", "charge_log10"],
+    "targets":    ["azimuth", "zenith"],
+    "angles_to_units":  true,
+    "event_lims": "abs(pid) = 14",
+    "node_lims":  null, 
+
+    "LossFunc":   "VonMisesPolarZenith",
+    "log_wandb": true,
+    "metrics":    ["angle_u", "zenith_u", "azimuthal_u", "mean_zenith_std", "mean_azimuth_std"]
+}
+   
