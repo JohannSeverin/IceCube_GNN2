@@ -18,7 +18,7 @@ def classic_schedule(lr, buildup = 3, decay = 0.9):
     return lr_schedule
 
 
-def fast_schedule(lr, buildup = 0, decay = 0.9):
+def fast_schedule(lr, buildup = 2, decay = 0.9):
 
     def lr_schedule():
         # Intial value

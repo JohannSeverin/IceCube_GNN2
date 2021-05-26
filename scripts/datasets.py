@@ -4,6 +4,7 @@ from sqlite3.dbapi2 import enable_shared_cache
 import os.path as osp
 import tensorflow as tf
 import numpy as np
+from multiprocessing import Process, Pool
 
 from pandas import read_sql, read_pickle
 
@@ -104,11 +105,16 @@ class graph_dataset(Dataset):
             else:
                 train_events, val_events, test_events = split_events(event_ids, self.data_split, self.seed)
 
+            np.random.shuffle(train_events)
+            np.random.shuffle(val_events)
+            np.random.shuffle(test_events)
+
             del event_ids # Remove unecessary ram usage
             if self.max_split:
                 train_events = train_events[:self.max_split[0]]
                 val_events   = val_events[:self.max_split[1]]
                 test_events  = test_events[:self.max_split[2]]
+            
 
             # Generate x features if they do not exist
             if not xs_exists:
@@ -129,11 +135,11 @@ class graph_dataset(Dataset):
                         if self.node_lims:
                             feature_query += " and " + self.node_lims # Add further restrictions
 
-                        features      = read_sql(feature_query, conn)
+                        features      = read_sql(feature_query, conn).sort_values('event_no')
 
                         target_query = f"select {'event_no, ' + ', '.join(self.targets)} from truth where event_no in {tuple(get_ids)}"
 
-                        targets      = read_sql(target_query, conn)
+                        targets      = read_sql(target_query, conn).sort_values('event_no')
 
                         # Convert to np arrays and split xs in list
                         f_event      = np.array(features['event_no'])
@@ -154,6 +160,7 @@ class graph_dataset(Dataset):
 
                         xs           = np.split(x_long, np.cumsum(counts[: -1]))
 
+                        # print(_, ys[:, 0])
                         
                         # Save in folder
                         with open(osp.join(x_path, data_type + str(i) + ".dat"), "wb") as xy_file:
@@ -162,9 +169,41 @@ class graph_dataset(Dataset):
             if not as_exists:
                 # Load data from the xs and generate appropiate adjacency matrices in the a - folder
                 
-                if verbose:
+                if self.verbose:
                     print("Making adjacency matrices")
 
+                # def generate_a(filename):
+                #     with open(osp.join(x_path, xy_file), "rb") as file:
+                #         xs, ys = pickle.load(file)
+                #     As = []
+                #     for x in xs:
+                #         try:
+                #             a = A_func(x[:, :3], self.GraphParam)
+                #         except:
+                #              a = csr_matrix(np.ones(shape = (x.shape[0], x.shape[0])) - np.eye(x.shape[0]))
+                #         As.append(a)
+                    
+                #     with open(osp.join(a_path, xy_file), "wb") as a_file:
+                #         pickle.dump(As, a_file)
+                    # if self.verbose:
+                    #     print(f"{xy_file} produced")
+
+                # with Pool(5) as p:
+                #     p.map(generate_a, os.listdir(x_path))
+                # count = 0
+                # total = len(os.listdir(x_path))
+                # for i in range(0, len(os.listdir(x_path)) // 5 + 1, 5):
+                #     processes = []
+                #     for xy_file in os.listdir(x_path)[i : i + 5]:
+                #         p = Process(target = generate_a, args = (xy_file, ))
+                #         processes.append(p)
+                #         p.start()
+
+                #     for p in processes:
+                #         p.join()
+                #         count += 1
+                #         if self.verbose:
+                #             print(f"{count} / {total} done")
                 for xy_file in tqdm.tqdm(os.listdir(x_path)):
                     with open(osp.join(x_path, xy_file), "rb") as file:
                         xs, ys = pickle.load(file)

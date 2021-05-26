@@ -1,0 +1,59 @@
+{
+    "Experiment": "standard_2",
+    "Exp_group":  "EnergyZenith_batchnorm", 
+
+    "ModelName":  "GraphSage_network",
+
+    "Load_model": false,
+    "Load_name":  "PCA6_cleaned",
+
+    "threads":           null, 
+
+    "epochs":     100,
+    "train_data": 20000000,
+    "batch_size": 512,
+    "early_stop": false,
+    "patience":   5,
+    "learning_rate":   1e-2,
+    "lr_schedule": "classic_schedule",
+    "val_every":   500000,
+    "buffer_size": 250000,
+    "verbose":     true,
+
+    "hyper_params": {
+        "n_out":           2,
+        "n_kappa":         2,
+        "n_corr":          0,
+        "gamma":           0,
+        "n_in":            5,
+        "hidden_states":   32,
+        "dropout":         0.1,
+        "decode_layers":   [6, 6, 4, 4], 
+        "mp_layers":       2,
+        "scale":           true
+    },
+
+    "Data":            "OscNextCommonSplit_test_part",
+    "GraphType":       "NearestNeighbors",
+    "GraphParam":       15,
+    "data_split":      [0.8, 0.1, 0.1],
+    "max_split":       null,
+    "clear_dataset":   false,
+    "graph_batch":     50000,
+    "transforms":      "/groups/hep/johannbs/data/transformers2.pkl",
+
+
+    "raw_path":   "/groups/hep/johannbs/data/rasmus_classification_muon_3neutrino_3mio.db",
+
+    "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10"],
+    "targets":    ["energy_log10", "zenith"],
+    "angles_to_units":  false,
+    "event_lims": "abs(pid) = 13 limit 500000",
+    "node_lims":  "SRTInIcePulses = 1", 
+
+
+    "LossFunc":   "NormalEnergyZenith",
+    "log_wandb": true,
+    "metrics":    ["energy_w", "zenith_u_from_angles", "energy_sigma_mean", "mean_zenith_std_e"]
+}
+   

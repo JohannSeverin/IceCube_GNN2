@@ -1,0 +1,92 @@
+2021-05-26 13:27:17.002798: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-05-26 13:27:17.007097: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2021-05-26 13:27:17.021734: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:27:17.023548: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:4d:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
+2021-05-26 13:27:17.023778: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-05-26 13:27:17.042764: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-05-26 13:27:17.042895: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-05-26 13:27:17.575512: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-05-26 13:27:17.852777: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-05-26 13:27:18.089767: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-05-26 13:27:18.090896: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2021-05-26 13:27:18.216417: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2021-05-26 13:27:18.216840: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:27:18.217389: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:27:18.248911: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+GPU detected
+Starting process with 1 experiments
+Starting expriment from EnergyZenith_attention48_scaled_loss
+wandb: Currently logged in as: johannbs (use `wandb login --relogin` to force relogin)
+wandb: wandb version 0.10.30 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.10.27
+wandb: Syncing run Attention48_scaled_loss
+wandb: ⭐️ View project at https://wandb.ai/johannbs/Full_OscNext2
+wandb: 🚀 View run at https://wandb.ai/johannbs/Full_OscNext2/runs/2hqs4tja
+wandb: Run data is saved locally in /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210526_132730-2hqs4tja
+wandb: Run `wandb offline` to turn off syncing.
+
+2021-05-26 13:28:16.369115: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-05-26 13:28:16.370464: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-05-26 13:28:16.370649: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:28:16.371128: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:4d:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
+2021-05-26 13:28:16.371157: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-05-26 13:28:16.371184: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-05-26 13:28:16.371195: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-05-26 13:28:16.371207: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-05-26 13:28:16.371217: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-05-26 13:28:16.371228: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-05-26 13:28:16.371238: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2021-05-26 13:28:16.371249: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2021-05-26 13:28:16.371284: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:28:16.371735: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:28:16.372131: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-05-26 13:28:16.372158: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-05-26 13:28:19.633145: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-05-26 13:28:19.633244: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2021-05-26 13:28:19.633255: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2021-05-26 13:28:19.634055: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:28:19.634540: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:28:19.634978: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-05-26 13:28:19.635406: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6629 MB memory) -> physical GPU (device: 0, name: GeForce RTX 3090, pci bus id: 0000:4d:00.0, compute capability: 8.6)
+/groups/hep/johannbs/anaconda3/envs/tf/lib/python3.8/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+2021-05-26 13:29:48.797793: W tensorflow/stream_executor/platform/default/dso_loader.cc:60] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-05-26 13:29:48.896003: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2021-05-26 13:30:46.709504: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-05-26 13:30:46.732896: W tensorflow/stream_executor/platform/default/dso_loader.cc:60] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2021-05-26 13:30:46.733177: W tensorflow/stream_executor/cuda/cuda_driver.cc:326] failed call to cuInit: UNKNOWN ERROR (303)
+2021-05-26 13:30:46.733292: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (hep02.cluster): /proc/driver/nvidia/version does not exist
+Starting process with 1 experiments
+Starting expriment from EnergyZenith_attention48_scaled_loss
+wandb: Currently logged in as: johannbs (use `wandb login --relogin` to force relogin)
+wandb: wandb version 0.10.30 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.10.27
+wandb: Syncing run Attention48_scaled_loss
+wandb: ⭐️ View project at https://wandb.ai/johannbs/Full_OscNext2
+wandb: 🚀 View run at https://wandb.ai/johannbs/Full_OscNext2/runs/3jtnmbkr
+wandb: Run data is saved locally in /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210526_133124-3jtnmbkr
+wandb: Run `wandb offline` to turn off syncing.
+
+2021-05-26 13:32:29.393630: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+WARNING:tensorflow:Gradients do not exist for variables ['message_pass_model/batch_normalization_3/gamma:0', 'message_pass_model/batch_normalization_3/beta:0', 'message_pass_model/batch_normalization_4/gamma:0', 'message_pass_model/batch_normalization_4/beta:0'] when minimizing the loss.
+WARNING:tensorflow:Gradients do not exist for variables ['message_pass_model/batch_normalization_3/gamma:0', 'message_pass_model/batch_normalization_3/beta:0', 'message_pass_model/batch_normalization_4/gamma:0', 'message_pass_model/batch_normalization_4/beta:0'] when minimizing the loss.
+2021-05-26 13:33:43.044242: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-05-26 13:33:43.091711: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 3000170000 Hz
+
+
+Validation loss: 4.554622 	 learning_rate 2.500e-04
+Validation metrics: zenith_u_from_angles: 41.041	energy_w: 0.618
+
+2021-05-26 13:43:58.346567: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+
+
+Validation loss: 3.629602 	 learning_rate 5.000e-04
+Validation metrics: zenith_u_from_angles: 41.027	energy_w: 0.593
+

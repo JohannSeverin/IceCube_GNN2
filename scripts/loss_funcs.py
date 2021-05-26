@@ -10,8 +10,85 @@ eps = 1e-5
 
 
 #######################################################
+#   Energy         --- Probabilistic                  #
+#######################################################
+
+def NormalEnergy(targets, energies, kappas):
+    # energies = y_reco[:, 0]
+    # targets  = y_true
+    # kappas   = y_reco[:, 1]
+
+    log_likelihood  = - (energies - targets) ** 2 * kappas / 2 + tf.math.log(kappas) / 2
+
+    return tf.reduce_mean(- log_likelihood) 
+
+
+def NormalEnergyZenith(y_true, y_reco):
+    energy_reco   = y_reco[:, 1]
+    energy_truth  = y_true[:, 2]
+    energy_kappa  = y_reco[:, 2]
+
+    zenith_reco   = y_reco[:, 0]
+    reco_cos      = tf.cos(zenith_reco)
+    reco_sin      = tf.sin(zenith_reco)
+
+    zenith_truth  = y_true[:, 1]
+    zenith_kappa  = y_reco[:, 3]
+
+    zenith_cos    = reco_cos * tf.math.cos(zenith_truth) + tf.math.sin(zenith_truth) * reco_sin
+
+    # log_likelihood  = - (energy_reco - energy_truth) ** 2 * energy_kappa / 2 + tf.math.log(energy_kappa) / 2
+
+    lnI0_zenth   = zenith_kappa + tf.math.log(1 + tf.math.exp(-2*zenith_kappa)) -0.25 * tf.math.log(1 + 0.25 * tf.square(zenith_kappa)) + tf.math.log(1 + 0.24273*tf.square(zenith_kappa)) - tf.math.log(1+0.43023*tf.square(zenith_kappa))
+    llh_zenth   = zenith_kappa * zenith_cos - lnI0_zenth
+
+    log_likelihood =  llh_zenth
+
+    data1 = tf.sort(y_true[:, 2])
+    data2 = tf.sort(y_reco[:, 2])
+    data_all = tf.sort(tf.concat([data1, data2], axis = 0))
+    cdf1 = tf.searchsorted(data1, data_all, side='right')
+    cdf2 = tf.searchsorted(data2, data_all, side='right')
+
+    penal_ks   = tf.cast(tf.math.reduce_max(tf.abs(cdf1 - cdf2)) / tf.shape(data1)[0], tf.float32) * 5
+
+    return tf.reduce_mean(- log_likelihood) + penal_ks
+
+
+
+#######################################################
 #   Unit-Vector    --- Probabilistic                  #
 #######################################################
+def VonMisesSum(y_true, y_reco):
+    llh_2d = VonMisesPolarZenith(y_true, y_reco[:, :5])
+    llh_3d = VonMises3D(y_true, tf.concat([y_reco[:, :3], tf.expand_dims(y_reco[:, 5], axis = 1)], axis = 1))
+    return llh_2d + llh_3d
+
+def VonMisesSumEnergy(y_true, y_reco):
+    llh_2d = VonMisesZenith(y_true[:, :3], tf.concat([y_reco[:, :3], y_reco[:, 4:6]], axis = 1))
+    # llh_3d = VonMises3D(y_true[:, :3], tf.concat([y_reco[:, :3], tf.expand_dims(y_reco[:, 6], axis = 1)], axis = 1))
+    # llh_en = NormalEnergy(y_true[:, 3], y_reco[:, 3], y_reco[:, 7])
+
+    # std_penal_zenith = .5 * tf.abs(tf.math.reduce_std(y_true[:, 2]) - tf.math.reduce_std(y_reco[:, 2])) 
+
+
+
+    # KS PENALTY # CREDZ TO KIMI
+    data1 = tf.sort(y_true[:, 2])
+    data2 = tf.sort(y_reco[:, 2])
+    data_all = tf.sort(tf.concat([data1, data2], axis = 0))
+    cdf1 = tf.searchsorted(data1, data_all, side='right')
+    cdf2 = tf.searchsorted(data2, data_all, side='right')
+
+    penal_ks   = tf.cast(tf.math.reduce_max(tf.abs(cdf1 - cdf2)) / tf.shape(data1)[0], tf.float32)
+
+    # true_dist  = tf.sort(y_true[:, 2])
+    # reco_dist  = tf.sort(y_reco[:, 2])
+
+    # probs      = tf.linspace(0, 1, tf.shape(true_dist))
+
+
+    return llh_2d + penal_ks# + llh_en #
 
 
 def VonMisesNormal(y_true, y_reco):
@@ -37,6 +114,31 @@ def VonMisesNormal(y_true, y_reco):
 
 
     return tf.reduce_mean(- llh_zenth - llh_azi)
+
+
+def VonMisesZenith(y_true, y_reco):
+    # Two polar von mises in azimuth and zenith
+    vects       = y_reco[:, :3]
+    polar_k     = y_reco[:, 3]
+    zenth_k     = y_reco[:, 4]
+
+    rxy_reco    = tf.math.reduce_euclidean_norm(vects[:, :2],  axis = 1)
+    rxy_true    = tf.math.reduce_euclidean_norm(y_true[:, :2], axis = 1)
+
+    # cos_azi     = tf.math.divide_no_nan(tf.squeeze(tf.expand_dims(vects[:, :2], axis = 1) @ tf.expand_dims(y_true[:, :2], axis = -1)),
+    #                                     (rxy_reco * rxy_true ))
+
+    cos_zenth   = vects[:, 2] * y_true[:, 2] + rxy_reco * rxy_true
+
+
+    # lnI0_azi     = polar_k + tf.math.log(1 + tf.math.exp(-2*polar_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(polar_k)) + tf.math.log(1 + 0.24273*tf.square(polar_k)) - tf.math.log(1+0.43023*tf.square(polar_k))
+    lnI0_zenth   = zenth_k + tf.math.log(1 + tf.math.exp(-2*zenth_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(zenth_k)) + tf.math.log(1 + 0.24273*tf.square(zenth_k)) - tf.math.log(1+0.43023*tf.square(zenth_k))
+
+    # llh_azi     = polar_k * cos_azi   - lnI0_azi
+    llh_zenth   = zenth_k * cos_zenth - lnI0_zenth
+
+
+    return tf.reduce_mean(- llh_zenth)
 
 
 def VonMisesPolarZenith(y_true, y_reco):
@@ -180,7 +282,7 @@ def TwoNegativeCosine(y_true, y_reco):
 
     cos_zenth   = vects[:, 2] * y_true[:, 2] + tf.math.sign(vects[:, 0]) * tf.math.sign(y_true[:, 0]) * rxy_reco * rxy_true
 
-    return tf.reduce_mean(2 - cos_azi - cos_zenth)
+    return tf.reduce_mean(2 - cos_azi - cos_zenth) + 0.05 * tf.reduce_mean(cos_zenth)
 
 # Helper function
 def cos_from_vects(true, pred):

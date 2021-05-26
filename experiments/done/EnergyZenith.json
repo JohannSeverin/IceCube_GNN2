@@ -1,0 +1,59 @@
+{
+    "Experiment": "OscNext_MP",
+    "Exp_group":  "Full_OscNext", 
+
+    "ModelName":  "GraphSage_network",
+
+    "Load_model": false,
+    "Load_name":  "PCA6_cleaned",
+
+    "threads":           null, 
+
+    "epochs":     100,
+    "train_data": 10000000,
+    "batch_size": 128,
+    "early_stop": false,
+    "patience":   5,
+    "learning_rate":   1e-3,
+    "lr_schedule": "classic_schedule",
+    "val_every":   500000,
+    "buffer_size": 250000,
+    "verbose":     true,
+
+    "hyper_params": {
+        "n_out":           2,
+        "n_kappa":         2,
+        "n_corr":          0,
+        "gamma":           0,
+        "n_in":            5,
+        "hidden_states":   64,
+        "dropout":         0.1,
+        "decode_layers":   [6, 6, 4, 4], 
+        "mp_layers":       3,
+        "batch_norm":      true,
+        "scale":           true
+    },
+
+    "Data":            "OscNext_ZenithEnergy",
+    "GraphType":       "NearestNeighbors",
+    "GraphParam":       16,
+    "data_split":      "/groups/hep/pcs557/databases/dev_lvl7_mu_nu_e_classification_v003/meta/sets.pkl",
+    "max_split":       [1000000, 100000, 250000],
+    "clear_dataset":   false,
+    "graph_batch":     50000,
+    "transforms":      null,
+
+
+    "raw_path":   "/groups/hep/pcs557/databases/dev_lvl7_mu_nu_e_classification_v003/data/dev_lvl7_mu_nu_e_classification_v003_unscaled.db",
+
+    "features":   ["dom_x", "dom_y", "dom_z", "dom_time", "charge_log10"],
+    "targets":    ["energy_log10", "zenith"],
+    "angles_to_units":  false,
+    "event_lims": null,
+    "node_lims":  null, 
+
+    "LossFunc":   "NormalEnergyZenith",
+    "log_wandb": false,
+    "metrics":    ["energy_w", "zenith_u_from_angles", "energy_sigma_mean", "mean_zenith_std_e"]
+}
+   

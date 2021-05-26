@@ -11,11 +11,11 @@
 
     "epochs":     100,
     "train_data": 50000000,
-    "batch_size": 1024,
+    "batch_size": 128,
     "early_stop": true,
     "patience":   5,
-    "learning_rate":   1e-4,
-    "lr_schedule": "classic_schedule",
+    "learning_rate":   1e-3,
+    "lr_schedule": "fast_schedule",
     "val_every":   600000,
     "buffer_size": 200000,
     "verbose":     true,
@@ -26,8 +26,8 @@
         "n_corr":          0,
         "gamma":           0,
         "n_in":            6,
-        "hidden_states":   128,
-        "dropout":         0.0,
+        "hidden_states":   64,
+        "dropout":         0.05,
         "batch_norm":      true
     },
 

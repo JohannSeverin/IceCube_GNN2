@@ -13,7 +13,8 @@ def azimuthal_u_from_angles(y_true, y_reco):
 
 
 def zenith_u_from_angles(y_true, y_reco):
-    diffs = tf.minimum(abs(y_true[:, 1] - y_reco[:, 1]), 2 * np.pi - abs(y_true[:, 1] - y_reco[:, 1]))
+    
+    diffs = tf.minimum(abs(y_true[:, 1] - y_reco[:, 0]), 2 * np.pi - abs(y_true[:, 1] - y_reco[:, 0]))
 
     u_zen = 180 / np.pi * tfp.stats.percentile(diffs, [68])
 
@@ -138,3 +139,30 @@ def AUC(y_true, y_reco):
 BA = BinaryAccuracy()
 def binary_accuracy(y_true, y_reco):
     return BA(y_true, y_reco)
+
+
+def energy_w(y_true, y_reco):
+    diffs = y_reco[:, 1] -  y_true[:, 2]
+    quantiles = tfp.stats.percentile(diffs, [25, 75])
+
+    IQR = quantiles[1] - quantiles[0]
+
+    w = IQR / 1.349
+
+    return w.numpy()
+
+def mean_zenith_std_e(y_true, y_reco):
+    zenith_k   = y_reco[:, 3]
+
+    std       = tf.math.sqrt(- 2 * tf.math.log(tf.math.divide_no_nan(tf.math.special.bessel_i1(zenith_k),
+                                                       tf.math.special.bessel_i0(zenith_k))))
+
+    return (tf.reduce_mean(std) / np.pi * 180).numpy()
+
+
+def energy_sigma_mean(y_true, y_reco):
+    k = y_reco[:, 2]
+
+    sig = 1 / tf.sqrt(k)
+
+    return tf.reduce_mean(sig).numpy()

@@ -13,7 +13,7 @@ if len(gpu_devices) > 0:
 import numpy as np
 
 import os.path as osp
-
+import matplotlib.pyplot as plt
 from tensorflow.keras.optimizers import Adam
 from spektral.data import DisjointLoader
 from importlib import __import__
@@ -51,6 +51,11 @@ def train_model(construct_dict):
     val_data      = graph_dataset(construct_dict, "val")
 
 
+    if "node_size" in construct_dict.keys():
+        filt = lambda x: x.n_nodes > construct_dict["node_size"]
+        train_data.filter(filt)
+        val_data.filter(filt)
+
 
 
     ################################################
@@ -61,6 +66,7 @@ def train_model(construct_dict):
     model, model_path     = setup_model(construct_dict)
     loss_func             = get_loss_func(construct_dict['LossFunc'])
     metrics               = get_metrics(construct_dict['metrics'])
+    plot_list             = get_plot_funcs(construct_dict['plot_list'])
     lr_schedule           = get_lr_schedule(construct_dict)
 
     # Learning rate and optimizer
@@ -125,8 +131,15 @@ def train_model(construct_dict):
             metric_dict   = {i:j for i, j in zip(construct_dict['metrics'], metric_values)}
         else:
             metric_dict   = None
+        
+        if len(plot_list) > 0 and construct_dict["log_wandb"]:
+            figs          = [wandb.Image(func(targets.numpy(), predictions.numpy())) for func in plot_list]
+            plot_dict     = {i:j for i, j in zip(construct_dict['plot_list'], figs)}
+            plt.close("all")
+        else:
+            plot_dict     = None
 
-        return val_loss, metric_dict
+        return val_loss, metric_dict, plot_dict
 
 
 
@@ -201,6 +214,7 @@ def train_model(construct_dict):
 
         train_data    = graph_dataset(construct_dict, "train")
         train_loader  = DisjointLoader(train_data, epochs = 1, batch_size = batch_size)
+        # train_loader  = train_data.interleave(lambda _: train_loader, num_parallel_calls = 4)
         
         for batch in train_loader:
             # Train model
@@ -225,14 +239,14 @@ def train_model(construct_dict):
 
                 # Validate data
                 val_loader = DisjointLoader(val_data, epochs = 1, batch_size = batch_size)
-                val_loss, metric_dict = validation(val_loader, metrics)
+                val_loss, metric_dict, plot_dict = validation(val_loader, metrics)
 
                 # Print if verbose
-                if construct_dict['verbose']:
-                    print("\n")
-                    print(f"Validation loss: {val_loss :.6f} \t learning_rate {lr:.3e}")
-                    print(f"Validation metrics: " + "\t".join([f"{i}: {metric_dict[i]:.3f}" for i in metric_dict.keys()]))
-                    print("")
+                # if construct_dict['verbose']:
+                print("\n")
+                print(f"Validation loss: {val_loss :.6f} \t learning_rate {lr:.3e}")
+                print(f"Validation metrics: " + "\t".join([f"{i}: {metric_dict[i]:.3f}" for i in metric_dict.keys()]))
+                print("")
 
 
                 # Log to wandb
@@ -247,6 +261,7 @@ def train_model(construct_dict):
                     to_log["learning_rate"] = lr
 
                     wandb.log(data = to_log, step = seen_data)
+                    wandb.log(plot_dict)
 
                 # Update learning rate according to schedule
                 lr  = next(lr_schedule)
@@ -269,6 +284,9 @@ def train_model(construct_dict):
                         break
 
     test_data             = graph_dataset(construct_dict, "test")
+    if "node_size" in construct_dict.keys():
+        test_data.filter(filt)
+
     test_loader           = DisjointLoader(test_data, epochs = 1, batch_size = batch_size, shuffle = False)
     test_dict             = test_model(test_loader, metrics)
 
@@ -309,6 +327,15 @@ def get_metrics(metric_names):
 
     return metric_list
 
+
+def get_plot_funcs(plot_names):
+    plot_list   = []
+    import scripts.plot_script as plot_module
+
+    for name in plot_names:
+        plot_list.append(getattr(plot_module, name))
+
+    return plot_list
 
 def get_loss_func(name):
     # Return loss func from the loss functions folder given a name

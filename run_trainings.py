@@ -5,12 +5,14 @@ import os.path as osp
 from tensorflow.keras.backend import clear_session
 
 
-
+GPU       = 1
 SHUTDOWN  = False
 SKIP_ERRS = False 
 ##########################################################
 #      Loop over JSON files and train models             # 
 ##########################################################
+
+os.environ['CUDA_VISIBLE_DEVICES'] = str(GPU)
 
 # Generate list over experiments to run
 from scripts.utils import list_experiments, instructions_to_dataset_name

@@ -1,0 +1,60 @@
+{
+    "Experiment": "GraphSage64",
+    "Exp_group":  "Full_OscNext2", 
+
+    "ModelName":  "MessagePassModel",
+
+    "Load_model": false,
+    "Load_name":  "PCA6_cleaned",
+
+    "threads":           16, 
+
+    "epochs":     100,
+    "train_data": 30000000,
+    "batch_size": 1024,
+    "early_stop": true,
+    "patience":   5,
+    "learning_rate":   2e-3,
+    "lr_schedule": "fast_schedule",
+    "val_every":   1000000,
+    "buffer_size": 1000000,
+    "verbose":     false,
+
+    "hyper_params": {
+        "n_out":           4,
+        "n_kappa":         4,
+        "n_corr":          0,
+        "gamma":           0,
+        "n_in":            6,
+        "hidden_states":   64 ,
+        "mp_layers":       2,
+        "decode_layers":   [8, 8], 
+        "dropout":         0.2,
+        "convulutions":    "GraphSage",
+        "batch_norm":      true
+    },
+
+    "Data":            "OscNextCommonSplit_full",
+    "GraphType":       "NearestNeighbors",
+    "GraphParam":       12,
+    "node_size":        0,
+    "data_split":      "/groups/hep/pcs557/databases/dev_lvl7_mu_nu_e_classification_v003/meta/sets.pkl",
+    "max_split":       [250000000, 200000, 25000000],
+    "clear_dataset":   false,
+    "graph_batch":     100000,
+    "transforms":      null,
+
+
+    "raw_path":   "/groups/hep/pcs557/databases/dev_lvl7_mu_nu_e_classification_v003/data/dev_lvl7_mu_nu_e_classification_v003_unscaled.db",
+
+    "features":   ["dom_x", "dom_y", "dom_z", "dom_time", "charge_log10", "width"],
+    "targets":    ["azimuth", "zenith", "energy_log10"],
+    "angles_to_units":  true,
+    "event_lims": null,
+    "node_lims":  null, 
+
+    "LossFunc":   "VonMisesSumEnergy",
+    "log_wandb": true,
+    "metrics":   ["angle_u", "zenith_u", "azimuthal_u", "energy_w"]
+}
+   
