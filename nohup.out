@@ -1,92 +1,1885 @@
-2021-05-26 13:27:17.002798: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2021-05-26 13:27:17.007097: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
-2021-05-26 13:27:17.021734: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:27:17.023548: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
-pciBusID: 0000:4d:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+
+
+Validation loss: -2.576362 	 learning_rate 1.960e-03
+Validation metrics: angle_u: 14.816	zenith_u: 6.225	azimuthal_u: 23.101
+
+
+
+Validation loss: -2.600171 	 learning_rate 1.921e-03
+Validation metrics: angle_u: 14.674	zenith_u: 5.853	azimuthal_u: 24.478
+
+
+
+Validation loss: -2.744946 	 learning_rate 1.882e-03
+Validation metrics: angle_u: 13.708	zenith_u: 5.664	azimuthal_u: 21.912
+
+
+
+Validation loss: -2.842797 	 learning_rate 1.845e-03
+Validation metrics: angle_u: 13.373	zenith_u: 5.225	azimuthal_u: 21.570
+
+
+
+Validation loss: -2.516389 	 learning_rate 1.808e-03
+Validation metrics: angle_u: 13.861	zenith_u: 7.045	azimuthal_u: 22.189
+
+
+
+Validation loss: -2.809863 	 learning_rate 1.772e-03
+Validation metrics: angle_u: 13.317	zenith_u: 5.505	azimuthal_u: 21.187
+
+
+
+Validation loss: -2.912621 	 learning_rate 1.736e-03
+Validation metrics: angle_u: 13.001	zenith_u: 5.058	azimuthal_u: 21.003
+
+
+
+Validation loss: -2.949839 	 learning_rate 1.702e-03
+Validation metrics: angle_u: 12.781	zenith_u: 4.951	azimuthal_u: 20.512
+
+
+
+Validation loss: -2.901028 	 learning_rate 1.667e-03
+Validation metrics: angle_u: 12.960	zenith_u: 5.321	azimuthal_u: 20.944
+
+
+
+Validation loss: -2.882277 	 learning_rate 1.634e-03
+Validation metrics: angle_u: 13.307	zenith_u: 5.401	azimuthal_u: 20.838
+
+
+
+Validation loss: -3.028382 	 learning_rate 1.601e-03
+Validation metrics: angle_u: 12.688	zenith_u: 4.856	azimuthal_u: 20.215
+
+
+
+Validation loss: -2.855426 	 learning_rate 1.569e-03
+Validation metrics: angle_u: 12.855	zenith_u: 5.383	azimuthal_u: 21.776
+
+
+
+Validation loss: -3.047217 	 learning_rate 1.538e-03
+Validation metrics: angle_u: 12.675	zenith_u: 4.696	azimuthal_u: 20.734
+
+
+
+Validation loss: -2.781013 	 learning_rate 1.507e-03
+Validation metrics: angle_u: 13.906	zenith_u: 5.096	azimuthal_u: 22.939
+
+
+
+Validation loss: -3.057547 	 learning_rate 1.477e-03
+Validation metrics: angle_u: 12.499	zenith_u: 4.825	azimuthal_u: 19.977
+
+
+
+Validation loss: -3.146589 	 learning_rate 1.448e-03
+Validation metrics: angle_u: 12.232	zenith_u: 4.539	azimuthal_u: 20.001
+
+
+
+Validation loss: -3.128586 	 learning_rate 1.419e-03
+Validation metrics: angle_u: 12.495	zenith_u: 4.595	azimuthal_u: 19.911
+
+
+wandb: Waiting for W&B process to finish, PID 8208
+wandb: Program ended successfully.
+wandb: - 0.77MB of 0.77MB uploaded (0.00MB deduped)wandb: \ 0.77MB of 0.77MB uploaded (0.00MB deduped)wandb: | 0.77MB of 0.78MB uploaded (0.00MB deduped)wandb: / 0.78MB of 0.78MB uploaded (0.00MB deduped)wandb: - 0.78MB of 0.78MB uploaded (0.00MB deduped)wandb: \ 0.78MB of 0.78MB uploaded (0.00MB deduped)wandb: | 0.78MB of 0.78MB uploaded (0.00MB deduped)wandb: / 0.78MB of 0.78MB uploaded (0.00MB deduped)wandb: - 0.78MB of 0.78MB uploaded (0.00MB deduped)wandb: \ 0.78MB of 0.78MB uploaded (0.00MB deduped)wandb:                                                                                
+wandb: Find user logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210607_213419-iyng2qnl/logs/debug.log
+wandb: Find internal logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210607_213419-iyng2qnl/logs/debug-internal.log
+wandb: Run summary:
+wandb:                   angle_u 12.4986
+wandb:                  zenith_u 4.59628
+wandb:               azimuthal_u 19.92032
+wandb:                train_loss -3.0255
+wandb:                  val_loss -3.12859
+wandb:             learning_rate 0.00142
+wandb:                  _runtime 3693
+wandb:                _timestamp 1623098152
+wandb:                     _step 10000001
+wandb:                  TestLoss -3.12879
+wandb: Run history:
+wandb:         angle_u █▄▄▃▃▂▂▂▂▂▁▁▂▁▁▁▂▁▁▁▁
+wandb:        zenith_u █▄▅▃▂▂▂▄▂▂▁▂▂▁▂▁▂▁▁▁▁
+wandb:     azimuthal_u █▄▄▂▃▂▂▂▂▁▁▁▁▁▂▁▂▁▁▁▁
+wandb:      train_loss █▄▄▃▃▂▃▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:        val_loss █▅▅▃▃▃▂▃▂▂▂▂▂▁▂▁▂▁▁▁
+wandb:   learning_rate ▁▃███▇▇▇▇▇▇▆▆▆▆▆▆▆▅▅
+wandb:        _runtime ▁▁▂▂▂▃▃▄▄▄▅▅▅▆▆▆▇▇███
+wandb:      _timestamp ▁▁▂▂▂▃▃▄▄▄▅▅▅▆▆▆▇▇███
+wandb:           _step ▁▁▂▂▂▃▃▄▄▄▅▅▅▆▆▇▇▇███
+wandb:        TestLoss ▁
+wandb: 
+wandb: Synced 6 W&B file(s), 40 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: 
+wandb: Synced MuonGun_VonMises2D_cleaned: https://wandb.ai/johannbs/MuonGunEnsembles/runs/iyng2qnl
+Model: "message_pass_model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+batch_normalization (BatchNo multiple                  28        
+_________________________________________________________________
+global_max_pool (GlobalMaxPo multiple                  0         
+_________________________________________________________________
+global_avg_pool (GlobalAvgPo multiple                  0         
+_________________________________________________________________
+global_sum_pool (GlobalSumPo multiple                  0         
+_________________________________________________________________
+global_max_pool_1 (GlobalMax multiple                  0         
+_________________________________________________________________
+mp (MP)                      multiple                  111936    
+_________________________________________________________________
+mp_1 (MP)                    multiple                  141632    
+_________________________________________________________________
+batch_normalization_1 (Batch multiple                  256       
+_________________________________________________________________
+batch_normalization_2 (Batch multiple                  256       
+_________________________________________________________________
+global_max_pool_2 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_1 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_1 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_3 (GlobalMax multiple                  0         
+_________________________________________________________________
+graph_sage_conv (GraphSageCo multiple                  16512     
+_________________________________________________________________
+graph_sage_conv_1 (GraphSage multiple                  65792     
+_________________________________________________________________
+global_max_pool_4 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_2 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_2 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_5 (GlobalMax multiple                  0         
+_________________________________________________________________
+dense_8 (Dense)              multiple                  1336320   
+_________________________________________________________________
+dropout (Dropout)            multiple                  0         
+_________________________________________________________________
+batch_normalization_3 (Batch multiple                  4096      
+_________________________________________________________________
+dense_9 (Dense)              multiple                  787200    
+_________________________________________________________________
+dropout_1 (Dropout)          multiple                  0         
+_________________________________________________________________
+batch_normalization_4 (Batch multiple                  3072      
+_________________________________________________________________
+dense_10 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_2 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_11 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_3 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_12 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_13 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_4 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_14 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_5 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_15 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_16 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_6 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_17 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_7 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_18 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_19 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_8 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_20 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_9 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_21 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_22 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_10 (Dropout)         multiple                  0         
+_________________________________________________________________
+dense_23 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_11 (Dropout)         multiple                  0         
+_________________________________________________________________
+dense_24 (Dense)             multiple                  65        
+=================================================================
+Total params: 2,734,305
+Trainable params: 2,730,451
+Non-trainable params: 3,854
+_________________________________________________________________
+None
+Experiment MuonGun2D_clean done 	 MuonGun2D_clean.json: 1 / 4
+Starting expriment from MuonGun3D
+wandb: wandb version 0.10.31 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.10.27
+wandb: Syncing run MuonGun_VonMises3D
+wandb: ⭐️ View project at https://wandb.ai/johannbs/MuonGunEnsembles
+wandb: 🚀 View run at https://wandb.ai/johannbs/MuonGunEnsembles/runs/trc1gkqt
+wandb: Run data is saved locally in /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210607_223558-trc1gkqt
+wandb: Run `wandb offline` to turn off syncing.
+
+/groups/hep/johannbs/anaconda3/envs/tf/lib/python3.8/site-packages/sklearn/base.py:310: UserWarning: Trying to unpickle estimator RobustScaler from version 0.23.2 when using version 0.24.1. This might lead to breaking code or invalid results. Use at your own risk.
+  warnings.warn(
+Extracting features for train
+  0%|                                                    | 0/24 [00:00<?, ?it/s]  4%|█▋                                       | 1/24 [04:04<1:33:50, 244.81s/it]  8%|███▌                                       | 2/24 [05:47<59:06, 161.20s/it] 12%|█████▍                                     | 3/24 [06:26<36:58, 105.63s/it] 17%|███████▎                                    | 4/24 [07:42<31:16, 93.83s/it] 21%|█████████▏                                  | 5/24 [08:54<27:09, 85.77s/it] 25%|███████████                                 | 6/24 [09:32<20:54, 69.67s/it] 29%|████████████▊                               | 7/24 [10:15<17:18, 61.06s/it] 33%|██████████████▋                             | 8/24 [10:58<14:44, 55.26s/it] 38%|████████████████▌                           | 9/24 [12:12<15:14, 60.99s/it] 42%|█████████████████▉                         | 10/24 [12:51<12:37, 54.12s/it] 46%|███████████████████▋                       | 11/24 [13:58<12:37, 58.24s/it] 50%|█████████████████████▌                     | 12/24 [14:38<10:31, 52.59s/it] 54%|███████████████████████▎                   | 13/24 [15:16<08:50, 48.20s/it] 58%|█████████████████████████                  | 14/24 [16:33<09:28, 56.88s/it] 62%|██████████████████████████▉                | 15/24 [17:42<09:04, 60.50s/it] 67%|████████████████████████████▋              | 16/24 [18:18<07:06, 53.34s/it] 71%|██████████████████████████████▍            | 17/24 [19:25<06:41, 57.40s/it] 75%|████████████████████████████████▎          | 18/24 [20:03<05:09, 51.56s/it] 79%|██████████████████████████████████         | 19/24 [20:40<03:54, 46.97s/it] 83%|███████████████████████████████████▊       | 20/24 [21:16<02:54, 43.73s/it] 88%|█████████████████████████████████████▋     | 21/24 [21:55<02:06, 42.24s/it] 92%|███████████████████████████████████████▍   | 22/24 [22:32<01:21, 40.79s/it] 96%|█████████████████████████████████████████▏ | 23/24 [23:40<00:49, 49.02s/it]100%|███████████████████████████████████████████| 24/24 [24:19<00:00, 45.85s/it]Extracting features for val
+100%|███████████████████████████████████████████| 24/24 [24:19<00:00, 60.80s/it]
+  0%|                                                     | 0/3 [00:00<?, ?it/s] 33%|███████████████                              | 1/3 [00:38<01:17, 38.77s/it] 67%|██████████████████████████████               | 2/3 [01:49<00:57, 57.75s/it]100%|█████████████████████████████████████████████| 3/3 [03:01<00:00, 64.03s/it]Extracting features for test
+100%|█████████████████████████████████████████████| 3/3 [03:01<00:00, 60.44s/it]
+  0%|                                                     | 0/3 [00:00<?, ?it/s] 33%|███████████████                              | 1/3 [00:37<01:15, 37.97s/it] 67%|██████████████████████████████               | 2/3 [01:18<00:39, 39.19s/it]100%|█████████████████████████████████████████████| 3/3 [02:33<00:00, 55.64s/it]100%|█████████████████████████████████████████████| 3/3 [02:33<00:00, 51.08s/it]
+  0%|                                                    | 0/30 [00:00<?, ?it/s]  3%|█▍                                          | 1/30 [00:28<13:44, 28.43s/it]  7%|██▉                                         | 2/30 [02:27<38:11, 81.85s/it] 10%|████▍                                       | 3/30 [03:00<26:42, 59.34s/it] 13%|█████▊                                      | 4/30 [03:27<20:08, 46.50s/it] 17%|███████▎                                    | 5/30 [03:54<16:32, 39.71s/it] 20%|████████▊                                   | 6/30 [04:21<14:07, 35.33s/it] 23%|██████████▎                                 | 7/30 [04:48<12:33, 32.75s/it] 27%|███████████▋                                | 8/30 [06:51<22:31, 61.42s/it] 30%|█████████████▏                              | 9/30 [08:36<26:11, 74.83s/it] 33%|██████████████▎                            | 10/30 [09:03<20:01, 60.10s/it] 37%|███████████████▊                           | 11/30 [10:49<23:31, 74.28s/it] 40%|█████████████████▏                         | 12/30 [11:16<17:55, 59.76s/it] 43%|██████████████████▋                        | 13/30 [13:10<21:38, 76.39s/it] 47%|████████████████████                       | 14/30 [13:38<16:26, 61.63s/it] 50%|█████████████████████▌                     | 15/30 [14:04<12:45, 51.02s/it] 53%|██████████████████████▉                    | 16/30 [15:45<15:25, 66.07s/it] 57%|████████████████████████▎                  | 17/30 [16:12<11:43, 54.10s/it] 60%|█████████████████████████▊                 | 18/30 [16:38<09:09, 45.81s/it] 63%|███████████████████████████▏               | 19/30 [17:05<07:19, 39.99s/it] 67%|████████████████████████████▋              | 20/30 [17:31<05:59, 35.94s/it] 70%|██████████████████████████████             | 21/30 [17:57<04:57, 33.03s/it] 73%|███████████████████████████████▌           | 22/30 [18:23<04:07, 30.99s/it] 77%|████████████████████████████████▉          | 23/30 [18:50<03:27, 29.64s/it] 80%|██████████████████████████████████▍        | 24/30 [19:17<02:52, 28.76s/it] 83%|███████████████████████████████████▊       | 25/30 [19:44<02:20, 28.18s/it] 87%|█████████████████████████████████████▎     | 26/30 [21:26<03:21, 50.34s/it] 90%|██████████████████████████████████████▋    | 27/30 [21:53<02:10, 43.38s/it] 93%|████████████████████████████████████████▏  | 28/30 [22:19<01:16, 38.27s/it] 97%|█████████████████████████████████████████▌ | 29/30 [24:09<00:59, 59.90s/it]100%|███████████████████████████████████████████| 30/30 [24:36<00:00, 49.97s/it]100%|███████████████████████████████████████████| 30/30 [24:36<00:00, 49.22s/it]
+
+
+Validation loss: -2.853633 	 learning_rate 5.000e-04
+Validation metrics: zenith_u_from_angles: 37.181	azimuthal_u_from_angles: 6.707
+
+
+
+Validation loss: -2.949649 	 learning_rate 1.000e-03
+Validation metrics: zenith_u_from_angles: 41.585	azimuthal_u_from_angles: 6.926
+
+
+
+Validation loss: -1.383757 	 learning_rate 2.000e-03
+Validation metrics: zenith_u_from_angles: 42.990	azimuthal_u_from_angles: 9.128
+
+
+
+Validation loss: -3.340765 	 learning_rate 1.960e-03
+Validation metrics: zenith_u_from_angles: 40.837	azimuthal_u_from_angles: 5.523
+
+
+
+Validation loss: -3.546138 	 learning_rate 1.921e-03
+Validation metrics: zenith_u_from_angles: 38.695	azimuthal_u_from_angles: 5.004
+
+
+
+Validation loss: -3.654190 	 learning_rate 1.882e-03
+Validation metrics: zenith_u_from_angles: 39.446	azimuthal_u_from_angles: 4.749
+
+
+
+Validation loss: -3.653241 	 learning_rate 1.845e-03
+Validation metrics: zenith_u_from_angles: 38.699	azimuthal_u_from_angles: 4.618
+
+
+
+Validation loss: -3.456410 	 learning_rate 1.808e-03
+Validation metrics: zenith_u_from_angles: 38.266	azimuthal_u_from_angles: 4.929
+
+
+
+Validation loss: -3.711064 	 learning_rate 1.772e-03
+Validation metrics: zenith_u_from_angles: 38.096	azimuthal_u_from_angles: 4.430
+
+
+
+Validation loss: -3.772219 	 learning_rate 1.736e-03
+Validation metrics: zenith_u_from_angles: 38.270	azimuthal_u_from_angles: 4.363
+
+
+
+Validation loss: -3.791336 	 learning_rate 1.702e-03
+Validation metrics: zenith_u_from_angles: 38.278	azimuthal_u_from_angles: 4.307
+
+
+
+Validation loss: -3.866622 	 learning_rate 1.667e-03
+Validation metrics: zenith_u_from_angles: 38.840	azimuthal_u_from_angles: 4.181
+
+
+
+Validation loss: -3.853434 	 learning_rate 1.634e-03
+Validation metrics: zenith_u_from_angles: 38.767	azimuthal_u_from_angles: 4.301
+
+
+
+Validation loss: -3.872146 	 learning_rate 1.601e-03
+Validation metrics: zenith_u_from_angles: 38.260	azimuthal_u_from_angles: 4.322
+
+
+
+Validation loss: -3.816397 	 learning_rate 1.569e-03
+Validation metrics: zenith_u_from_angles: 39.105	azimuthal_u_from_angles: 4.411
+
+
+
+Validation loss: -3.831168 	 learning_rate 1.538e-03
+Validation metrics: zenith_u_from_angles: 38.245	azimuthal_u_from_angles: 4.255
+
+
+
+Validation loss: -3.856795 	 learning_rate 1.507e-03
+Validation metrics: zenith_u_from_angles: 38.309	azimuthal_u_from_angles: 4.113
+
+
+
+Validation loss: -3.961802 	 learning_rate 1.477e-03
+Validation metrics: zenith_u_from_angles: 38.818	azimuthal_u_from_angles: 4.091
+
+
+
+Validation loss: -3.845680 	 learning_rate 1.448e-03
+Validation metrics: zenith_u_from_angles: 38.111	azimuthal_u_from_angles: 4.270
+
+
+
+Validation loss: -3.898545 	 learning_rate 1.419e-03
+Validation metrics: zenith_u_from_angles: 39.881	azimuthal_u_from_angles: 4.179
+
+
+
+Validation loss: -3.778630 	 learning_rate 1.390e-03
+Validation metrics: zenith_u_from_angles: 38.814	azimuthal_u_from_angles: 4.123
+
+
+
+Validation loss: -3.961429 	 learning_rate 1.362e-03
+Validation metrics: zenith_u_from_angles: 39.208	azimuthal_u_from_angles: 4.275
+
+
+
+Validation loss: -3.973745 	 learning_rate 1.335e-03
+Validation metrics: zenith_u_from_angles: 39.311	azimuthal_u_from_angles: 4.046
+
+
+
+Validation loss: -4.024327 	 learning_rate 1.309e-03
+Validation metrics: zenith_u_from_angles: 38.506	azimuthal_u_from_angles: 4.052
+
+
+
+Validation loss: -4.010312 	 learning_rate 1.282e-03
+Validation metrics: zenith_u_from_angles: 38.401	azimuthal_u_from_angles: 4.112
+
+
+
+Validation loss: -3.990734 	 learning_rate 1.257e-03
+Validation metrics: zenith_u_from_angles: 38.752	azimuthal_u_from_angles: 3.993
+
+
+
+Validation loss: -3.874781 	 learning_rate 1.232e-03
+Validation metrics: zenith_u_from_angles: 38.685	azimuthal_u_from_angles: 4.180
+
+
+
+Validation loss: -3.996262 	 learning_rate 1.207e-03
+Validation metrics: zenith_u_from_angles: 39.677	azimuthal_u_from_angles: 4.022
+
+
+
+Validation loss: -4.074670 	 learning_rate 1.183e-03
+Validation metrics: zenith_u_from_angles: 38.990	azimuthal_u_from_angles: 3.957
+
+
+
+Validation loss: -4.080153 	 learning_rate 1.159e-03
+Validation metrics: zenith_u_from_angles: 38.609	azimuthal_u_from_angles: 3.890
+
+
+
+Validation loss: -3.999268 	 learning_rate 1.136e-03
+Validation metrics: zenith_u_from_angles: 38.458	azimuthal_u_from_angles: 4.038
+
+
+
+Validation loss: -4.081612 	 learning_rate 1.113e-03
+Validation metrics: zenith_u_from_angles: 39.457	azimuthal_u_from_angles: 3.909
+
+
+
+Validation loss: -4.020056 	 learning_rate 1.091e-03
+Validation metrics: zenith_u_from_angles: 39.026	azimuthal_u_from_angles: 3.985
+
+
+
+Validation loss: -4.055934 	 learning_rate 1.069e-03
+Validation metrics: zenith_u_from_angles: 39.728	azimuthal_u_from_angles: 4.009
+
+
+
+Validation loss: -4.085500 	 learning_rate 1.048e-03
+Validation metrics: zenith_u_from_angles: 38.923	azimuthal_u_from_angles: 3.910
+
+
+
+Validation loss: -4.109921 	 learning_rate 1.027e-03
+Validation metrics: zenith_u_from_angles: 38.871	azimuthal_u_from_angles: 3.850
+
+
+
+Validation loss: -4.014863 	 learning_rate 1.006e-03
+Validation metrics: zenith_u_from_angles: 38.915	azimuthal_u_from_angles: 4.072
+
+
+
+Validation loss: -4.090036 	 learning_rate 9.861e-04
+Validation metrics: zenith_u_from_angles: 38.968	azimuthal_u_from_angles: 3.853
+
+
+
+Validation loss: -4.030632 	 learning_rate 9.664e-04
+Validation metrics: zenith_u_from_angles: 38.941	azimuthal_u_from_angles: 3.855
+
+
+
+Validation loss: -4.071102 	 learning_rate 9.471e-04
+Validation metrics: zenith_u_from_angles: 39.600	azimuthal_u_from_angles: 3.906
+
+
+
+Validation loss: -4.126935 	 learning_rate 9.282e-04
+Validation metrics: zenith_u_from_angles: 39.253	azimuthal_u_from_angles: 3.843
+
+
+
+Validation loss: -4.124129 	 learning_rate 9.096e-04
+Validation metrics: zenith_u_from_angles: 39.217	azimuthal_u_from_angles: 3.881
+
+
+
+Validation loss: -4.088424 	 learning_rate 8.914e-04
+Validation metrics: zenith_u_from_angles: 39.053	azimuthal_u_from_angles: 3.882
+
+
+
+Validation loss: -4.107479 	 learning_rate 8.736e-04
+Validation metrics: zenith_u_from_angles: 39.260	azimuthal_u_from_angles: 3.886
+
+
+
+Validation loss: -4.156663 	 learning_rate 8.561e-04
+Validation metrics: zenith_u_from_angles: 38.904	azimuthal_u_from_angles: 3.822
+
+
+
+Validation loss: -4.069966 	 learning_rate 8.390e-04
+Validation metrics: zenith_u_from_angles: 38.675	azimuthal_u_from_angles: 3.870
+
+
+
+Validation loss: -4.111907 	 learning_rate 8.222e-04
+Validation metrics: zenith_u_from_angles: 38.725	azimuthal_u_from_angles: 3.826
+
+
+
+Validation loss: -4.113420 	 learning_rate 8.058e-04
+Validation metrics: zenith_u_from_angles: 39.023	azimuthal_u_from_angles: 3.790
+
+
+
+Validation loss: -4.174544 	 learning_rate 7.896e-04
+Validation metrics: zenith_u_from_angles: 39.124	azimuthal_u_from_angles: 3.774
+
+
+
+Validation loss: -4.148449 	 learning_rate 7.738e-04
+Validation metrics: zenith_u_from_angles: 39.184	azimuthal_u_from_angles: 3.819
+
+
+wandb: Waiting for W&B process to finish, PID 12999
+wandb: Program ended successfully.
+wandb: - 1.86MB of 1.86MB uploaded (0.00MB deduped)wandb: \ 1.86MB of 1.86MB uploaded (0.00MB deduped)wandb: | 1.86MB of 1.87MB uploaded (0.00MB deduped)wandb: / 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb: - 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb: \ 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb: | 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb: / 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb: - 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb:                                                                                
+wandb: Find user logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210607_223558-trc1gkqt/logs/debug.log
+wandb: Find internal logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210607_223558-trc1gkqt/logs/debug-internal.log
+wandb: Run summary:
+wandb:          zenith_u_from_angles 39.18209
+wandb:       azimuthal_u_from_angles 3.81893
+wandb:                    train_loss -4.11748
+wandb:                      val_loss -4.14845
+wandb:                 learning_rate 0.00077
+wandb:                      _runtime 19404
+wandb:                    _timestamp 1623117562
+wandb:                         _step 25000001
+wandb:                      TestLoss -4.14877
+wandb: Run history:
+wandb:      zenith_u_from_angles ▁▆█▅▄▃▂▂▂▃▃▃▂▂▃▄▃▃▃▂▃▃▃▃▃▃▄▃▃▃▃▄▃▃▄▃▃▃▃▃
+wandb:   azimuthal_u_from_angles ▅▅█▃▂▂▃▂▂▂▂▂▂▁▁▂▁▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                train_loss █▅▄▄▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                  val_loss ▄▄█▃▂▂▃▂▂▂▂▂▂▂▁▂▂▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             learning_rate ▁▃██▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▂▂
+wandb:                  _runtime ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:                _timestamp ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:                     _step ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:                  TestLoss ▁
+wandb: 
+wandb: Synced 6 W&B file(s), 100 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: 
+wandb: Synced MuonGun_VonMises3D: https://wandb.ai/johannbs/MuonGunEnsembles/runs/trc1gkqt
+Model: "message_pass_model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+batch_normalization (BatchNo multiple                  32        
+_________________________________________________________________
+global_max_pool (GlobalMaxPo multiple                  0         
+_________________________________________________________________
+global_avg_pool (GlobalAvgPo multiple                  0         
+_________________________________________________________________
+global_sum_pool (GlobalSumPo multiple                  0         
+_________________________________________________________________
+global_max_pool_1 (GlobalMax multiple                  0         
+_________________________________________________________________
+mp (MP)                      multiple                  112704    
+_________________________________________________________________
+mp_1 (MP)                    multiple                  141888    
+_________________________________________________________________
+batch_normalization_1 (Batch multiple                  256       
+_________________________________________________________________
+batch_normalization_2 (Batch multiple                  256       
+_________________________________________________________________
+global_max_pool_2 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_1 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_1 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_3 (GlobalMax multiple                  0         
+_________________________________________________________________
+graph_sage_conv (GraphSageCo multiple                  16512     
+_________________________________________________________________
+graph_sage_conv_1 (GraphSage multiple                  65792     
+_________________________________________________________________
+global_max_pool_4 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_2 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_2 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_5 (GlobalMax multiple                  0         
+_________________________________________________________________
+dense_8 (Dense)              multiple                  1340416   
+_________________________________________________________________
+dropout (Dropout)            multiple                  0         
+_________________________________________________________________
+batch_normalization_3 (Batch multiple                  4096      
+_________________________________________________________________
+dense_9 (Dense)              multiple                  787200    
+_________________________________________________________________
+dropout_1 (Dropout)          multiple                  0         
+_________________________________________________________________
+batch_normalization_4 (Batch multiple                  3072      
+_________________________________________________________________
+dense_10 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_2 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_11 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_3 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_12 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_13 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_4 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_14 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_5 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_15 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_16 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_6 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_17 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_7 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_18 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_19 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_8 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_20 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_9 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_21 (Dense)             multiple                  65        
+=================================================================
+Total params: 2,685,988
+Trainable params: 2,682,132
+Non-trainable params: 3,856
+_________________________________________________________________
+None
+Experiment MuonGun3D done 	 MuonGun3D.json: 2 / 4
+Starting expriment from MuonGun2D
+wandb: Tracking run with wandb version 0.10.27
+wandb: Syncing run MuonGun_VonMises2D
+wandb: ⭐️ View project at https://wandb.ai/johannbs/MuonGunEnsembles
+wandb: 🚀 View run at https://wandb.ai/johannbs/MuonGunEnsembles/runs/3d313zo5
+wandb: Run data is saved locally in /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_035937-3d313zo5
+wandb: Run `wandb offline` to turn off syncing.
+
+
+
+Validation loss: -2.099227 	 learning_rate 5.000e-04
+Validation metrics: angle_u: 14.949	zenith_u: 8.457	azimuthal_u: 23.711
+
+
+
+Validation loss: -2.823923 	 learning_rate 1.000e-03
+Validation metrics: angle_u: 10.315	zenith_u: 5.451	azimuthal_u: 16.508
+
+
+
+Validation loss: -2.827862 	 learning_rate 2.000e-03
+Validation metrics: angle_u: 11.550	zenith_u: 5.207	azimuthal_u: 19.457
+
+
+
+Validation loss: -3.024743 	 learning_rate 1.960e-03
+Validation metrics: angle_u: 9.856	zenith_u: 4.887	azimuthal_u: 16.546
+
+
+
+Validation loss: -3.261890 	 learning_rate 1.921e-03
+Validation metrics: angle_u: 8.869	zenith_u: 4.441	azimuthal_u: 13.848
+
+
+
+Validation loss: -3.220138 	 learning_rate 1.882e-03
+Validation metrics: angle_u: 9.163	zenith_u: 4.683	azimuthal_u: 14.477
+
+
+
+Validation loss: -3.391510 	 learning_rate 1.845e-03
+Validation metrics: angle_u: 8.627	zenith_u: 4.248	azimuthal_u: 13.521
+
+
+
+Validation loss: -3.424505 	 learning_rate 1.808e-03
+Validation metrics: angle_u: 8.402	zenith_u: 4.296	azimuthal_u: 13.160
+
+
+
+Validation loss: -3.386809 	 learning_rate 1.772e-03
+Validation metrics: angle_u: 8.790	zenith_u: 4.321	azimuthal_u: 13.849
+
+
+
+Validation loss: -3.541612 	 learning_rate 1.736e-03
+Validation metrics: angle_u: 8.141	zenith_u: 3.911	azimuthal_u: 12.957
+
+
+
+Validation loss: -3.453571 	 learning_rate 1.702e-03
+Validation metrics: angle_u: 8.305	zenith_u: 4.319	azimuthal_u: 12.766
+
+
+
+Validation loss: -3.487200 	 learning_rate 1.667e-03
+Validation metrics: angle_u: 8.124	zenith_u: 4.324	azimuthal_u: 12.476
+
+
+
+Validation loss: -3.597976 	 learning_rate 1.634e-03
+Validation metrics: angle_u: 8.067	zenith_u: 3.821	azimuthal_u: 12.777
+
+
+
+Validation loss: -3.595769 	 learning_rate 1.601e-03
+Validation metrics: angle_u: 8.038	zenith_u: 3.831	azimuthal_u: 12.513
+
+
+
+Validation loss: -3.510649 	 learning_rate 1.569e-03
+Validation metrics: angle_u: 8.274	zenith_u: 4.171	azimuthal_u: 12.483
+
+
+
+Validation loss: -3.499213 	 learning_rate 1.538e-03
+Validation metrics: angle_u: 8.191	zenith_u: 4.269	azimuthal_u: 12.601
+
+
+
+Validation loss: -3.664851 	 learning_rate 1.507e-03
+Validation metrics: angle_u: 7.801	zenith_u: 3.571	azimuthal_u: 12.421
+
+
+
+Validation loss: -3.614422 	 learning_rate 1.477e-03
+Validation metrics: angle_u: 7.936	zenith_u: 3.924	azimuthal_u: 12.019
+
+
+
+Validation loss: -3.776963 	 learning_rate 1.448e-03
+Validation metrics: angle_u: 7.500	zenith_u: 3.435	azimuthal_u: 11.949
+
+
+
+Validation loss: -3.730945 	 learning_rate 1.419e-03
+Validation metrics: angle_u: 7.700	zenith_u: 3.513	azimuthal_u: 12.142
+
+
+
+Validation loss: -3.589411 	 learning_rate 1.390e-03
+Validation metrics: angle_u: 7.869	zenith_u: 4.038	azimuthal_u: 12.458
+
+
+
+Validation loss: -3.772105 	 learning_rate 1.362e-03
+Validation metrics: angle_u: 7.544	zenith_u: 3.486	azimuthal_u: 11.954
+
+
+
+Validation loss: -3.628640 	 learning_rate 1.335e-03
+Validation metrics: angle_u: 7.819	zenith_u: 4.125	azimuthal_u: 11.619
+
+
+
+Validation loss: -3.763895 	 learning_rate 1.309e-03
+Validation metrics: angle_u: 7.532	zenith_u: 3.599	azimuthal_u: 11.760
+
+
+
+Validation loss: -3.788802 	 learning_rate 1.282e-03
+Validation metrics: angle_u: 7.506	zenith_u: 3.463	azimuthal_u: 11.952
+
+
+
+Validation loss: -3.815141 	 learning_rate 1.257e-03
+Validation metrics: angle_u: 7.514	zenith_u: 3.444	azimuthal_u: 11.822
+
+
+
+Validation loss: -3.827788 	 learning_rate 1.232e-03
+Validation metrics: angle_u: 7.405	zenith_u: 3.340	azimuthal_u: 11.692
+
+
+
+Validation loss: -3.766286 	 learning_rate 1.207e-03
+Validation metrics: angle_u: 7.505	zenith_u: 3.517	azimuthal_u: 11.814
+
+
+
+Validation loss: -3.786132 	 learning_rate 1.183e-03
+Validation metrics: angle_u: 7.566	zenith_u: 3.590	azimuthal_u: 11.749
+
+
+
+Validation loss: -3.804525 	 learning_rate 1.159e-03
+Validation metrics: angle_u: 7.498	zenith_u: 3.417	azimuthal_u: 11.759
+
+
+
+Validation loss: -3.844966 	 learning_rate 1.136e-03
+Validation metrics: angle_u: 7.351	zenith_u: 3.417	azimuthal_u: 11.560
+
+
+
+Validation loss: -3.856694 	 learning_rate 1.113e-03
+Validation metrics: angle_u: 7.309	zenith_u: 3.415	azimuthal_u: 11.510
+
+
+
+Validation loss: -3.833496 	 learning_rate 1.091e-03
+Validation metrics: angle_u: 7.317	zenith_u: 3.379	azimuthal_u: 11.528
+
+
+
+Validation loss: -3.794284 	 learning_rate 1.069e-03
+Validation metrics: angle_u: 7.389	zenith_u: 3.513	azimuthal_u: 11.739
+
+
+
+Validation loss: -3.882910 	 learning_rate 1.048e-03
+Validation metrics: angle_u: 7.342	zenith_u: 3.284	azimuthal_u: 11.622
+
+
+
+Validation loss: -3.808007 	 learning_rate 1.027e-03
+Validation metrics: angle_u: 7.629	zenith_u: 3.412	azimuthal_u: 12.120
+
+
+
+Validation loss: -3.853738 	 learning_rate 1.006e-03
+Validation metrics: angle_u: 7.386	zenith_u: 3.349	azimuthal_u: 11.797
+
+
+
+Validation loss: -3.918100 	 learning_rate 9.861e-04
+Validation metrics: angle_u: 7.247	zenith_u: 3.301	azimuthal_u: 11.468
+
+
+
+Validation loss: -3.886382 	 learning_rate 9.664e-04
+Validation metrics: angle_u: 7.210	zenith_u: 3.322	azimuthal_u: 11.412
+
+
+
+Validation loss: -3.878684 	 learning_rate 9.471e-04
+Validation metrics: angle_u: 7.253	zenith_u: 3.326	azimuthal_u: 11.359
+
+
+
+Validation loss: -3.922619 	 learning_rate 9.282e-04
+Validation metrics: angle_u: 7.160	zenith_u: 3.200	azimuthal_u: 11.398
+
+
+
+Validation loss: -3.936429 	 learning_rate 9.096e-04
+Validation metrics: angle_u: 7.206	zenith_u: 3.258	azimuthal_u: 11.250
+
+
+
+Validation loss: -3.857975 	 learning_rate 8.914e-04
+Validation metrics: angle_u: 7.182	zenith_u: 3.258	azimuthal_u: 11.290
+
+
+
+Validation loss: -3.892849 	 learning_rate 8.736e-04
+Validation metrics: angle_u: 7.211	zenith_u: 3.248	azimuthal_u: 11.325
+
+
+
+Validation loss: -3.958059 	 learning_rate 8.561e-04
+Validation metrics: angle_u: 7.083	zenith_u: 3.179	azimuthal_u: 11.283
+
+
+
+Validation loss: -3.930735 	 learning_rate 8.390e-04
+Validation metrics: angle_u: 7.113	zenith_u: 3.215	azimuthal_u: 11.210
+
+
+
+Validation loss: -3.917963 	 learning_rate 8.222e-04
+Validation metrics: angle_u: 7.148	zenith_u: 3.278	azimuthal_u: 11.350
+
+
+
+Validation loss: -3.916247 	 learning_rate 8.058e-04
+Validation metrics: angle_u: 7.094	zenith_u: 3.324	azimuthal_u: 11.162
+
+
+
+Validation loss: -3.927119 	 learning_rate 7.896e-04
+Validation metrics: angle_u: 7.058	zenith_u: 3.207	azimuthal_u: 11.114
+
+
+
+Validation loss: -3.979835 	 learning_rate 7.738e-04
+Validation metrics: angle_u: 7.108	zenith_u: 3.165	azimuthal_u: 11.199
+
+
+wandb: Waiting for W&B process to finish, PID 21351
+wandb: Program ended successfully.
+wandb: - 1.89MB of 1.89MB uploaded (0.00MB deduped)wandb: \ 1.89MB of 1.89MB uploaded (0.00MB deduped)wandb: | 1.89MB of 1.89MB uploaded (0.00MB deduped)wandb: / 1.89MB of 1.89MB uploaded (0.00MB deduped)wandb: - 1.89MB of 1.89MB uploaded (0.00MB deduped)wandb: \ 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: | 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: / 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: - 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: \ 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb:                                                                                
+wandb: Find user logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_035937-3d313zo5/logs/debug.log
+wandb: Find internal logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_035937-3d313zo5/logs/debug-internal.log
+wandb: Run summary:
+wandb:                   angle_u 7.10382
+wandb:                  zenith_u 3.16381
+wandb:               azimuthal_u 11.19786
+wandb:                train_loss -3.89022
+wandb:                  val_loss -3.97984
+wandb:             learning_rate 0.00077
+wandb:                  _runtime 16336
+wandb:                _timestamp 1623133913
+wandb:                     _step 25000001
+wandb:                  TestLoss -3.97955
+wandb: Run history:
+wandb:         angle_u █▄▅▃▃▂▂▃▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:        zenith_u █▄▄▃▃▂▂▃▃▃▂▂▂▂▂▁▂▁▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     azimuthal_u █▄▆▄▃▂▂▃▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:      train_loss █▅▄▄▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:        val_loss █▅▅▅▄▃▃▃▃▃▂▂▃▂▂▂▂▂▂▂▂▂▂▂▂▁▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:   learning_rate ▁▃██▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▂▂
+wandb:        _runtime ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:      _timestamp ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:           _step ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:        TestLoss ▁
+wandb: 
+wandb: Synced 6 W&B file(s), 100 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: 
+wandb: Synced MuonGun_VonMises2D: https://wandb.ai/johannbs/MuonGunEnsembles/runs/3d313zo5
+Model: "message_pass_model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+batch_normalization (BatchNo multiple                  32        
+_________________________________________________________________
+global_max_pool (GlobalMaxPo multiple                  0         
+_________________________________________________________________
+global_avg_pool (GlobalAvgPo multiple                  0         
+_________________________________________________________________
+global_sum_pool (GlobalSumPo multiple                  0         
+_________________________________________________________________
+global_max_pool_1 (GlobalMax multiple                  0         
+_________________________________________________________________
+mp (MP)                      multiple                  112704    
+_________________________________________________________________
+mp_1 (MP)                    multiple                  141888    
+_________________________________________________________________
+batch_normalization_1 (Batch multiple                  256       
+_________________________________________________________________
+batch_normalization_2 (Batch multiple                  256       
+_________________________________________________________________
+global_max_pool_2 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_1 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_1 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_3 (GlobalMax multiple                  0         
+_________________________________________________________________
+graph_sage_conv (GraphSageCo multiple                  16512     
+_________________________________________________________________
+graph_sage_conv_1 (GraphSage multiple                  65792     
+_________________________________________________________________
+global_max_pool_4 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_2 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_2 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_5 (GlobalMax multiple                  0         
+_________________________________________________________________
+dense_8 (Dense)              multiple                  1340416   
+_________________________________________________________________
+dropout (Dropout)            multiple                  0         
+_________________________________________________________________
+batch_normalization_3 (Batch multiple                  4096      
+_________________________________________________________________
+dense_9 (Dense)              multiple                  787200    
+_________________________________________________________________
+dropout_1 (Dropout)          multiple                  0         
+_________________________________________________________________
+batch_normalization_4 (Batch multiple                  3072      
+_________________________________________________________________
+dense_10 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_2 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_11 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_3 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_12 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_13 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_4 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_14 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_5 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_15 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_16 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_6 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_17 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_7 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_18 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_19 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_8 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_20 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_9 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_21 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_22 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_10 (Dropout)         multiple                  0         
+_________________________________________________________________
+dense_23 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_11 (Dropout)         multiple                  0         
+_________________________________________________________________
+dense_24 (Dense)             multiple                  65        
+=================================================================
+Total params: 2,739,429
+Trainable params: 2,735,573
+Non-trainable params: 3,856
+_________________________________________________________________
+None
+Experiment MuonGun2D done 	 MuonGun2D.json: 3 / 4
+Starting expriment from MuonGun3D_clean
+wandb: Tracking run with wandb version 0.10.27
+wandb: Syncing run MuonGun_VonMises3D_cleaned
+wandb: ⭐️ View project at https://wandb.ai/johannbs/MuonGunEnsembles
+wandb: 🚀 View run at https://wandb.ai/johannbs/MuonGunEnsembles/runs/22wtnoeb
+wandb: Run data is saved locally in /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_083245-22wtnoeb
+wandb: Run `wandb offline` to turn off syncing.
+
+
+
+Validation loss: -2.379133 	 learning_rate 5.000e-04
+Validation metrics: zenith_u_from_angles: 36.914	azimuthal_u_from_angles: 9.376
+
+
+
+Validation loss: -2.516074 	 learning_rate 1.000e-03
+Validation metrics: zenith_u_from_angles: 38.109	azimuthal_u_from_angles: 8.204
+
+
+
+Validation loss: -2.883792 	 learning_rate 2.000e-03
+Validation metrics: zenith_u_from_angles: 37.847	azimuthal_u_from_angles: 7.430
+
+
+
+Validation loss: -2.841949 	 learning_rate 1.960e-03
+Validation metrics: zenith_u_from_angles: 37.878	azimuthal_u_from_angles: 7.541
+
+
+
+Validation loss: -2.970638 	 learning_rate 1.921e-03
+Validation metrics: zenith_u_from_angles: 37.870	azimuthal_u_from_angles: 7.040
+
+
+
+Validation loss: -2.992530 	 learning_rate 1.882e-03
+Validation metrics: zenith_u_from_angles: 37.943	azimuthal_u_from_angles: 7.071
+
+
+
+Validation loss: -3.057543 	 learning_rate 1.845e-03
+Validation metrics: zenith_u_from_angles: 38.434	azimuthal_u_from_angles: 6.906
+
+
+
+Validation loss: -2.962948 	 learning_rate 1.808e-03
+Validation metrics: zenith_u_from_angles: 39.077	azimuthal_u_from_angles: 6.869
+
+
+
+Validation loss: -3.120031 	 learning_rate 1.772e-03
+Validation metrics: zenith_u_from_angles: 39.032	azimuthal_u_from_angles: 6.788
+
+
+
+Validation loss: -3.182856 	 learning_rate 1.736e-03
+Validation metrics: zenith_u_from_angles: 37.471	azimuthal_u_from_angles: 6.516
+
+
+
+Validation loss: -3.160820 	 learning_rate 1.702e-03
+Validation metrics: zenith_u_from_angles: 37.309	azimuthal_u_from_angles: 6.710
+
+
+
+Validation loss: -3.164726 	 learning_rate 1.667e-03
+Validation metrics: zenith_u_from_angles: 36.902	azimuthal_u_from_angles: 6.633
+
+
+
+Validation loss: -3.129296 	 learning_rate 1.634e-03
+Validation metrics: zenith_u_from_angles: 37.896	azimuthal_u_from_angles: 6.714
+
+
+
+Validation loss: -3.200149 	 learning_rate 1.601e-03
+Validation metrics: zenith_u_from_angles: 38.530	azimuthal_u_from_angles: 6.513
+
+
+
+Validation loss: -3.219126 	 learning_rate 1.569e-03
+Validation metrics: zenith_u_from_angles: 38.093	azimuthal_u_from_angles: 6.502
+
+
+
+Validation loss: -3.270777 	 learning_rate 1.538e-03
+Validation metrics: zenith_u_from_angles: 37.912	azimuthal_u_from_angles: 6.506
+
+
+
+Validation loss: -3.224910 	 learning_rate 1.507e-03
+Validation metrics: zenith_u_from_angles: 37.759	azimuthal_u_from_angles: 6.467
+
+
+
+Validation loss: -3.262594 	 learning_rate 1.477e-03
+Validation metrics: zenith_u_from_angles: 37.353	azimuthal_u_from_angles: 6.461
+
+
+
+Validation loss: -3.280668 	 learning_rate 1.448e-03
+Validation metrics: zenith_u_from_angles: 37.477	azimuthal_u_from_angles: 6.511
+
+
+
+Validation loss: -3.272745 	 learning_rate 1.419e-03
+Validation metrics: zenith_u_from_angles: 37.106	azimuthal_u_from_angles: 6.510
+
+
+
+Validation loss: -3.296896 	 learning_rate 1.390e-03
+Validation metrics: zenith_u_from_angles: 37.537	azimuthal_u_from_angles: 6.440
+
+
+
+Validation loss: -3.264833 	 learning_rate 1.362e-03
+Validation metrics: zenith_u_from_angles: 37.222	azimuthal_u_from_angles: 6.553
+
+
+
+Validation loss: -3.272890 	 learning_rate 1.335e-03
+Validation metrics: zenith_u_from_angles: 36.836	azimuthal_u_from_angles: 6.582
+
+
+
+Validation loss: -3.280862 	 learning_rate 1.309e-03
+Validation metrics: zenith_u_from_angles: 36.849	azimuthal_u_from_angles: 6.519
+
+
+
+Validation loss: -3.323297 	 learning_rate 1.282e-03
+Validation metrics: zenith_u_from_angles: 36.986	azimuthal_u_from_angles: 6.521
+
+
+
+Validation loss: -3.308708 	 learning_rate 1.257e-03
+Validation metrics: zenith_u_from_angles: 37.433	azimuthal_u_from_angles: 6.432
+
+
+
+Validation loss: -3.315089 	 learning_rate 1.232e-03
+Validation metrics: zenith_u_from_angles: 37.294	azimuthal_u_from_angles: 6.419
+
+
+
+Validation loss: -3.320859 	 learning_rate 1.207e-03
+Validation metrics: zenith_u_from_angles: 37.901	azimuthal_u_from_angles: 6.335
+
+
+
+Validation loss: -3.358149 	 learning_rate 1.183e-03
+Validation metrics: zenith_u_from_angles: 37.475	azimuthal_u_from_angles: 6.330
+
+
+
+Validation loss: -3.345884 	 learning_rate 1.159e-03
+Validation metrics: zenith_u_from_angles: 37.758	azimuthal_u_from_angles: 6.376
+
+2021-06-08 10:09:28.890643: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-06-08 10:10:44.286419: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-06-08 10:10:44.305991: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2021-06-08 10:10:44.820927: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:10:44.823053: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:21:00.0 name: GeForce RTX 3090 computeCapability: 8.6
 coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
-2021-05-26 13:27:17.023778: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
-2021-05-26 13:27:17.042764: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
-2021-05-26 13:27:17.042895: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
-2021-05-26 13:27:17.575512: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2021-05-26 13:27:17.852777: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2021-05-26 13:27:18.089767: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2021-05-26 13:27:18.090896: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
-2021-05-26 13:27:18.216417: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
-2021-05-26 13:27:18.216840: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:27:18.217389: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:27:18.248911: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-06-08 10:10:44.906562: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-06-08 10:10:44.909559: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-06-08 10:10:44.909653: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-06-08 10:10:45.301452: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-06-08 10:10:45.727336: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-06-08 10:10:46.224316: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-06-08 10:10:46.225418: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2021-06-08 10:10:46.306704: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2021-06-08 10:10:46.307919: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:10:46.308633: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:10:46.309245: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
 GPU detected
 Starting process with 1 experiments
-Starting expriment from EnergyZenith_attention48_scaled_loss
+Starting expriment from MuonGun2D_clean
+
+
+Validation loss: -3.369387 	 learning_rate 1.136e-03
+Validation metrics: zenith_u_from_angles: 37.659	azimuthal_u_from_angles: 6.335
+
 wandb: Currently logged in as: johannbs (use `wandb login --relogin` to force relogin)
-wandb: wandb version 0.10.30 is available!  To upgrade, please run:
+wandb: wandb version 0.10.31 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.10.27
-wandb: Syncing run Attention48_scaled_loss
-wandb: ⭐️ View project at https://wandb.ai/johannbs/Full_OscNext2
-wandb: 🚀 View run at https://wandb.ai/johannbs/Full_OscNext2/runs/2hqs4tja
-wandb: Run data is saved locally in /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210526_132730-2hqs4tja
+wandb: Syncing run MuonGun_VonMises2D_cleaned
+wandb: ⭐️ View project at https://wandb.ai/johannbs/MuonGunEnsembles
+wandb: 🚀 View run at https://wandb.ai/johannbs/MuonGunEnsembles/runs/1ckmxim6
+wandb: Run data is saved locally in /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_101131-1ckmxim6
 wandb: Run `wandb offline` to turn off syncing.
 
-2021-05-26 13:28:16.369115: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+2021-06-08 10:12:00.201268: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2021-05-26 13:28:16.370464: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2021-05-26 13:28:16.370649: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:28:16.371128: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
-pciBusID: 0000:4d:00.0 name: GeForce RTX 3090 computeCapability: 8.6
+2021-06-08 10:12:00.202511: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-06-08 10:12:00.202671: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:12:00.203359: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:21:00.0 name: GeForce RTX 3090 computeCapability: 8.6
 coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
-2021-05-26 13:28:16.371157: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
-2021-05-26 13:28:16.371184: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
-2021-05-26 13:28:16.371195: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
-2021-05-26 13:28:16.371207: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2021-05-26 13:28:16.371217: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2021-05-26 13:28:16.371228: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2021-05-26 13:28:16.371238: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
-2021-05-26 13:28:16.371249: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
-2021-05-26 13:28:16.371284: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:28:16.371735: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:28:16.372131: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2021-05-26 13:28:16.372158: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
-2021-05-26 13:28:19.633145: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
-2021-05-26 13:28:19.633244: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
-2021-05-26 13:28:19.633255: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
-2021-05-26 13:28:19.634055: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:28:19.634540: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:28:19.634978: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2021-05-26 13:28:19.635406: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6629 MB memory) -> physical GPU (device: 0, name: GeForce RTX 3090, pci bus id: 0000:4d:00.0, compute capability: 8.6)
-/groups/hep/johannbs/anaconda3/envs/tf/lib/python3.8/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown
-  warnings.warn('resource_tracker: There appear to be %d '
-2021-05-26 13:29:48.797793: W tensorflow/stream_executor/platform/default/dso_loader.cc:60] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
-2021-05-26 13:29:48.896003: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
-2021-05-26 13:30:46.709504: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2021-05-26 13:30:46.732896: W tensorflow/stream_executor/platform/default/dso_loader.cc:60] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
-2021-05-26 13:30:46.733177: W tensorflow/stream_executor/cuda/cuda_driver.cc:326] failed call to cuInit: UNKNOWN ERROR (303)
-2021-05-26 13:30:46.733292: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (hep02.cluster): /proc/driver/nvidia/version does not exist
-Starting process with 1 experiments
-Starting expriment from EnergyZenith_attention48_scaled_loss
-wandb: Currently logged in as: johannbs (use `wandb login --relogin` to force relogin)
-wandb: wandb version 0.10.30 is available!  To upgrade, please run:
-wandb:  $ pip install wandb --upgrade
-wandb: Tracking run with wandb version 0.10.27
-wandb: Syncing run Attention48_scaled_loss
-wandb: ⭐️ View project at https://wandb.ai/johannbs/Full_OscNext2
-wandb: 🚀 View run at https://wandb.ai/johannbs/Full_OscNext2/runs/3jtnmbkr
-wandb: Run data is saved locally in /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210526_133124-3jtnmbkr
-wandb: Run `wandb offline` to turn off syncing.
-
-2021-05-26 13:32:29.393630: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
-WARNING:tensorflow:Gradients do not exist for variables ['message_pass_model/batch_normalization_3/gamma:0', 'message_pass_model/batch_normalization_3/beta:0', 'message_pass_model/batch_normalization_4/gamma:0', 'message_pass_model/batch_normalization_4/beta:0'] when minimizing the loss.
-WARNING:tensorflow:Gradients do not exist for variables ['message_pass_model/batch_normalization_3/gamma:0', 'message_pass_model/batch_normalization_3/beta:0', 'message_pass_model/batch_normalization_4/gamma:0', 'message_pass_model/batch_normalization_4/beta:0'] when minimizing the loss.
-2021-05-26 13:33:43.044242: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
-2021-05-26 13:33:43.091711: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 3000170000 Hz
+2021-06-08 10:12:00.203387: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-06-08 10:12:00.203410: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-06-08 10:12:00.203420: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-06-08 10:12:00.203430: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-06-08 10:12:00.203441: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-06-08 10:12:00.203451: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-06-08 10:12:00.203461: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2021-06-08 10:12:00.203471: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2021-06-08 10:12:00.203504: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:12:00.204147: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:12:00.204765: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-06-08 10:12:00.206571: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-06-08 10:12:01.672734: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-06-08 10:12:01.672775: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2021-06-08 10:12:01.672785: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2021-06-08 10:12:01.672979: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:12:01.673717: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:12:01.674343: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2021-06-08 10:12:01.674973: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 16774 MB memory) -> physical GPU (device: 0, name: GeForce RTX 3090, pci bus id: 0000:21:00.0, compute capability: 8.6)
+2021-06-08 10:12:37.591459: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-06-08 10:12:37.677028: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 3700040000 Hz
+2021-06-08 10:12:38.474572: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-06-08 10:12:38.892751: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-06-08 10:12:38.923399: I tensorflow/stream_executor/cuda/cuda_blas.cc:1838] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
 
 
-Validation loss: 4.554622 	 learning_rate 2.500e-04
-Validation metrics: zenith_u_from_angles: 41.041	energy_w: 0.618
-
-2021-05-26 13:43:58.346567: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+Validation loss: -3.364745 	 learning_rate 1.113e-03
+Validation metrics: zenith_u_from_angles: 37.752	azimuthal_u_from_angles: 6.428
 
 
-Validation loss: 3.629602 	 learning_rate 5.000e-04
-Validation metrics: zenith_u_from_angles: 41.027	energy_w: 0.593
 
+Validation loss: 1.248363 	 learning_rate 5.000e-04
+Validation metrics: angle_u: 40.708	zenith_u: 21.199	azimuthal_u: 61.238
+
+2021-06-08 10:16:03.928702: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+
+
+Validation loss: -3.358539 	 learning_rate 1.091e-03
+Validation metrics: zenith_u_from_angles: 37.412	azimuthal_u_from_angles: 6.286
+
+
+
+Validation loss: -2.402922 	 learning_rate 1.000e-03
+Validation metrics: angle_u: 15.250	zenith_u: 6.402	azimuthal_u: 24.539
+
+
+
+Validation loss: -3.297021 	 learning_rate 1.069e-03
+Validation metrics: zenith_u_from_angles: 37.922	azimuthal_u_from_angles: 6.253
+
+
+
+Validation loss: -2.520396 	 learning_rate 2.000e-03
+Validation metrics: angle_u: 15.341	zenith_u: 5.954	azimuthal_u: 25.733
+
+
+
+Validation loss: -3.195943 	 learning_rate 1.048e-03
+Validation metrics: zenith_u_from_angles: 37.567	azimuthal_u_from_angles: 6.339
+
+
+
+Validation loss: -2.623068 	 learning_rate 1.960e-03
+Validation metrics: angle_u: 14.440	zenith_u: 5.975	azimuthal_u: 23.092
+
+
+
+Validation loss: -3.340330 	 learning_rate 1.027e-03
+Validation metrics: zenith_u_from_angles: 37.382	azimuthal_u_from_angles: 6.323
+
+
+
+Validation loss: -2.606420 	 learning_rate 1.921e-03
+Validation metrics: angle_u: 14.583	zenith_u: 5.827	azimuthal_u: 23.327
+
+
+
+Validation loss: -3.377375 	 learning_rate 1.006e-03
+Validation metrics: zenith_u_from_angles: 37.812	azimuthal_u_from_angles: 6.227
+
+
+
+Validation loss: -2.795458 	 learning_rate 1.882e-03
+Validation metrics: angle_u: 13.224	zenith_u: 5.355	azimuthal_u: 21.471
+
+
+
+Validation loss: -3.429191 	 learning_rate 9.861e-04
+Validation metrics: zenith_u_from_angles: 37.740	azimuthal_u_from_angles: 6.246
+
+
+
+Validation loss: -2.901546 	 learning_rate 1.845e-03
+Validation metrics: angle_u: 12.735	zenith_u: 5.110	azimuthal_u: 20.885
+
+
+
+Validation loss: -3.424643 	 learning_rate 9.664e-04
+Validation metrics: zenith_u_from_angles: 37.940	azimuthal_u_from_angles: 6.250
+
+
+
+Validation loss: -2.856207 	 learning_rate 1.808e-03
+Validation metrics: angle_u: 13.382	zenith_u: 5.194	azimuthal_u: 21.649
+
+
+
+Validation loss: -3.428694 	 learning_rate 9.471e-04
+Validation metrics: zenith_u_from_angles: 37.739	azimuthal_u_from_angles: 6.267
+
+
+
+Validation loss: -2.937682 	 learning_rate 1.772e-03
+Validation metrics: angle_u: 12.807	zenith_u: 4.872	azimuthal_u: 20.925
+
+
+
+Validation loss: -3.376903 	 learning_rate 9.282e-04
+Validation metrics: zenith_u_from_angles: 37.869	azimuthal_u_from_angles: 6.315
+
+
+
+Validation loss: -2.835204 	 learning_rate 1.736e-03
+Validation metrics: angle_u: 13.258	zenith_u: 5.049	azimuthal_u: 22.267
+
+
+
+Validation loss: -3.373521 	 learning_rate 9.096e-04
+Validation metrics: zenith_u_from_angles: 37.776	azimuthal_u_from_angles: 6.251
+
+
+
+Validation loss: -2.901407 	 learning_rate 1.702e-03
+Validation metrics: angle_u: 12.905	zenith_u: 4.865	azimuthal_u: 21.065
+
+
+
+Validation loss: -3.318970 	 learning_rate 8.914e-04
+Validation metrics: zenith_u_from_angles: 37.720	azimuthal_u_from_angles: 6.248
+
+
+
+Validation loss: -2.949908 	 learning_rate 1.667e-03
+Validation metrics: angle_u: 12.532	zenith_u: 5.075	azimuthal_u: 20.494
+
+
+
+Validation loss: -3.356379 	 learning_rate 8.736e-04
+Validation metrics: zenith_u_from_angles: 37.369	azimuthal_u_from_angles: 6.298
+
+
+
+Validation loss: -3.017153 	 learning_rate 1.634e-03
+Validation metrics: angle_u: 12.472	zenith_u: 4.976	azimuthal_u: 20.220
+
+
+
+Validation loss: -3.375798 	 learning_rate 8.561e-04
+Validation metrics: zenith_u_from_angles: 37.959	azimuthal_u_from_angles: 6.303
+
+
+
+Validation loss: -3.392985 	 learning_rate 8.390e-04
+Validation metrics: zenith_u_from_angles: 38.267	azimuthal_u_from_angles: 6.228
+
+
+
+Validation loss: -2.823011 	 learning_rate 1.601e-03
+Validation metrics: angle_u: 12.905	zenith_u: 5.549	azimuthal_u: 20.189
+
+
+
+Validation loss: -3.424652 	 learning_rate 8.222e-04
+Validation metrics: zenith_u_from_angles: 37.910	azimuthal_u_from_angles: 6.196
+
+
+
+Validation loss: -3.011446 	 learning_rate 1.569e-03
+Validation metrics: angle_u: 12.417	zenith_u: 4.662	azimuthal_u: 20.218
+
+
+
+Validation loss: -3.394834 	 learning_rate 8.058e-04
+Validation metrics: zenith_u_from_angles: 37.828	azimuthal_u_from_angles: 6.243
+
+
+
+Validation loss: -3.045563 	 learning_rate 1.538e-03
+Validation metrics: angle_u: 12.380	zenith_u: 4.595	azimuthal_u: 20.427
+
+
+
+Validation loss: -3.433929 	 learning_rate 7.896e-04
+Validation metrics: zenith_u_from_angles: 37.941	azimuthal_u_from_angles: 6.246
+
+
+
+Validation loss: -3.062127 	 learning_rate 1.507e-03
+Validation metrics: angle_u: 12.421	zenith_u: 4.640	azimuthal_u: 20.349
+
+
+
+Validation loss: -3.388849 	 learning_rate 7.738e-04
+Validation metrics: zenith_u_from_angles: 38.025	azimuthal_u_from_angles: 6.223
+
+
+
+Validation loss: -3.145190 	 learning_rate 1.477e-03
+Validation metrics: angle_u: 12.156	zenith_u: 4.452	azimuthal_u: 20.144
+
+
+wandb: Waiting for W&B process to finish, PID 22473
+wandb: Program ended successfully.
+wandb: - 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb: \ 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb: | 1.87MB of 1.87MB uploaded (0.00MB deduped)wandb: / 1.87MB of 1.88MB uploaded (0.00MB deduped)wandb: - 1.88MB of 1.88MB uploaded (0.00MB deduped)wandb: \ 1.88MB of 1.88MB uploaded (0.00MB deduped)wandb: | 1.88MB of 1.88MB uploaded (0.00MB deduped)wandb: / 1.88MB of 1.88MB uploaded (0.00MB deduped)wandb: - 1.88MB of 1.88MB uploaded (0.00MB deduped)wandb: \ 1.88MB of 1.88MB uploaded (0.00MB deduped)wandb:                                                                                
+wandb: Find user logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_083245-22wtnoeb/logs/debug.log
+wandb: Find internal logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_083245-22wtnoeb/logs/debug-internal.log
+wandb: Run summary:
+wandb:          zenith_u_from_angles 38.02931
+wandb:       azimuthal_u_from_angles 6.22659
+wandb:                    train_loss -3.40646
+wandb:                      val_loss -3.38885
+wandb:                 learning_rate 0.00077
+wandb:                      _runtime 10111
+wandb:                    _timestamp 1623144079
+wandb:                         _step 25000001
+wandb:                      TestLoss -3.38881
+wandb: Run history:
+wandb:      zenith_u_from_angles ▁▅▄▄▄▆██▂▁▄▅▄▄▃▂▃▂▁▁▃▂▃▄▄▃▄▃▃▄▄▄▄▄▃▄▄▄▄▅
+wandb:   azimuthal_u_from_angles █▅▄▄▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                train_loss █▆▅▄▃▃▃▃▃▂▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                  val_loss █▇▅▅▄▃▄▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▂▂▁▁▁▁▁▂▁▁▁▁▁
+wandb:             learning_rate ▁▃██▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▂▂
+wandb:                  _runtime ▁▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇███
+wandb:                _timestamp ▁▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇███
+wandb:                     _step ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:                  TestLoss ▁
+wandb: 
+wandb: Synced 6 W&B file(s), 100 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: 
+wandb: Synced MuonGun_VonMises3D_cleaned: https://wandb.ai/johannbs/MuonGunEnsembles/runs/22wtnoeb
+Model: "message_pass_model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+batch_normalization (BatchNo multiple                  28        
+_________________________________________________________________
+global_max_pool (GlobalMaxPo multiple                  0         
+_________________________________________________________________
+global_avg_pool (GlobalAvgPo multiple                  0         
+_________________________________________________________________
+global_sum_pool (GlobalSumPo multiple                  0         
+_________________________________________________________________
+global_max_pool_1 (GlobalMax multiple                  0         
+_________________________________________________________________
+mp (MP)                      multiple                  111936    
+_________________________________________________________________
+mp_1 (MP)                    multiple                  141632    
+_________________________________________________________________
+batch_normalization_1 (Batch multiple                  256       
+_________________________________________________________________
+batch_normalization_2 (Batch multiple                  256       
+_________________________________________________________________
+global_max_pool_2 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_1 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_1 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_3 (GlobalMax multiple                  0         
+_________________________________________________________________
+graph_sage_conv (GraphSageCo multiple                  16512     
+_________________________________________________________________
+graph_sage_conv_1 (GraphSage multiple                  65792     
+_________________________________________________________________
+global_max_pool_4 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_2 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_2 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_5 (GlobalMax multiple                  0         
+_________________________________________________________________
+dense_8 (Dense)              multiple                  1336320   
+_________________________________________________________________
+dropout (Dropout)            multiple                  0         
+_________________________________________________________________
+batch_normalization_3 (Batch multiple                  4096      
+_________________________________________________________________
+dense_9 (Dense)              multiple                  787200    
+_________________________________________________________________
+dropout_1 (Dropout)          multiple                  0         
+_________________________________________________________________
+batch_normalization_4 (Batch multiple                  3072      
+_________________________________________________________________
+dense_10 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_2 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_11 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_3 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_12 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_13 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_4 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_14 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_5 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_15 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_16 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_6 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_17 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_7 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_18 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_19 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_8 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_20 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_9 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_21 (Dense)             multiple                  65        
+=================================================================
+Total params: 2,680,864
+Trainable params: 2,677,010
+Non-trainable params: 3,854
+_________________________________________________________________
+None
+Traceback (most recent call last):
+  File "/groups/hep/johannbs/anaconda3/envs/tf/lib/python3.8/shutil.py", line 791, in move
+    os.rename(src, real_dst)
+FileNotFoundError: [Errno 2] No such file or directory: '/lustre/hpc/hep/johannbs/IceCube_GNN2/scripts/../experiments/MuonGun3D_clean.json' -> '/lustre/hpc/hep/johannbs/IceCube_GNN2/scripts/../experiments/done/MuonGun3D_clean.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "run_trainings.py", line 49, in <module>
+    shutil.move(osp.join(exp_folder, experiment), osp.join(exp_folder, "done", experiment))
+  File "/groups/hep/johannbs/anaconda3/envs/tf/lib/python3.8/shutil.py", line 805, in move
+    copy_function(src, real_dst)
+  File "/groups/hep/johannbs/anaconda3/envs/tf/lib/python3.8/shutil.py", line 435, in copy2
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "/groups/hep/johannbs/anaconda3/envs/tf/lib/python3.8/shutil.py", line 264, in copyfile
+    with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
+FileNotFoundError: [Errno 2] No such file or directory: '/lustre/hpc/hep/johannbs/IceCube_GNN2/scripts/../experiments/MuonGun3D_clean.json'
+
+
+Validation loss: -2.374057 	 learning_rate 1.448e-03
+Validation metrics: angle_u: 14.844	zenith_u: 6.210	azimuthal_u: 22.391
+
+
+
+Validation loss: -3.136395 	 learning_rate 1.419e-03
+Validation metrics: angle_u: 12.259	zenith_u: 4.429	azimuthal_u: 19.899
+
+
+
+Validation loss: -3.148172 	 learning_rate 1.390e-03
+Validation metrics: angle_u: 12.115	zenith_u: 4.411	azimuthal_u: 19.932
+
+
+
+Validation loss: -3.134708 	 learning_rate 1.362e-03
+Validation metrics: angle_u: 12.363	zenith_u: 4.462	azimuthal_u: 19.788
+
+
+
+Validation loss: -3.173331 	 learning_rate 1.335e-03
+Validation metrics: angle_u: 12.005	zenith_u: 4.564	azimuthal_u: 19.691
+
+
+
+Validation loss: -3.204499 	 learning_rate 1.309e-03
+Validation metrics: angle_u: 12.046	zenith_u: 4.288	azimuthal_u: 19.686
+
+
+
+Validation loss: -3.119159 	 learning_rate 1.282e-03
+Validation metrics: angle_u: 12.177	zenith_u: 4.635	azimuthal_u: 19.843
+
+
+
+Validation loss: -3.126018 	 learning_rate 1.257e-03
+Validation metrics: angle_u: 12.259	zenith_u: 4.638	azimuthal_u: 19.496
+
+
+
+Validation loss: -3.166631 	 learning_rate 1.232e-03
+Validation metrics: angle_u: 12.176	zenith_u: 4.503	azimuthal_u: 19.920
+
+
+
+Validation loss: -3.109285 	 learning_rate 1.207e-03
+Validation metrics: angle_u: 12.212	zenith_u: 4.495	azimuthal_u: 19.692
+
+
+
+Validation loss: -3.190675 	 learning_rate 1.183e-03
+Validation metrics: angle_u: 12.041	zenith_u: 4.351	azimuthal_u: 19.601
+
+
+
+Validation loss: -3.154288 	 learning_rate 1.159e-03
+Validation metrics: angle_u: 12.121	zenith_u: 4.423	azimuthal_u: 19.704
+
+
+
+Validation loss: -3.176203 	 learning_rate 1.136e-03
+Validation metrics: angle_u: 12.101	zenith_u: 4.427	azimuthal_u: 19.707
+
+
+
+Validation loss: -3.211024 	 learning_rate 1.113e-03
+Validation metrics: angle_u: 11.949	zenith_u: 4.304	azimuthal_u: 19.548
+
+
+
+Validation loss: -3.080813 	 learning_rate 1.091e-03
+Validation metrics: angle_u: 12.031	zenith_u: 4.721	azimuthal_u: 19.453
+
+
+
+Validation loss: -3.257360 	 learning_rate 1.069e-03
+Validation metrics: angle_u: 11.926	zenith_u: 4.319	azimuthal_u: 19.321
+
+
+
+Validation loss: -3.207618 	 learning_rate 1.048e-03
+Validation metrics: angle_u: 11.995	zenith_u: 4.298	azimuthal_u: 19.510
+
+
+
+Validation loss: -3.191684 	 learning_rate 1.027e-03
+Validation metrics: angle_u: 11.921	zenith_u: 4.373	azimuthal_u: 19.384
+
+
+
+Validation loss: -3.239604 	 learning_rate 1.006e-03
+Validation metrics: angle_u: 11.886	zenith_u: 4.339	azimuthal_u: 19.303
+
+
+
+Validation loss: -3.188212 	 learning_rate 9.861e-04
+Validation metrics: angle_u: 11.814	zenith_u: 4.305	azimuthal_u: 19.441
+
+
+
+Validation loss: -3.254516 	 learning_rate 9.664e-04
+Validation metrics: angle_u: 11.909	zenith_u: 4.270	azimuthal_u: 19.393
+
+
+
+Validation loss: -3.270776 	 learning_rate 9.471e-04
+Validation metrics: angle_u: 11.720	zenith_u: 4.219	azimuthal_u: 19.218
+
+
+
+Validation loss: -3.222756 	 learning_rate 9.282e-04
+Validation metrics: angle_u: 11.737	zenith_u: 4.307	azimuthal_u: 19.354
+
+
+
+Validation loss: -3.202903 	 learning_rate 9.096e-04
+Validation metrics: angle_u: 11.893	zenith_u: 4.311	azimuthal_u: 19.371
+
+
+
+Validation loss: -3.189337 	 learning_rate 8.914e-04
+Validation metrics: angle_u: 11.807	zenith_u: 4.319	azimuthal_u: 19.500
+
+
+
+Validation loss: -3.221686 	 learning_rate 8.736e-04
+Validation metrics: angle_u: 11.968	zenith_u: 4.268	azimuthal_u: 19.505
+
+
+
+Validation loss: -3.260090 	 learning_rate 8.561e-04
+Validation metrics: angle_u: 11.755	zenith_u: 4.213	azimuthal_u: 19.232
+
+
+
+Validation loss: -3.167600 	 learning_rate 8.390e-04
+Validation metrics: angle_u: 11.958	zenith_u: 4.368	azimuthal_u: 19.604
+
+
+
+Validation loss: -3.314648 	 learning_rate 8.222e-04
+Validation metrics: angle_u: 11.819	zenith_u: 4.195	azimuthal_u: 19.177
+
+
+
+Validation loss: -3.303733 	 learning_rate 8.058e-04
+Validation metrics: angle_u: 11.781	zenith_u: 4.226	azimuthal_u: 19.014
+
+
+
+Validation loss: -3.274660 	 learning_rate 7.896e-04
+Validation metrics: angle_u: 11.664	zenith_u: 4.268	azimuthal_u: 19.091
+
+
+
+Validation loss: -3.237540 	 learning_rate 7.738e-04
+Validation metrics: angle_u: 12.007	zenith_u: 4.391	azimuthal_u: 19.533
+
+
+wandb: Waiting for W&B process to finish, PID 35842
+wandb: Program ended successfully.
+wandb: - 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: \ 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: | 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: / 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: - 1.90MB of 1.90MB uploaded (0.00MB deduped)wandb: \ 1.91MB of 1.91MB uploaded (0.00MB deduped)wandb: | 1.91MB of 1.91MB uploaded (0.00MB deduped)wandb: / 1.91MB of 1.91MB uploaded (0.00MB deduped)wandb: - 1.91MB of 1.91MB uploaded (0.00MB deduped)wandb: \ 1.91MB of 1.91MB uploaded (0.00MB deduped)wandb:                                                                                
+wandb: Find user logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_101131-1ckmxim6/logs/debug.log
+wandb: Find internal logs for this run at: /lustre/hpc/hep/johannbs/IceCube_GNN2/wandb/run-20210608_101131-1ckmxim6/logs/debug-internal.log
+wandb: Run summary:
+wandb:                   angle_u 11.99242
+wandb:                  zenith_u 4.39713
+wandb:               azimuthal_u 19.52013
+wandb:                train_loss -3.24898
+wandb:                  val_loss -3.23754
+wandb:             learning_rate 0.00077
+wandb:                  _runtime 10861
+wandb:                _timestamp 1623150752
+wandb:                     _step 25000001
+wandb:                  TestLoss -3.23731
+wandb: Run history:
+wandb:         angle_u █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:        zenith_u █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     azimuthal_u █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:      train_loss █▅▅▄▃▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:        val_loss █▂▂▂▂▂▂▂▂▂▁▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   learning_rate ▁▃██▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▂▂
+wandb:        _runtime ▁▁▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:      _timestamp ▁▁▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:           _step ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇████
+wandb:        TestLoss ▁
+wandb: 
+wandb: Synced 6 W&B file(s), 100 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: 
+wandb: Synced MuonGun_VonMises2D_cleaned: https://wandb.ai/johannbs/MuonGunEnsembles/runs/1ckmxim6
+Model: "message_pass_model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+batch_normalization (BatchNo multiple                  28        
+_________________________________________________________________
+global_max_pool (GlobalMaxPo multiple                  0         
+_________________________________________________________________
+global_avg_pool (GlobalAvgPo multiple                  0         
+_________________________________________________________________
+global_sum_pool (GlobalSumPo multiple                  0         
+_________________________________________________________________
+global_max_pool_1 (GlobalMax multiple                  0         
+_________________________________________________________________
+mp (MP)                      multiple                  111936    
+_________________________________________________________________
+mp_1 (MP)                    multiple                  141632    
+_________________________________________________________________
+batch_normalization_1 (Batch multiple                  256       
+_________________________________________________________________
+batch_normalization_2 (Batch multiple                  256       
+_________________________________________________________________
+global_max_pool_2 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_1 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_1 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_3 (GlobalMax multiple                  0         
+_________________________________________________________________
+graph_sage_conv (GraphSageCo multiple                  16512     
+_________________________________________________________________
+graph_sage_conv_1 (GraphSage multiple                  65792     
+_________________________________________________________________
+global_max_pool_4 (GlobalMax multiple                  0         
+_________________________________________________________________
+global_avg_pool_2 (GlobalAvg multiple                  0         
+_________________________________________________________________
+global_sum_pool_2 (GlobalSum multiple                  0         
+_________________________________________________________________
+global_max_pool_5 (GlobalMax multiple                  0         
+_________________________________________________________________
+dense_8 (Dense)              multiple                  1336320   
+_________________________________________________________________
+dropout (Dropout)            multiple                  0         
+_________________________________________________________________
+batch_normalization_3 (Batch multiple                  4096      
+_________________________________________________________________
+dense_9 (Dense)              multiple                  787200    
+_________________________________________________________________
+dropout_1 (Dropout)          multiple                  0         
+_________________________________________________________________
+batch_normalization_4 (Batch multiple                  3072      
+_________________________________________________________________
+dense_10 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_2 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_11 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_3 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_12 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_13 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_4 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_14 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_5 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_15 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_16 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_6 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_17 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_7 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_18 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_19 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_8 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_20 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_9 (Dropout)          multiple                  0         
+_________________________________________________________________
+dense_21 (Dense)             multiple                  65        
+_________________________________________________________________
+dense_22 (Dense)             multiple                  49216     
+_________________________________________________________________
+dropout_10 (Dropout)         multiple                  0         
+_________________________________________________________________
+dense_23 (Dense)             multiple                  4160      
+_________________________________________________________________
+dropout_11 (Dropout)         multiple                  0         
+_________________________________________________________________
+dense_24 (Dense)             multiple                  65        
+=================================================================
+Total params: 2,734,305
+Trainable params: 2,730,451
+Non-trainable params: 3,854
+_________________________________________________________________
+None
+Experiment MuonGun2D_clean done 	 MuonGun2D_clean.json: 1 / 1

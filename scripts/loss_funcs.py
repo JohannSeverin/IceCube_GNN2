@@ -50,7 +50,7 @@ def NormalEnergyZenith(y_true, y_reco):
     cdf1 = tf.searchsorted(data1, data_all, side='right')
     cdf2 = tf.searchsorted(data2, data_all, side='right')
 
-    penal_ks   = tf.cast(tf.math.reduce_max(tf.abs(cdf1 - cdf2)) / tf.shape(data1)[0], tf.float32) * 5
+    penal_ks   = tf.cast(tf.math.reduce_max(tf.abs(cdf1 - cdf2)) / tf.shape(data1)[0], tf.float32) * 2.5
 
     return tf.reduce_mean(- log_likelihood) + penal_ks
 
@@ -65,8 +65,8 @@ def VonMisesSum(y_true, y_reco):
     return llh_2d + llh_3d
 
 def VonMisesSumEnergy(y_true, y_reco):
-    llh_2d = VonMisesZenith(y_true[:, :3], tf.concat([y_reco[:, :3], y_reco[:, 4:6]], axis = 1))
-    # llh_3d = VonMises3D(y_true[:, :3], tf.concat([y_reco[:, :3], tf.expand_dims(y_reco[:, 6], axis = 1)], axis = 1))
+    # llh_2d = VonMisesPolarZenith_ks(y_true[:, :3], tf.concat([y_reco[:, :3], y_reco[:, 4:6]], axis = 1))
+    llh_3d = VonMises3D(y_true[:, :3], tf.concat([y_reco[:, :3], tf.expand_dims(y_reco[:, 6], axis = 1)], axis = 1))
     # llh_en = NormalEnergy(y_true[:, 3], y_reco[:, 3], y_reco[:, 7])
 
     # std_penal_zenith = .5 * tf.abs(tf.math.reduce_std(y_true[:, 2]) - tf.math.reduce_std(y_reco[:, 2])) 
@@ -74,21 +74,21 @@ def VonMisesSumEnergy(y_true, y_reco):
 
 
     # KS PENALTY # CREDZ TO KIMI
-    data1 = tf.sort(y_true[:, 2])
-    data2 = tf.sort(y_reco[:, 2])
-    data_all = tf.sort(tf.concat([data1, data2], axis = 0))
-    cdf1 = tf.searchsorted(data1, data_all, side='right')
-    cdf2 = tf.searchsorted(data2, data_all, side='right')
+    # data1 = tf.sort(y_true[:, 2])
+    # data2 = tf.sort(y_reco[:, 2])
+    # data_all = tf.sort(tf.concat([data1, data2], axis = 0))
+    # cdf1 = tf.searchsorted(data1, data_all, side='right')
+    # cdf2 = tf.searchsorted(data2, data_all, side='right')
 
-    penal_ks   = tf.cast(tf.math.reduce_max(tf.abs(cdf1 - cdf2)) / tf.shape(data1)[0], tf.float32)
+    # penal_ks   = tf.cast(tf.math.reduce_max(tf.abs(cdf1 - cdf2)) / tf.shape(data1)[0], tf.float32)
 
     # true_dist  = tf.sort(y_true[:, 2])
     # reco_dist  = tf.sort(y_reco[:, 2])
 
     # probs      = tf.linspace(0, 1, tf.shape(true_dist))
+    return llh_3d
 
-
-    return llh_2d + penal_ks# + llh_en #
+    # return llh_2d + llh_en # penal_ks# + llh_en #
 
 
 def VonMisesNormal(y_true, y_reco):
@@ -125,16 +125,16 @@ def VonMisesZenith(y_true, y_reco):
     rxy_reco    = tf.math.reduce_euclidean_norm(vects[:, :2],  axis = 1)
     rxy_true    = tf.math.reduce_euclidean_norm(y_true[:, :2], axis = 1)
 
-    # cos_azi     = tf.math.divide_no_nan(tf.squeeze(tf.expand_dims(vects[:, :2], axis = 1) @ tf.expand_dims(y_true[:, :2], axis = -1)),
-    #                                     (rxy_reco * rxy_true ))
+    cos_azi     = tf.math.divide_no_nan(tf.squeeze(tf.expand_dims(vects[:, :2], axis = 1) @ tf.expand_dims(y_true[:, :2], axis = -1)),
+                                        (rxy_reco * rxy_true ))
 
     cos_zenth   = vects[:, 2] * y_true[:, 2] + rxy_reco * rxy_true
 
 
-    # lnI0_azi     = polar_k + tf.math.log(1 + tf.math.exp(-2*polar_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(polar_k)) + tf.math.log(1 + 0.24273*tf.square(polar_k)) - tf.math.log(1+0.43023*tf.square(polar_k))
+    lnI0_azi     = polar_k + tf.math.log(1 + tf.math.exp(-2*polar_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(polar_k)) + tf.math.log(1 + 0.24273*tf.square(polar_k)) - tf.math.log(1+0.43023*tf.square(polar_k))
     lnI0_zenth   = zenth_k + tf.math.log(1 + tf.math.exp(-2*zenth_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(zenth_k)) + tf.math.log(1 + 0.24273*tf.square(zenth_k)) - tf.math.log(1+0.43023*tf.square(zenth_k))
 
-    # llh_azi     = polar_k * cos_azi   - lnI0_azi
+    llh_azi     = polar_k * cos_azi   - lnI0_azi
     llh_zenth   = zenth_k * cos_zenth - lnI0_zenth
 
 
@@ -165,6 +165,39 @@ def VonMisesPolarZenith(y_true, y_reco):
 
     return tf.reduce_mean(- llh_zenth - llh_azi)
     
+
+def VonMisesPolarZenith_ks(y_true, y_reco):
+    # Two polar von mises in azimuth and zenith
+    vects       = y_reco[:, :3]
+    polar_k     = y_reco[:, 3]
+    zenth_k     = y_reco[:, 4]
+
+    rxy_reco    = tf.math.reduce_euclidean_norm(vects[:, :2],  axis = 1)
+    rxy_true    = tf.math.reduce_euclidean_norm(y_true[:, :2], axis = 1)
+
+    cos_azi     = tf.math.divide_no_nan(tf.squeeze(tf.expand_dims(vects[:, :2], axis = 1) @ tf.expand_dims(y_true[:, :2], axis = -1)),
+                                        (rxy_reco * rxy_true ))
+
+    cos_zenth   = vects[:, 2] * y_true[:, 2] + rxy_reco * rxy_true
+
+
+    lnI0_azi     = polar_k + tf.math.log(1 + tf.math.exp(-2*polar_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(polar_k)) + tf.math.log(1 + 0.24273*tf.square(polar_k)) - tf.math.log(1+0.43023*tf.square(polar_k))
+    lnI0_zenth   = zenth_k + tf.math.log(1 + tf.math.exp(-2*zenth_k)) -0.25 * tf.math.log(1 + 0.25 * tf.square(zenth_k)) + tf.math.log(1 + 0.24273*tf.square(zenth_k)) - tf.math.log(1+0.43023*tf.square(zenth_k))
+
+    data1 = tf.sort(y_true[:, 2])
+    data2 = tf.sort(y_reco[:, 2])
+    data_all = tf.sort(tf.concat([data1, data2], axis = 0))
+    cdf1 = tf.searchsorted(data1, data_all, side='right')
+    cdf2 = tf.searchsorted(data2, data_all, side='right')
+
+    penal_ks   = tf.cast(tf.math.reduce_max(tf.abs(cdf1 - cdf2)) / tf.shape(data1)[0], tf.float32) * 5
+
+    llh_azi     = polar_k * cos_azi   - lnI0_azi
+    llh_zenth   = zenth_k * cos_zenth - lnI0_zenth
+
+
+    return tf.reduce_mean(- llh_zenth - llh_azi) + penal_ks
+
 
 def VonMisesPolarZenith_ws(y_true, y_reco):
     # Two polar von mises in azimuth and zenith
@@ -317,7 +350,15 @@ def VonMisesPolarZenith_from_angles(y_true, y_reco):
     return tf.reduce_mean(- llh_zenth - llh_azi)
 
 
+def VonMises3D_from_angles(y_true, y_reco):
+    k = y_reco[:, 2]
+    zs = tf.cos(y_reco[:, 1]) * tf.cos(y_true[:, 1])
+    # xy = 
+    log_likelihood =  - k / 2 * tf.squeeze(tf.expand_dims(vects - y_true, axis = 1) @ tf.expand_dims(vects - y_true, axis = -1))\
+                      + tf.math.log(k) - tf.math.log(1 - tf.exp(- 2 * k))
+                     
 
+    return tf.reduce_mean(- log_likelihood)
 
 
 #######################################################

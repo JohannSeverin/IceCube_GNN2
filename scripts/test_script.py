@@ -49,7 +49,7 @@ def reco_true_hist(reco, true, ax = None):
 
 def azi_zen_from_units(arr):
     azi = np.arctan2(arr[:, 1], arr[:, 0])
-    zen = np.pi - np.arccos(arr[:, 2])
+    zen = np.arccos(arr[:, 2])
     return azi, zen
 
 

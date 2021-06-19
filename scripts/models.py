@@ -30,8 +30,8 @@ normalize5 ={"translate": tf.constant([0, 0, -200, 10000, 0], dtype = tf.float32
              "time":   (10000, 2500),
              "charge": (0, 0.25)}
 
-normalize6 ={"translate": tf.constant([0, 0, -200, 10000, 0, 1.], dtype = tf.float32),
-             "scale":     tf.constant([100, 100, 100, 2500, 0.25, 7.], dtype = tf.float32),
+normalize6 ={"translate": tf.constant([0, 0, -200, 10000, 0, 1., 0.], dtype = tf.float32),
+             "scale":     tf.constant([100, 100, 100, 2500, 0.25, 7., 1.], dtype = tf.float32),
              "x_dom":  (0, 100),
              "y_dom":  (0, 100),
              "z_dom":  (-200, 100),
@@ -44,8 +44,8 @@ class GraphSage_network_angles(Model):
     def __init__(self, n_out = 2, n_kappa = 1, n_corr = 0, n_in = 5, hidden_states = 64, forward = False, dropout = 0, gamma = 0, cossin = False, **kwargs):
         super().__init__()
         self.forward = forward
-        self.norm_trans   = normalize6['translate'][:n_in]
-        self.norm_scale   = normalize6['scale'][:n_in]
+        self.norm_trans   = tf.constant([0, 0, -200, 10000, 0, 1., 0.][:n_in], dtype = tf.float32)
+        self.norm_scale   = tf.constant([100, 100, 100, 2500, 0.25, 7., 1.][:n_in], dtype = tf.float32)
         self.gamma        = gamma
         self.n_corr       = n_corr
         self.n_sigs       = n_kappa
@@ -293,8 +293,8 @@ class GraphSage_network(Model):
                 forward = False, dropout = 0, gamma = 0, sigmoid = False, scale = True, **kwargs):
         super().__init__()
         self.forward = forward
-        self.norm_trans   = normalize6['translate'][:n_in]
-        self.norm_scale   = normalize6['scale'][:n_in]
+        self.norm_trans   = tf.constant([0, 0, -200, 10000, 0, 1., 0.][:n_in], dtype = tf.float32)
+        self.norm_scale   = tf.constant([100, 100, 100, 2500, 0.25, 7., 1.][:n_in], dtype = tf.float32)
         self.gamma        = gamma
         self.n_out        = n_out
         self.n_corr       = n_corr
@@ -306,7 +306,7 @@ class GraphSage_network(Model):
         if self.scale:
           self.batch_edge  = BatchNormalization()
 
-        self.MP          = [MP2(hidden_states, dropout = dropout) for i in range(mp_layers)]
+        self.MP          = MP(hidden_states, dropout = dropout)
 
         self.GraphSage1  = GraphSageConv(hidden_states * 2, activation = "relu")
         self.GraphSage2  = GraphSageConv(hidden_states * 4, activation = "relu")
@@ -341,11 +341,11 @@ class GraphSage_network(Model):
           x       = self.normalize(x)
 
         a, e    = self.generate_edge_features(x, a)
-        if self.scale:
-          e       = self.batch_edge(e, training = training)
+        # if self.scale:
+        #   e       = self.batch_edge(e, training = training)
         
-        for MP_layer in self.MP:
-          x = MP_layer([x, a, e], training = training)
+        # for MP_layer in self.MP:
+        x = MP([x, a, e], training = training)
         x = self.GraphSage1([x, a])
         x = self.GraphSage2([x, a])
 
@@ -430,8 +430,8 @@ class MessagePassModel(Model):
         
         # Setups 
         super().__init__()
-        self.norm_trans   = normalize6['translate'][:n_in]
-        self.norm_scale   = normalize6['scale'][:n_in]
+        self.norm_trans   = tf.constant([0, 0, -200, 10000, 0, 1., 0.][:n_in], dtype = tf.float32)
+        self.norm_scale   = tf.constant([100, 100, 100, 2500, 0.25, 7., 1.][:n_in], dtype = tf.float32)
         self.n_out        = n_out
         self.n_kappa      = n_kappa
         self.sigmoid      = sigmoid
@@ -439,38 +439,50 @@ class MessagePassModel(Model):
         self.units_out    = units_out
 
         self.batch_edge  = BatchNormalization()
-        
+
+        self.prePool1   = GlobalMaxPool()
+        self.prePool2   = GlobalAvgPool()
+        self.prePool3   = GlobalSumPool()
+        self.prePool4   = GlobalMaxPool()
+
+
         self.apply_layers = []
         self.bn_layers    = []
         for i in range(mp_layers):
-          self.apply_layers.append(MP2(hidden_states = hidden_states,  message_size = message_size,   message_layers = message_layers, \
-                                        update_size   = update_size,    update_layers = update_layers, dropout = dropout))
+          self.apply_layers.append(MP(n_out = hidden_states, hidden_states=hidden_states, dropout = dropout))
+          # self.apply_layers.append(MP2(hidden_states = hidden_states,  message_size = message_size,   message_layers = message_layers, \
+          #                               update_size   = update_size,    update_layers = update_layers, dropout = dropout))
           if batch_norm:
             self.bn_layers.append(BatchNormalization())
         
+        self.mpPool1   = GlobalMaxPool()
+        self.mpPool2   = GlobalAvgPool()
+        self.mpPool3   = GlobalSumPool()
+        self.mpPool4   = GlobalMaxPool()
+
         if convs:
           self.convs = []
           if convs == "attention":
-            self.convs.append(GATConv(hidden_states * 2, attn_heads = 4, dropout_rate = dropout))
-            self.convs.append(Dropout(dropout))
-            self.convs.append(BatchNormalization())
             self.convs.append(GATConv(hidden_states * 1, attn_heads = 2, dropout_rate = dropout))
-            self.convs.append(Dropout(dropout))
-            self.convs.append(BatchNormalization())
+            # self.convs.append(Dropout(dropout))
+            # self.convs.append(BatchNormalization())
+            self.convs.append(GATConv(hidden_states * 2, attn_heads = 4, dropout_rate = dropout))
+            # self.convs.append(Dropout(dropout))
+            # self.convs.append(BatchNormalization())
           elif convs == "GRU":
-            self.convs.append(GatedGraphConv(hidden_states, n_layers = 5))
-            self.convs.append(Dropout(dropout))
-            self.convs.append(BatchNormalization())
             self.convs.append(GatedGraphConv(hidden_states, n_layers = 3))
-            self.convs.append(Dropout(dropout))
-            self.convs.append(BatchNormalization())
+            # self.convs.append(Dropout(dropout))
+            # self.convs.append(BatchNormalization())
+            self.convs.append(GatedGraphConv(hidden_states, n_layers = 5))
+            # self.convs.append(Dropout(dropout))
+            # self.convs.append(BatchNormalization())
           elif convs == "GraphSage":
-            self.convs.append(GraphSageConv(hidden_states * 4, activation = "gelu"))
-            self.convs.append(Dropout(dropout))
-            self.convs.append(BatchNormalization())
             self.convs.append(GraphSageConv(hidden_states * 2, activation = "gelu"))
-            self.convs.append(Dropout(dropout))
-            self.convs.append(BatchNormalization())
+            # self.convs.append(Dropout(dropout))
+            # self.convs.append(BatchNormalization())
+            self.convs.append(GraphSageConv(hidden_states * 4, activation = "gelu"))
+            # self.convs.append(Dropout(dropout))
+            # self.convs.append(BatchNormalization())
         else:
           print("No convulutions defined.")
           self.convs = None
@@ -493,7 +505,7 @@ class MessagePassModel(Model):
           for j in split_structure:
             split.append(Dense(hidden_states * j))
             split.append(Dropout(dropout))
-            split.append(BatchNormalization())
+            # split.append(BatchNormalization())
           split.append(Dense(1))
           self.split_layers.append(split)
 
@@ -504,9 +516,21 @@ class MessagePassModel(Model):
         a, e    = self.generate_edge_features(x, a)
         e       = self.batch_edge(e, training = training)
 
+        x1 = self.prePool1([x, i])
+        x2 = self.prePool2([x, i])
+        x3 = self.prePool3([x, i])
+        x4 = -1 * self.prePool4([-1 * x, i])
+        x_pre = tf.concat([x1, x2, x3, x4], axis = 1)
+
         for MessagePassLayer, BatchNormLayer in zip(self.apply_layers, self.bn_layers):
           x = MessagePassLayer([x, a, e], training = training)
           x = BatchNormLayer(x, training = training)
+
+        x1 = self.mpPool1([x, i])
+        x2 = self.mpPool2([x, i])
+        x3 = self.mpPool3([x, i])
+        x4 = -1 * self.mpPool4([-1 * x, i])
+        x_mp = tf.concat([x1, x2, x3, x4], axis = 1)
         
         if self.convs:
           for layer in self.convs:
@@ -520,7 +544,9 @@ class MessagePassModel(Model):
         x2 = self.Pool2([x, i])
         x3 = self.Pool3([x, i])
         x4 = -1 * self.Pool4([-1 * x, i])
-        x = tf.concat([x1, x2, x3, x4], axis = 1)
+        x_conv = tf.concat([x1, x2, x3, x4], axis = 1)
+
+        x = tf.concat([x_pre, x_mp, x_conv], axis = 1)
         
         for DecodeLayer in self.decode_layers:
           if isinstance(DecodeLayer, Dense):

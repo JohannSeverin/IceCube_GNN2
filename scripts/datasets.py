@@ -100,8 +100,12 @@ class graph_dataset(Dataset):
             # Split event_numbers in train/test
             if type(self.data_split) == str:
                 sets = read_pickle(self.data_split)
-                train_events, val_events     = list(sets['train'].event_no), list(sets['test'].event_no)
-                test_events                  = list(sets['test'].event_no)
+                try: 
+                    train_events, val_events     = list(sets['train'].event_no), list(sets['test'].event_no)
+                    test_events                  = list(sets['test'].event_no)
+                except:
+                    train_events, val_events     = list(sets['train']), list(sets['test'])
+                    test_events                  = list(sets['test'])
             else:
                 train_events, val_events, test_events = split_events(event_ids, self.data_split, self.seed)
 

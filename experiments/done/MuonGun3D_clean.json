@@ -1,0 +1,61 @@
+{
+    "Experiment": "MuonGun_VonMises3D_cleaned",
+    "Exp_group":  "MuonGunEnsembles", 
+
+    "ModelName":  "MessagePassModel",
+
+    "Load_model": false,
+    "Load_name":  "",
+
+    "threads":           24, 
+
+    "epochs":     100,
+    "train_data": 25000000,
+    "batch_size": 128,
+    "early_stop": true,
+    "patience":   5,
+    "learning_rate":   2e-3,
+    "lr_schedule": "fast_schedule",
+    "val_every":   500000,
+    "buffer_size": 500000,
+    "verbose":     false,
+
+    "hyper_params": {
+        "n_out":           3,
+        "n_kappa":         1,
+        "n_in":            6,
+        "hidden_states":   64,
+        "mp_layers":       2,
+        "decode_layers":   [16, 12], 
+        "dropout":         0.0,
+        "convs":           "GraphSage",
+        "batch_norm":      true,
+        "units_out":       true
+    },
+
+    "Data":            "MuonGun_cleaned",
+    "GraphType":       "NearestNeighbors",
+    "GraphParam":       12,
+    "node_size":        0,
+    "data_split":      "/groups/hep/johannbs/data/rasmus_classification_muon_1500k_sets.pkl",
+    "max_split":       [250000000, 2000000, 25000000],
+    "clear_dataset":   false,
+    "graph_batch":     50000,
+    "transforms":      "/groups/hep/johannbs/data/transformers2.pkl",
+
+
+    "raw_path":   "/groups/hep/johannbs/data/rasmus_classification_muon_3neutrino_3mio.db",
+
+    "features":   ["dom_x", "dom_y", "dom_z", "time", "charge_log10", "pulse_width"],
+    "targets":    ["azimuth", "zenith"],
+    "angles_to_units":  true,
+    "event_lims": "abs(pid) = 13",
+    "node_lims":  "SRTInIcePulses = 1", 
+
+    "LossFunc":   "VonMises3D",
+    "log_wandb": true,
+    "metrics":   ["angle_u", "zenith_u", "azimuthal_u"],
+
+    "plot_list": ["zenith_histogram_from_z", "zenith_2d_hist_from_z"]
+}
+   

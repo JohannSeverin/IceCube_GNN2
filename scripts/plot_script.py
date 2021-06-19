@@ -1,6 +1,19 @@
 import matplotlib.pyplot as plt
 import numpy as np 
 
+from sklearn.metrics import roc_curve
+def ROC(y_true, y_reco):
+    fig, ax = plt.subplots(figsize = (9,6))
+
+    x, y, _ = roc_curve(y_true, y_reco)
+
+    ax.plot(x, y, "k")
+    ax.set_title("AUC")
+    ax.set_xlabel("TPR")
+    ax.set_ylabel("FPR")
+
+    return fig
+
 def zenith_histogram_from_angle(y_true, y_reco):
     zenith_reco = y_reco[:, 0]
     zenith_true = y_true[:, 1]
@@ -27,7 +40,7 @@ def zenith_histogram_from_z(y_true, y_reco):
     ax.set_ylabel("Freq")
 
     ax.hist(zenith_reco, range = (0, np.pi), bins = 100, label = "reco", histtype= "step")
-    ax.hist(zenith_true, range = (0, np.pi), bins = 100, label = "reco", histtype= "step")
+    ax.hist(zenith_true, range = (0, np.pi), bins = 100, label = "true", histtype= "step")
 
     ax.legend()
 

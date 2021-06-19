@@ -155,7 +155,7 @@ def train_model(construct_dict):
         loss    = 0
 
         # Loop over the batch and calculate predictions
-        for batch in loader:
+        for batch in tqdm.tqdm(loader):
             inputs, labels  = batch
             _, __, N        = tf.unique_with_counts(inputs[2])
             ids, targets, predictions = test_step(inputs, labels)
@@ -214,7 +214,7 @@ def train_model(construct_dict):
 
         train_data    = graph_dataset(construct_dict, "train")
         train_loader  = DisjointLoader(train_data, epochs = 1, batch_size = batch_size)
-        # train_loader  = train_data.interleave(lambda _: train_loader, num_parallel_calls = 4)
+        # train_loader  = train_loader.load().prefetch(1)
         
         for batch in train_loader:
             # Train model
@@ -239,7 +239,9 @@ def train_model(construct_dict):
 
                 # Validate data
                 val_loader = DisjointLoader(val_data, epochs = 1, batch_size = batch_size)
+                # val_loader = val_loader.load().prefetch(1)
                 val_loss, metric_dict, plot_dict = validation(val_loader, metrics)
+                # del val_loader
 
                 # Print if verbose
                 # if construct_dict['verbose']:
@@ -282,12 +284,14 @@ def train_model(construct_dict):
                         print(f"Training stopped, no improvement made in {patience} steps.")
                         early_stop = True
                         break
+        # del train_loader
 
     test_data             = graph_dataset(construct_dict, "test")
     if "node_size" in construct_dict.keys():
         test_data.filter(filt)
 
     test_loader           = DisjointLoader(test_data, epochs = 1, batch_size = batch_size, shuffle = False)
+    test_loader           = test_loader.load().prefetch(1)
     test_dict             = test_model(test_loader, metrics)
 
     if construct_dict["log_wandb"]:

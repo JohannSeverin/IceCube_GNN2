@@ -142,7 +142,7 @@ def binary_accuracy(y_true, y_reco):
 
 
 def energy_w(y_true, y_reco):
-    diffs = y_reco[:, 1] -  y_true[:, 2]
+    diffs = y_reco[:, 3] -  y_true[:, 3]
     quantiles = tfp.stats.percentile(diffs, [25, 75])
 
     IQR = quantiles[1] - quantiles[0]

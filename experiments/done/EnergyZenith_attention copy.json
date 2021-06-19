@@ -11,10 +11,10 @@
 
     "epochs":     100,
     "train_data": 75000000,
-    "batch_size": 1024,
+    "batch_size": 256,
     "early_stop": true,
     "patience":   5,
-    "learning_rate":   1e-3,
+    "learning_rate":   5e-4,
     "lr_schedule": "fast_schedule",
     "val_every":   1000000,
     "buffer_size": 1000000,
@@ -26,11 +26,11 @@
         "n_corr":          0,
         "gamma":           0,
         "n_in":            6,
-        "hidden_states":   48,
-        "mp_layers":       2,
+        "hidden_states":   64,
+        "mp_layers":       1,
         "decode_layers":   [12, 12], 
         "dropout":         0.1,
-        "convs":           "attention",
+        "convs":           "GraphSage",
         "batch_norm":      true
     },
 
